@@ -24,13 +24,13 @@ PRODUCT_RELEASE_NAME := SGS2
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 # Inherit device configuration
-$(call inherit-product, device/samsung/galaxys2/full_galaxys2.mk)
+$(call inherit-product, device/samsung/epic4gtouch/full_epic4gtouch.mk)
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := galaxys2
-PRODUCT_NAME := cm_galaxys2
+PRODUCT_DEVICE := epic4gtouch
+PRODUCT_NAME := cm_epic4gtouch
 PRODUCT_BRAND := Samsung
-PRODUCT_MODEL := GT-I9100
+PRODUCT_MODEL := SPH-D710 
 
 #Set build fingerprint / ID / Prduct Name ect.
 PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=GT-I9100 BUILD_DISPLAY_ID=IML74K BUILD_FINGERPRINT=samsung/GT-I9100/GT-I9100:4.0.3/IML74K/XXLPB:user/release-keys PRIVATE_BUILD_DESC="GT-I9100-user 4.0.3 IML74K XXLPB release-keys"

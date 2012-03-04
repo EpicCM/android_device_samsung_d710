@@ -7,27 +7,26 @@ on init
     export ANDROID_DATA /data
     export EXTERNAL_STORAGE /sdcard
 
-    symlink /system/etc /etc
+    #symlink /system/etc /etc
 
     mkdir /sdcard
-    mkdir /emmc
-    mkdir /usbdisk
+    mkdir /sdcard1
     mkdir /system
     mkdir /data
     mkdir /cache
     mkdir /preload
-    mount /tmp /tmp tmpfs
+    mkdir /efs
+    mkdir /tmp
+    mkdir /mnt 0775 root root
+	mount /tmp /tmp tmpfs   
 
 on fs
-    mount ext4 /dev/block/mmcblk0p9 /system
+    mount ext4 /dev/block/mmcblk0p9 /system noatime wait
+
+    #mkdir /efs
+    #mount ext4 /dev/block/mmcblk0p1 /efs nosuid nodev noatime wait
 
 on boot
-
-# Permissions for mDNIe
-    chown system media_rw /sys/class/mdnie/mdnie/mode
-    chown system media_rw /sys/class/mdnie/mdnie/outdoor
-    chown system media_rw /sys/class/mdnie/mdnie/scenario
-    write /sys/class/mdnie/mdnie/scenario 4
 
     ifup lo
     hostname localhost
@@ -38,15 +37,6 @@ on boot
 service ueventd /sbin/ueventd
     critical
 
-service console /sbin/sh
-    class core
-    console
-    disabled
-    group log
-    
-on property:ro.debuggable=1
-    start console
-
 service recovery /sbin/recovery
 
 service adbd /sbin/adbd recovery
@@ -54,6 +44,9 @@ service adbd /sbin/adbd recovery
 
 # Always start adbd on userdebug and eng builds
 on property:ro.debuggable=1
+    setprop adb.recovery 1
+
+on property:adb.recovery=1
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 04e8
     write /sys/class/android_usb/android0/idProduct 6860

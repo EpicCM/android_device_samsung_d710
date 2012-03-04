@@ -29,4 +29,27 @@
 /dev/block/mmcblk0p8      0660   system     radio
 /dev/akm8975              0660   system     system
 /dev/accelerometer        0660   system     system
-/dev/graphics/fb0         0777   root       graphics
+#SISO Data Call Changes S [ From CL 43524 ]
+# CDMA radio interface MUX
+/dev/ts0710mux*           0640   radio      radio
+/dev/ppp                  0660   radio      vpn
+/dev/tun                  0660   vpn        vpn
+
+# <-------------------------------------------------------------
+# CDMA radio interface MUX
+/dev/dpramerr              0660   radio      radio
+/dev/dpram0                0660   radio      radio
+/dev/dpram1                0660   radio      radio
+/dev/multipdp              0660   radio      radio
+
+# change here
+/dev/ttyEFS0              0660   radio      radio
+/dev/ttyCDMA0              0660   radio      radio
+/dev/ttyVTVD0              0660   radio      radio
+/dev/ttyVTAD0              0660   radio      radio
+/dev/ttyVTCTRL0            0660   radio      radio
+/dev/ttyVTENT0             0660   radio      radio
+# <-------------------------------------------------------------
+#SISO Data Call Changes E
+/dev/uwibro               0660   system     system
+/dev/swmxctl              0660   system     system

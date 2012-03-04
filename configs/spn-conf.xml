@@ -51,9 +51,6 @@ examples:
 	
 <!-- Japan -->
     <spnOverride numeric="44010" spn="NTT DOCOMO"/>
-	
-<!-- Poland -->
-    <spnOverride numeric="26006" spn_display_rule="SPN_RULE_SHOW_SPN" spn_override_only_on="26001"/>	
 
 <!-- Belgium Telent - Proximus and Mobistar-->
     <spnOverride numeric="20605" spn_display_rule="SPN_RULE_SHOW_SPN" fake_home_on="20610"/>
@@ -128,5 +125,9 @@ examples:
 	<spnOverride numeric="23433" spn_display_rule="SPN_RULE_SHOW_PLMN" spn_override_only_on="23430,23431,23432,23433,23434,23486"/>
 	<spnOverride numeric="23434" spn_display_rule="SPN_RULE_SHOW_PLMN" spn_override_only_on="23430,23431,23432,23433,23434,23486"/>
 	<spnOverride numeric="23486" spn_display_rule="SPN_RULE_SHOW_PLMN" spn_override_only_on="23430,23431,23432,23433,23434,23486"/>
+
+<!-- Israel -->
+	<spnOverride numeric="42507" fake_home_on="42503"/> <!-- MIR @ PCL network -->
+
 
 </spnOverrides>

@@ -1,5 +1,5 @@
 #
-# system.prop for galaxys2
+# system.prop for epic4gtouch
 #
 
 rild.libpath=/system/lib/libsec-ril.so
