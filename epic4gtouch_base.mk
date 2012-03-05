@@ -75,8 +75,8 @@ PRODUCT_PACKAGES += \
 	Camera
 
 # Sensors
-PRODUCT_PACKAGES += \
-	lights.exynos4
+#PRODUCT_PACKAGES += \
+#	lights.exynos4
 
 # Ril
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -97,7 +97,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	mobiledata.interfaces=ppp0,eth0
 
 PRODUCT_COPY_FILES += \
-	device/samsumg/epic4gtouch/configs/ip-up:system/etc/ppp/ip-up \
+	device/samsung/epic4gtouch/configs/ip-up:system/etc/ppp/ip-up \
 	device/samsung/epic4gtouch/configs/ip-down:system/etc/ppp/ip-down\
 	device/samsung/epic4gtouch/configs/pppd_runner:system/bin/pppd_runner
 
@@ -160,7 +160,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mtp
+	persist.sys.usb.config=mass_storage
 
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 

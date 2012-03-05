@@ -69,8 +69,7 @@ PRODUCT_COPY_FILES += \
 
 # the kernel itself
 PRODUCT_COPY_FILES += \
-    device/samsung/epic4gtouch/zImage:kernel \ 
-    device/samsung/epic4gtouch/zImage:boot.img
+    device/samsung/epic4gtouch/zImage:kernel 
 
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 $(call inherit-product-if-exists, vendor/samsung/epic4gtouch/epic4gtouch-vendor.mk)
