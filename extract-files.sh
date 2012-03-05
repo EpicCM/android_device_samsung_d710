@@ -136,7 +136,7 @@ adb pull /system/lib/libsomxwmv8d.so ../../../vendor/$MANUFACTURER/$COMMON/propr
 # CAMERA
 adb pull /system/lib/libcamera_client.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libcamera_client.so
 adb pull /system/lib/libcaps.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libcaps.so
-adb pull /system/lib/camera.exynos4.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/camera.exynos4.so
+adb pull /system/lib/hw/camera.exynos4.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/camera.exynos4.so
 adb pull /system/lib/libs5pjpeg.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libs5pjpeg.so
 
 # SENSORS
@@ -154,6 +154,18 @@ adb pull /system/etc/wifi/bcm4330_p2p.bin ../../../vendor/$MANUFACTURER/$COMMON/
 adb pull /system/etc/wifi/bcm4330_sta.bin ../../../vendor/$MANUFACTURER/$COMMON/proprietary/bcm4330_sta.bin
 adb pull /system/etc/wifi/nvram_mfg.txt ../../../vendor/$MANUFACTURER/$COMMON/proprietary/nvram_mfg.txt
 adb pull /system/etc/wifi/nvram_net.txt ../../../vendor/$MANUFACTURER/$COMMON/proprietary/nvram_net.txt
+
+# WiMAX
+adb pull /system/app/WiMAXHiddenMenu.apk ../../../vendor/$MANUFACTURER/$COMMON/proprietary/WiMAXHiddenMenu.apk
+adb pull /system/app/WiMAXSettings.apk ../../../vendor/$MANUFACTURER/$COMMON/proprietary/WiMAXSettings.apk
+adb pull /system/app/SprintMenu.apk ../../../vendor/$MANUFACTURER/$COMMON/proprietary/SprintMenu.apk
+adb pull /system/app/SystemUpdateUI.apk ../../../vendor/$MANUFACTURER/$COMMON/proprietary/SystemUpdateUI.apk
+adb pull /system/lib/libWiMAXNative.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libWiMAXNative.so
+adb pull /system/lib/libSECmWiMAXcAPI.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libSECmWiMAXcAPI.so
+adb pull /system/etc/wimaxfw.bin ../../../vendor/$MANUFACTURER/$COMMON/proprietary/wimaxfw.bin
+adb pull /system/etc/wimaxloader.bin ../../../vendor/$MANUFACTURER/$COMMON/proprietary/wimaxloader.bin
+adb pull /system/etc/wimax_boot.bin ../../../vendor/$MANUFACTURER/$COMMON/proprietary/wimax_boot.bin
+adb pull /system/framework/wimax_service.jar  ../../../vendor/$MANUFACTURER/$COMMON/proprietary/wimax_service.jar
 
 # LPM
 adb pull /system/bin/immvibed ../../../vendor/$MANUFACTURER/$COMMON/proprietary/immvibed
@@ -215,7 +227,7 @@ PRODUCT_COPY_FILES := \\
 PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/rild:system/bin/rild \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libril.so:system/lib/libril.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsec-ril.so:system/lib/libsec-ril.so \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsec-ril40.so:system/lib/libsec-ril40.so \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsecril-client.so:system/lib/libsecril-client.so
 
 # AUDIO
@@ -267,7 +279,7 @@ PRODUCT_COPY_FILES += \\
 EOF
 
 
-(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__COMMON__/$COMMON/g | sed s/__MANUFACTURER__/$MANUFACTURER/g > ../../../vendor/$MANUFACTURER/$COMMON/common-vendor-blobs.mk
+(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__COMMON__/$COMMON/g | sed s/__MANUFACTURER__/$MANUFACTURER/g > ../../../vendor/$MANUFACTURER/$COMMON/$COMMON-vendor-blobs.mk
 # Copyright (C) 2012 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -376,6 +388,26 @@ PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/bcm4330_sta.bin:system/etc/wifi/bcm4330_sta.bin \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/nvram_mfg.txt:system/etc/wifi/nvram_mfg.txt \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/nvram_net.txt:system/etc/wifi/nvram_net.txt 
+
+# WiMAX
+#
+PRODUCT_COPY_FILES += \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/libWiMAXNative.so:system/lib/libWiMAXNative.so \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/wimaxfw.bin:system/etc/wimaxfw.bin \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/wimaxloader.bin:system/etc/wimaxloader.bin \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/wimax_boot.bin:system/etc/wimax_boot.bin \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/libSECmWiMAXcAPI.so:system/lib/libSECmWiMAXcAPI.so \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/wimax_service.jar:system/lib/wimax_service.jar \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/WiMAXSettings.apk:system/app/WiMAXSettings.apk \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/SprintMenu.apk:system/app/SprintMenu.apk \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/WiMAXHiddenMenu.apk:system/app/WiMAXHiddenMenu.apk \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/SystemUpdateUI.apk:system/app/SystemUpdateUI.apk
+
+PRODUCT_PACKAGES += \\
+                WiMAXSettings \\
+                SprintMenu \\
+                WiMAXHiddenMenu \\
+                SystemUpdateUI
 
 # LPM
 PRODUCT_COPY_FILES += \\
