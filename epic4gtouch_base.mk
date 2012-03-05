@@ -92,8 +92,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.ril.samsung_cdma=true \
 	ro.carrier=Sprint \
 	ro.wimax.interface=uwbr0 \
+	ro.cdma.ppp.interface=ppp0 \
 	net.tcp.buffersize.wimax=4096,524288,1048576,4096,16384,110208 \
 	mobiledata.interfaces=ppp0,eth0
+
+PRODUCT_COPY_FILES += \
+	device/samsumg/epic4gtouch/configs/ip-up:system/etc/ppp/ip-up \
+	device/samsung/epic4gtouch/configs/ip-down:system/etc/ppp/ip-down\
+	device/samsung/epic4gtouch/configs/pppd_runner:system/bin/pppd_runner
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
