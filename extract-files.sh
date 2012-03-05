@@ -142,9 +142,11 @@ adb pull /system/lib/libs5pjpeg.so ../../../vendor/$MANUFACTURER/$COMMON/proprie
 # SENSORS
 adb pull /system/lib/libakm.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libakm.so
 adb pull /system/lib/hw/sensors.exynos4.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/sensors.exynos4.so
+adb pull /system/lib/hw/lights.exynos4.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/lights.exynos4.so
 
 # GPS
 adb pull /system/lib/hw/gps.exynos4.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/gps.exynos4.so
+adb pull /system/bin/gpsd ../../../vendor/$MANUFACTURER/$COMMON/proprietary/gpsd
 
 # WIFI
 adb pull /system/bin/bcm4330B1.hcd ../../../vendor/$MANUFACTURER/$COMMON/proprietary/bcm4330B1.hcd
@@ -373,11 +375,13 @@ PRODUCT_COPY_FILES += \\
 # SENSORS
 PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libakm.so:system/lib/libakm.so \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/sensors.exynos4.so:system/lib/hw/sensors.exynos4.so
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/sensors.exynos4.so:system/lib/hw/sensors.exynos4.so \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/lights.exynos4.so:system/lib/hw/lights.exynos4.so
 
 # GPS
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/gps.exynos4.so:system/lib/hw/gps.exynos4.so
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/gps.exynos4.so:system/lib/hw/gps.exynos4.so \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/gpsd:system/bin/gpsd
 
 # WIFI
 PRODUCT_COPY_FILES += \\
