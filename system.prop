@@ -2,6 +2,6 @@
 # system.prop for epic4gtouch
 #
 
-rild.libpath=/system/lib/libsec-ril.so
+rild.libpath=/system/lib/libsec-ril40.so
 rild.libargs=-d /dev/ttyS0
 persist.sys.strictmode.visual=0
