@@ -15,7 +15,7 @@
 # limitations under the License.
 
 DEVICE=epic4gtouch
-COMMON=c1-common
+COMMON=epic4gtouch-common
 MANUFACTURER=samsung
 
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE
@@ -48,10 +48,10 @@ PRODUCT_COPY_FILES := \\
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
 
 # Pick up overlay for features that depend on non-open-source files
-DEVICE_PACKAGE_OVERLAYS := vendor/__MANUFACTURER__/c1-common/overlay
+DEVICE_PACKAGE_OVERLAYS := vendor/__MANUFACTURER__/__COMMON__/overlay
 
 \$(call inherit-product, vendor/__MANUFACTURER__/__DEVICE__/__DEVICE__-vendor-blobs.mk)
-\$(call inherit-product, vendor/__MANUFACTURER__/__COMMON__/c1-vendor-blobs.mk)
+\$(call inherit-product, vendor/__MANUFACTURER__/__COMMON__/__COMMON__-vendor-blobs.mk)
 EOF
 
 
