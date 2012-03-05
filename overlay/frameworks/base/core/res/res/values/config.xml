@@ -244,7 +244,7 @@
     </integer-array>
 
     <!-- The default iface on which to monitor data use -->
-    <string name="config_datause_iface">pdp0</string>
+    <string name="config_datause_iface">ppp0</string>
     
     <!-- Allow the menu hard key to be disabled in LockScreen on some devices -->
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
@@ -256,6 +256,9 @@
          legacy USB manager should be started. -->
     <string name="config_legacyUmsLunFile">/sys/class/android_usb/f_mass_storage/lun0/file</string>
 
+    <!-- Indicate whether the SD card is accessible without removing the battery. -->
+    <bool name="config_batterySdCardAccessibility">true</bool>
+
     <!-- Workaround for devices with broken keyboards -->	
     <bool name="config_forceDisableHardwareKeyboard">true</bool>
 
@@ -264,13 +267,15 @@
     <!-- Location of the wimax framwork jar location -->
     <string name="config_wimaxServiceJarLocation">/system/framework/wimax_service.jar</string>
     <!-- Location of the wimax native library locaiton -->
-    <string name="config_wimaxNativeLibLocation">/system/lib/libWiMAXNative.so</string>
+    <string name="config_wimaxNativeLibLocation">/system/lib/libSECmWiMAXcAPI.so</string>
     <!-- Name of the wimax manager class -->
-    <string name="config_wimaxManagerClassname">android.net.wimax.WimaxManager</string>
+    <string name="config_wimaxManagerClassname">android.net.fourG.wimax.Wimax4GManager</string>
     <!-- Name of the wimax service class -->
     <string name="config_wimaxServiceClassname">com.android.server.WimaxService</string>
-    <!-- Name of the wimax state tracker clas -->
-    <string name="config_wimaxStateTrackerClassname">android.net.wimax.WimaxStateTracker</string>
-
+    <!-- Name of the wimax state tracker class -->
+    <string name="config_wimaxStateTrackerClassname">android.net.fourG.wimax.WimaxStateTracker</string>
+    <!-- Set to true if the RSSI should always display CDMA signal
+         strength even on EVDO -->
+    <bool name="config_alwaysUseCdmaRssi">true</bool>
 
 </resources>
