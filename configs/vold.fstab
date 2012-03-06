@@ -13,11 +13,11 @@
 ## storage_struct - ex) series, "/mnt/sdcard/extStorages" / parallel
 ######################
 # internal sdcard
-dev_mount sdcard /mnt/sdcard 11 /devices/platform/dw_mmc/mmc_host/mmc0 encryptable_nonremovable
+dev_mount internal /mnt/sdcard 11 /devices/platform/dw_mmc/mmc_host/mmc0 encryptable_nonremovable
 
 # external sdcard
-dev_mount sdcard1 /mnt/sdcard/external_sd auto /devices/virtual/block/cyasblkdevblk0/cyasblkdevblk0p1
+dev_mount sdcard /mnt/emmc auto /devices/virtual/block/cyasblkdevblk0
 
 #usb host device 
-dev_mount sda /mnt/sdcard/usbStorage/ auto /devices/platform/s5p-ehci
+dev_mount usbdisk /mnt/usbdisk auto /devices/platform/s5p-ehci
 
