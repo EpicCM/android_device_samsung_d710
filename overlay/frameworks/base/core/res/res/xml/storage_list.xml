@@ -38,7 +38,7 @@
              android:primary="true"
              android:removable="false" />
 
-    <storage android:mountPoint="/mnt/emmc"
+    <storage android:mountPoint="/mnt/sdcard/external_sd"
              android:storageDescription="@string/storage_sd_card"
              android:primary="false"
              android:removable="true" />
