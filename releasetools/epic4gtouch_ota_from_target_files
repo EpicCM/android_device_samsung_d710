@@ -36,7 +36,7 @@ import epic4gtouch_edify_generator as edify_generator
 __doc__ = ota_from_target_files.__doc__
 
 def CopyBootFiles(input_zip, output_zip):
-    output_zip.write(os.path.join(TARGET_DIR, "boot.img"),"boot.img")
+    output_zip.write(os.path.join(TARGET_DIR, "kernel"),"kernel")
 
 def WriteFullOTAPackage(input_zip, output_zip):
   # TODO: how to determine this?  We don't know what version it will
@@ -93,7 +93,7 @@ def WriteFullOTAPackage(input_zip, output_zip):
     script.RunBackup("restore")
 
   script.ShowProgress(0.2, 10)
-  script.EMMCWriteRawImage("/dev/block/mmcblk0p5", "boot.img")
+  script.EMMCWriteRawImage("/dev/block/mmcblk0p5", "kernel")
 
   script.ShowProgress(0.1, 0)
   device_specific.FullOTA_InstallEnd()
