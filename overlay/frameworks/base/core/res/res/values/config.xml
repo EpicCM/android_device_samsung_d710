@@ -281,8 +281,8 @@
 
     <!-- LUN file to be used by legacy USB manager.
          The existence of this file will be used to determine in the
-         legacy USB manager should be started. -->
-    <string name="config_legacyUmsLunFile">/sys/class/android_usb/f_mass_storage/lun0/file</string>
+         legacy USB manager should be started. 
+    <string name="config_legacyUmsLunFile">/sys/class/android_usb/f_mass_storage/lun0/file</string> -->
 
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">true</bool>
