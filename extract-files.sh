@@ -169,6 +169,10 @@ adb pull /system/etc/wimaxloader.bin ../../../vendor/$MANUFACTURER/$COMMON/propr
 adb pull /system/etc/wimax_boot.bin ../../../vendor/$MANUFACTURER/$COMMON/proprietary/wimax_boot.bin
 adb pull /system/framework/wimax_service.jar  ../../../vendor/$MANUFACTURER/$COMMON/proprietary/wimax_service.jar
 
+# Sprint VVM
+
+adb pull /system/app/vtt-sprint.apk ../../../vendor/$MANUFACTURER/$COMMON/proprietary/vtt-sprint.apk
+
 # LPM
 adb pull /system/bin/immvibed ../../../vendor/$MANUFACTURER/$COMMON/proprietary/immvibed
 adb pull /system/bin/lpmkey ../../../vendor/$MANUFACTURER/$COMMON/proprietary/lpmkey
@@ -412,6 +416,14 @@ PRODUCT_PACKAGES += \\
                 SprintMenu \\
                 WiMAXHiddenMenu \\
                 SystemUpdateUI
+
+#Sprint VVM
+
+PRODUCT_COPY_FILES += \\
+   vendor/__MANUFACTURER__/__COMMON__/proprietary/vtt-sprint.apk:system/app/vtt-sprint.apk
+
+PRODUCT_PACKAGES += \\
+		vtt-sprint
 
 # LPM
 PRODUCT_COPY_FILES += \\
