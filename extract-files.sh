@@ -405,7 +405,7 @@ PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/wimaxloader.bin:system/etc/wimaxloader.bin \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/wimax_boot.bin:system/etc/wimax_boot.bin \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libSECmWiMAXcAPI.so:system/lib/libSECmWiMAXcAPI.so \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/wimax_service.jar:system/lib/wimax_service.jar \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/wimax_service.jar:system/framework/wimax_service.jar \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/WiMAXSettings.apk:system/app/WiMAXSettings.apk \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/SprintMenu.apk:system/app/SprintMenu.apk \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/WiMAXHiddenMenu.apk:system/app/WiMAXHiddenMenu.apk \\

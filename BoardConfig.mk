@@ -83,7 +83,7 @@ BOARD_CAMERA_LIBRARIES := libcamera
 endif
 
 # RIL
-BOARD_MOBILEDATA_INTERFACE_NAME := "pdp0"
+BOARD_MOBILEDATA_INTERFACE_NAME := "ppp0"
 
 # Wifi
 BOARD_WLAN_DEVICE                := bcmdhd

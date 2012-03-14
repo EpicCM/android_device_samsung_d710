@@ -94,7 +94,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.wimax.interface=uwbr0 \
 	ro.cdma.ppp.interface=ppp0 \
 	net.tcp.buffersize.wimax=4096,524288,1048576,4096,16384,110208 \
-	mobiledata.interfaces=ppp0,eth0
+	mobiledata.interfaces=ppp0,uwbr0
 
 PRODUCT_COPY_FILES += \
 	device/samsung/epic4gtouch/configs/ip-up:system/etc/ppp/ip-up \
@@ -160,11 +160,10 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Set default USB interface
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc \
-	persist.sys.usb.config=mass_storage,adb 
+	ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc 
 
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 
 # Include exynos4 platform specific parts
-#$(call inherit-product, hardware/sec/exynos4/exynos4.mk)
-#$(call inherit-product, hardware/sec/exynos4/Android.mk)
+#$(call inherit-product, hardware/samsung/exynos4/exynos4.mk)
+#$(call inherit-product, hardware/samsung/exynos4/Android.mk)
