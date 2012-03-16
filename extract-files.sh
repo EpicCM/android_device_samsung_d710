@@ -164,8 +164,6 @@ adb pull /system/app/SprintMenu.apk ../../../vendor/$MANUFACTURER/$COMMON/propri
 adb pull /system/app/SystemUpdateUI.apk ../../../vendor/$MANUFACTURER/$COMMON/proprietary/SystemUpdateUI.apk
 adb pull /system/lib/libWiMAXNative.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libWiMAXNative.so
 adb pull /system/lib/libSECmWiMAXcAPI.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libSECmWiMAXcAPI.so
-adb pull /system/etc/wimaxfw.bin ../../../vendor/$MANUFACTURER/$COMMON/proprietary/wimaxfw.bin
-adb pull /system/etc/wimaxloader.bin ../../../vendor/$MANUFACTURER/$COMMON/proprietary/wimaxloader.bin
 adb pull /system/etc/wimax_boot.bin ../../../vendor/$MANUFACTURER/$COMMON/proprietary/wimax_boot.bin
 adb pull /system/framework/wimax_service.jar  ../../../vendor/$MANUFACTURER/$COMMON/proprietary/wimax_service.jar
 
@@ -364,7 +362,6 @@ PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libsomxsr263d.so:system/lib/libsomxsr263d.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libsomxvc1d.so:system/lib/libsomxvc1d.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libsomxvenc.so:system/lib/libsomxvenc.so \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/libsomxvp8d.so:system/lib/libsomxvp8d.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libsomxwmad.so:system/lib/libsomxwmad.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libsomxwmv7d.so:system/lib/libsomxwmv7d.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libsomxwmv8d.so:system/lib/libsomxwmv8d.so
@@ -401,8 +398,6 @@ PRODUCT_COPY_FILES += \\
 #
 PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libWiMAXNative.so:system/lib/libWiMAXNative.so \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/wimaxfw.bin:system/etc/wimaxfw.bin \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/wimaxloader.bin:system/etc/wimaxloader.bin \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/wimax_boot.bin:system/etc/wimax_boot.bin \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libSECmWiMAXcAPI.so:system/lib/libSECmWiMAXcAPI.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/wimax_service.jar:system/framework/wimax_service.jar \\
