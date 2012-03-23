@@ -67,6 +67,7 @@ PRODUCT_PACKAGES := \
     TvOut \
     TvOutHack \
     camera.exynos4 \
+    Torch \
     GalaxyS2Settings \
     SamsungServiceMode
 

@@ -21,4 +21,7 @@
     <!-- If false, MIN is displayed. If true, MSID is displayed. -->
     <bool name="config_msid_enable">true</bool>
 
+    <bool name="has_led_flash">true</bool>
+
+
 </resources>
