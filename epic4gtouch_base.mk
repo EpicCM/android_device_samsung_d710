@@ -74,7 +74,6 @@ PRODUCT_PACKAGES := \
 
 # HAL 
 PRODUCT_PACKAGES += \
-        lights.exynos4 \
         lights.SPH-D710 \
         libhwconverter \
         libswconverter \
