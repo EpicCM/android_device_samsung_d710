@@ -33,8 +33,7 @@ static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 
 static char const RED_LED_DIR[]   = "/sys/class/leds/red";
 static char const BLUE_LED_DIR[]  = "/sys/class/leds/blue";
-static char const LCD_FILE[]      = "/sys/class/backlight/s5p_bl/brightness";
-static char const KEYBOARD_FILE[] = "/sys/devices/platform/s3c-keypad/brightness";
+static char const LCD_FILE[]      = "/sys/class/backlight/panel/brightness";
 static char const BUTTONS_FILE[]  = "/sys/class/sec/sec_touchkey/brightness";
 
 static struct led_state {
