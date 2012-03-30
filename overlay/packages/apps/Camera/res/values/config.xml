@@ -23,5 +23,5 @@
 	<!-- Samsung Camera Settings -->
 	<bool name="hasSamsungCamSettings">true</bool>
         <!-- Samsung Video Size -->
-        <bool name="needsSamsungVideoSize">false</bool>
+        <bool name="needsSamsungVideoSize">true</bool>
 </resources>
