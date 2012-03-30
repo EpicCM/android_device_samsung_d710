@@ -33,14 +33,9 @@ static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 
 static char const RED_LED_DIR[]   = "/sys/class/leds/red";
 static char const BLUE_LED_DIR[]  = "/sys/class/leds/blue";
-static char const LCD_FILE[]      = "/sys/class/backlight/panel/brightness";
-static char const BUTTONS_FILE[]  = "/sys/devices/virtual/sec/sec_touchkey/brightness";
-char const*const BUTTON_POWER     = "/sys/devices/virtual/sec/sec_touchkey/enable_disable";
-void init_globals(void)
-{
-    // init the mutex
-    pthread_mutex_init(&g_lock, NULL);
-}
+static char const LCD_FILE[]      = "/sys/class/backlight/s5p_bl/brightness";
+static char const KEYBOARD_FILE[] = "/sys/devices/platform/s3c-keypad/brightness";
+static char const BUTTONS_FILE[]  = "/sys/class/sec/sec_touchkey/brightness";
 
 static struct led_state {
 	unsigned int enabled;
@@ -113,12 +108,6 @@ static int rgb_to_brightness(struct light_state_t const *state)
 
 	return ((77*((color>>16) & 0x00ff))
 		+ (150*((color>>8) & 0x00ff)) + (29*(color & 0x00ff))) >> 8;
-}
-
-static int
-is_lit(struct light_state_t const* state)
-{
-    return state->color & 0x00ffffff;
 }
 
 static void comp_led_states(struct led_state *red, struct led_state *blue,
@@ -222,17 +211,9 @@ static int set_light_notifications(struct light_device_t* dev,
 	if ((res = set_led(RED_LED_DIR,  &battery_red,  &notifications_red)) >= 0)
 	     res = set_led(BLUE_LED_DIR, &battery_blue, &notifications_blue);
 
-
 	pthread_mutex_unlock(&g_lock);
 
 	return res;
-}
-
-static int
-set_light_attention(struct light_device_t* dev,
-        struct light_state_t const* state)
-{
-    return 0;
 }
 
 static int set_light_backlight(struct light_device_t *dev,
@@ -243,30 +224,31 @@ static int set_light_backlight(struct light_device_t *dev,
 
 	pthread_mutex_lock(&g_lock);
 	err = write_int(LCD_FILE, brightness);
-	err = write_int(BUTTONS_FILE, brightness > 0 ? 1 : 2);
+
 	pthread_mutex_unlock(&g_lock);
 	return err;
 }
 
-static int
-set_light_keyboard(struct light_device_t* dev,
-        struct light_state_t const* state)
+static int set_light_keyboard(struct light_device_t *dev,
+			struct light_state_t const *state)
 {
-    return 0;
+	return 0;
 }
 
 static int set_light_buttons(struct light_device_t *dev,
 			struct light_state_t const *state)
 {
-    int err = 0;
-    int on = is_lit(state);
+	int touch_led_control = state->color & 0x00ffffff ? 1 : 2;
+	int res;
 
-    pthread_mutex_lock(&g_lock);
-    LOGD("set_light_button on=%d\n", on ? 1 : 2);
-    err = write_int(BUTTONS_FILE, on ? 1 : 2);
-    pthread_mutex_unlock(&g_lock);
+	LOGD("set_light_buttons: color=%#010x, tlc=%u.", state->color,
+	     touch_led_control);
 
-    return err;
+	pthread_mutex_lock(&g_lock);
+	res = write_int(BUTTONS_FILE, touch_led_control);
+	pthread_mutex_unlock(&g_lock);
+
+	return res;
 }
 
 static int close_lights(struct light_device_t *dev)
@@ -296,8 +278,6 @@ static int open_lights(const struct hw_module_t *module, char const *name,
 		set_light = set_light_battery;
 	else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name))
 		set_light = set_light_notifications;
-	else if (0 == strcmp(LIGHT_ID_ATTENTION, name)) 
-        set_light = set_light_attention;
 	else
 		return -EINVAL;
 
@@ -312,9 +292,7 @@ static int open_lights(const struct hw_module_t *module, char const *name,
 	dev->common.close = (int (*)(struct hw_device_t *))close_lights;
 	dev->set_light = set_light;
 
-
 	*device = (struct hw_device_t *)dev;
-
 
 	return 0;
 }

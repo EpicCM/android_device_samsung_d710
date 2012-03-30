@@ -104,7 +104,7 @@ adb pull /system/lib/libtvoutservice.so ../../../vendor/$MANUFACTURER/$COMMON/pr
 # CAMERA
 adb pull /system/lib/libcamera_client.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libcamera_client.so
 adb pull /system/lib/libcaps.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libcaps.so
-adb pull /system/lib/hw/camera.exynos4.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/camera.exynos4.so
+adb pull /system/lib/hw/vendor-camera.exynos4.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/camera.exynos4.so
 
 # SENSORS
 adb pull /system/lib/libakm.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libakm.so
