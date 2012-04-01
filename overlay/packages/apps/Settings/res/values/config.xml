@@ -21,7 +21,10 @@
     <!-- If false, MIN is displayed. If true, MSID is displayed. -->
     <bool name="config_msid_enable">true</bool>
 
+    <!-- Has LED flash -->
     <bool name="has_led_flash">true</bool>
 
+    <!-- Dock settings -->
+    <bool name="has_dock_settings">true</bool>
 
 </resources>
