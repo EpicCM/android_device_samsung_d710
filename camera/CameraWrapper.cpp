@@ -92,8 +92,8 @@ static int check_vendor_module()
 }
 
 const static char * video_preview_sizes[] = {
-    "1920x1080,1280x720,640x480",
-    "640x480,352x288,320x240,176x144"
+    "1920x1080,1280x720,720x480",
+    "352x288,320x240,176x144"
 };
 
 static char * camera_fixup_getparams(int id, const char * settings)
