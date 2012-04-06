@@ -397,6 +397,12 @@ service iprenew_uwbr0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
+# GPS
+service gpsd /system/bin/gpsd
+    class main   
+    user system
+    group system inet
+
 # TVout
 service TvoutService_C /system/bin/bintvoutservice
     class main
