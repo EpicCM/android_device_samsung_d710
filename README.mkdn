@@ -1,32 +1,21 @@
-TODO
-____
-
-- Video Recording
-
-
-
 HOW-TO for building CyanogenMod
 _______________________________
 
 - firstly, follow http://source.android.com/source to figure out how to get your build environment running, etc
 - make a directory for your build source, then sync CyanogenMod: repo init -u git://github.com/CyanogenMod/android.git -b ics
-- pull my device tree: git clone git://github.com/darchstar/android_device_samsung_epic4gtouch device/samsung/epic4gtouch
 - plug in your phone, and run the extract files script against a working cyanogenmod build
 - change directory to the top, and source the build environment setup: . build/envsetup.sh
 - brunch cm_epic4gtouch-userdebug, and wait as your meal cooks. 
-- it should output an update.zip in the out/target/product/epic4gtouch... you've made CyanogenMod. congratulations. 
+- it should output an update.zip in out/target/product/epic4gtouch... you've made CyanogenMod. congratulations. 
   Now you can brag to your friends about how 1337 you are that you can build a ROM from source. :)
 
 
-
-Here are the necessary thank yous.
+List of Contributers to the device tree
 ___________________________________________________________________________
 
-- Thanks sbrissen, for the patches you committed lights working or mass storage working, and an initial reference. much appreciated. 
-- Thanks, testers i've had at #ICS-DEV-E4GT, i really would've been more stagnant on progress, had i not had intensive testing done by you guys. :)
-- codeworkx, for the initial device tree that i could work off of.
-- teamhacksung, for the tvout hacks in this device tree, and all the work they've been putting into the source for samsung phones.
-- Steady Hawkin for the init scripts used in this device tree.
+- darchstar
+- sbrissen
+- teamhacksung
 
 A full CHANGELOG for CyanogenMod can be found in its vendor:  https://github.com/CyanogenMod/android_vendor_cm/blob/ics/CHANGELOG.mkdn 
 
