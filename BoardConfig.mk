@@ -123,6 +123,9 @@ BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 
+# Device specific headers
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/epic4gtouch/overlay/include
+
 # assert
 TARGET_OTA_ASSERT_DEVICE := epic4gtouch,GT-I9100,GT-I9100M,GT-I9100T,SPH-D710
 
