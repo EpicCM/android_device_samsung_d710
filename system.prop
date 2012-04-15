@@ -10,4 +10,4 @@ persist.sys.strictmode.visual=0
 ro.telephony.call_ring.multiple=0
 
 # Set ring delay to 0ms
-ro.telephony.call_rin.delay=0
+ro.telephony.call_ring.delay=0
