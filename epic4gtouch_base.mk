@@ -178,10 +178,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# Set default USB interface
+# Vold properties and default USB interface
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc \
+	ro.vold.switchablepair=/mnt/emmc,/mnt/sdcard \
         persist.sys.usb.config=mass_storage
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+        persist.sys.vold.switchexternal=1
 
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 
