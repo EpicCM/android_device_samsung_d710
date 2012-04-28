@@ -24,7 +24,7 @@ MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs.mk
 PRODUCT_COPY_FILES += \\
 	$OUTDIR/proprietary/lib/libril.so:obj/lib/libril.so \\
 	$OUTDIR/proprietary/lib/libsecril-client.so:obj/lib/libsecril-client.so \\
-	$OUTDIR/proprietary/lib/libmediayamaha.so:obj/lib/libmediayamaha.so \\
+	$OUTDIR/proprietary/lib/libmediayamahaservice.so:obj/lib/libmediayamahaservice.so \\
 	$OUTDIR/proprietary/lib/libfimc.so:obj/lib/libfimc.so \\
 	$OUTDIR/proprietary/lib/libTVOut.so:obj/lib/libTVOut.so
 
