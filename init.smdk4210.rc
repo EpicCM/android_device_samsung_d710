@@ -319,6 +319,9 @@ on boot
     chown radio system /sys/devices/virtual/accelerometer/accelerometer/acc_file
     chown radio system /sys/devices/virtual/sec/gsensorcal/calibration
 
+# for device encryption
+    setprop vold.post_fs_data_done 1
+
 # permissions for NFC
     setprop ro.nfc.port "I2C"
     chmod 0600 /dev/pn544
