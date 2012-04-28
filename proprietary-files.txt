@@ -83,7 +83,6 @@ lib/hw/vendor-camera.exynos4.so
 
 # SENSORS
 lib/libakm.so
-lib/hw/sensors.exynos4.so
 
 # GPS
 lib/hw/gps.exynos4.so
