@@ -74,7 +74,6 @@ PRODUCT_PACKAGES := \
 # HAL 
 PRODUCT_PACKAGES += \
         lights.SPH-D710 \
-        sensors.exynos4 \
         libhwconverter \
         libswconverter \
         libs5pjpeg \
