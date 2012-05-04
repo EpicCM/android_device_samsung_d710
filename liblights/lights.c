@@ -30,6 +30,7 @@
 
 static pthread_once_t g_init = PTHREAD_ONCE_INIT;
 static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
+static int g_enable_touchlight = -1; // initialization of variable for touchkey backlight settings
 
 static char const RED_LED_DIR[]   = "/sys/class/leds/red";
 static char const BLUE_LED_DIR[]  = "/sys/class/leds/blue";
@@ -100,6 +101,24 @@ static int write_df_str(char const *dir, char const *file, char const *str)
 	snprintf(path, sizeof(path), "%s/%s", dir, file);
 	return write_str(path, str);
 }
+
+/* For usage of touchlight settings in advanced settings */
+void load_settings()
+{
+        FILE* fp = fopen("/data/.disable_touchlight", "r");
+        if (!fp) {
+            g_enable_touchlight = 1;
+        } else {
+            g_enable_touchlight = (int)(fgetc(fp));
+            if (g_enable_touchlight == '1')
+                g_enable_touchlight = 1;
+            else
+                g_enable_touchlight = 0;
+
+            fclose(fp);
+        }
+}
+
 
 static int rgb_to_brightness(struct light_state_t const *state)
 {
@@ -218,6 +237,7 @@ static int set_light_notifications(struct light_device_t* dev,
 static int set_light_backlight(struct light_device_t *dev,
 			struct light_state_t const *state)
 {
+        load_settings();
 	int err = 0;
 	int brightness = rgb_to_brightness(state);
 
