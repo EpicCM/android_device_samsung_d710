@@ -7,6 +7,7 @@
                 android:key="use_gyro_calibration"
                 android:title="@string/use_gyro_calibration_title_head"
                 android:summary="@string/use_gyro_calibration_summary_head"
+                android:defaultValue="true"
                 />
 
     <!-- Do gyro calibration -->
@@ -24,6 +25,7 @@
                 android:key="touchkey_light"
                 android:title="@string/touchkey_light_title_head"
                 android:summary="@string/touchkey_light_summary_head"
+                android:defaultValue="true"
                 />
     </PreferenceCategory>
 </PreferenceScreen>

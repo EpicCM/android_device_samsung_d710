@@ -109,12 +109,7 @@ void load_settings()
         if (!fp) {
             g_enable_touchlight = 1;
         } else {
-            g_enable_touchlight = (int)(fgetc(fp));
-            if (g_enable_touchlight == '1')
-                g_enable_touchlight = 1;
-            else
-                g_enable_touchlight = 0;
-
+            g_enable_touchlight = fgetc(fp) == '1' ? 0 : 1;
             fclose(fp);
         }
 }
@@ -264,7 +259,8 @@ static int set_light_buttons(struct light_device_t *dev,
 	     touch_led_control);
 
 	pthread_mutex_lock(&g_lock);
-	res = write_int(BUTTONS_FILE, touch_led_control);
+        if (g_enable_touchlight == -1 || g_enable_touchlight > 0)
+	    res = write_int(BUTTONS_FILE, touch_led_control);
 	pthread_mutex_unlock(&g_lock);
 
 	return res;
@@ -326,6 +322,6 @@ const struct hw_module_t HAL_MODULE_INFO_SYM = {
 	.version_minor = 0,
 	.id = LIGHTS_HARDWARE_MODULE_ID,
 	.name = "lights Module",
-	.author = "Google, Inc.",
+	.author = "The CyanogenMod Project",
 	.methods = &lights_module_methods,
 };
