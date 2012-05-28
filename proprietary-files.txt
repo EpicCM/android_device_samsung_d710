@@ -108,36 +108,4 @@ lib/libSECmWiMAXcAPI.so
 etc/wimax_boot.bin
 framework/wimax_service.jar
 
-# LPM
-bin/immvibed
-bin/lpmkey
-bin/playlpm
-lib/libQmageDecoder.so
-media/battery_batteryerror.qmg
-media/battery_charging_5.qmg
-media/battery_charging_10.qmg
-media/battery_charging_100.qmg
-media/battery_charging_15.qmg
-media/battery_charging_20.qmg
-media/battery_charging_25.qmg
-media/battery_charging_30.qmg
-media/battery_charging_35.qmg
-media/battery_charging_40.qmg
-media/battery_charging_45.qmg
-media/battery_charging_50.qmg
-media/battery_charging_55.qmg
-media/battery_charging_60.qmg
-media/battery_charging_65.qmg
-media/battery_charging_70.qmg
-media/battery_charging_75.qmg
-media/battery_charging_80.qmg
-media/battery_charging_85.qmg
-media/battery_charging_90.qmg
-media/battery_charging_95.qmg
-media/battery_error.qmg
-media/chargingwarning.qmg
-media/Disconnected.qmg
-media/LMprec_508.emd
-media/PFFprec_600.emd
-
 
