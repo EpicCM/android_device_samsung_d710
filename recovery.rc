@@ -23,8 +23,11 @@ on init
 on fs
     mount ext4 /dev/block/mmcblk0p9 /system noatime wait
 
-    #mkdir /efs
-    #mount ext4 /dev/block/mmcblk0p1 /efs nosuid nodev noatime wait
+# insmod kernel modules
+    insmod /system/lib/modules/j4fs.ko
+
+# mount param.lfs
+    mount j4fs /dev/block/mmcblk0p4 /mnt/.lfs
 
 on boot
 

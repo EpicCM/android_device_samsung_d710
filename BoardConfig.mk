@@ -127,6 +127,11 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 # Device specific headers
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/epic4gtouch/overlay/include
 
+# Charging mode
+BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
+BOARD_BATTERY_DEVICE_NAME := "battery"
+BOARD_CHARGER_RES := device/samsung/epic4gtouch/res/charger
+
 # assert
 TARGET_OTA_ASSERT_DEVICE := epic4gtouch,GT-I9100,GT-I9100M,GT-I9100T,SPH-D710
 

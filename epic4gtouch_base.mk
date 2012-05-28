@@ -78,7 +78,12 @@ PRODUCT_PACKAGES += \
         libs5pjpeg \
         libfimg
 
-# OMX 
+# Charger
+PRODUCT_PACKAGES += \
+    charger \
+    charger_res_images
+
+# MFC API
 PRODUCT_PACKAGES += \
         libstagefrighthw \
         libseccscapi \
