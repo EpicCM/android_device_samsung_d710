@@ -187,9 +187,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.vold.switchablepair=/mnt/emmc,/mnt/sdcard \
         persist.sys.usb.config=mass_storage
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-        persist.sys.vold.switchexternal=1
-
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 
 # Include exynos4 platform specific parts
