@@ -19,5 +19,6 @@
 
     <!-- Flag indicating if the tty is enabled -->
     <bool name="tty_enabled">false</bool>
+    <bool name="sprint_mwi_quirk">true</bool>
 
 </resources>
