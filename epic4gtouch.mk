@@ -67,6 +67,13 @@ PRODUCT_COPY_FILES += $(foreach module,\
 PRODUCT_COPY_FILES += \
     device/samsung/epic4gtouch/modules/j4fs.ko:recovery/root/lib/modules/j4fs.ko
 
+# kernel wifi firmware for ramdisk
+PRODUCT_COPY_FILES += \
+    device/samsung/epic4gtouch/firmware/wimaxfw.bin:root/vendor/firmware/wimaxfw.bin \
+    device/samsung/epic4gtouch/firmware/mfc_fw.bin:root/vendor/firmware/mfc_fw.bin \
+    device/samsung/epic4gtouch/firmware/wimaxloader.bin:root/vendor/firmware/wimaxloader.bin
+
+
 # the kernel itself
 PRODUCT_COPY_FILES += \
     device/samsung/epic4gtouch/zImage:kernel 
