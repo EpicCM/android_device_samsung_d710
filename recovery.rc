@@ -11,7 +11,6 @@ on init
     #symlink /misc /etc
 
     mkdir /sdcard
-    mkdir /sdcard1
     mkdir /system
     mkdir /data
     mkdir /cache
@@ -25,7 +24,7 @@ on fs
     mount ext4 /dev/block/mmcblk0p9 /system noatime wait
 
 # insmod kernel modules
-    insmod /modules/j4fs.ko
+    insmod /lib/modules/j4fs.ko
 
 # mount param.lfs
     mount j4fs /dev/block/mmcblk0p4 /mnt/.lfs
