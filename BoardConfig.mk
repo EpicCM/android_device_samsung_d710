@@ -124,6 +124,7 @@ BOARD_UMS_LUNFILE := "/sys/class/android_usb/f_mass_storage/lun0/file"
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_SUPPRESS_EMMC_WIPE := true
 
 # Device specific headers
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/epic4gtouch/overlay/include
