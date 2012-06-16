@@ -107,5 +107,7 @@ lib/libWiMAXNative.so
 lib/libSECmWiMAXcAPI.so
 etc/wimax_boot.bin
 framework/wimax_service.jar
-
+vendor/firmware/wimaxfw.bin
+vendor/firmware/mfc_fw.bin
+vendor/firmware/wimaxloader.bin
 

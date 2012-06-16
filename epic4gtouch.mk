@@ -54,12 +54,7 @@ PRODUCT_COPY_FILES += \
 # kernel modules
 PRODUCT_COPY_FILES += \
     device/samsung/epic4gtouch/dhd.ko:root/lib/modules/dhd.ko
-#todo move to prop samsung vendor
-#wimax firmware
-PRODUCT_COPY_FILES += \
-    device/samsung/epic4gtouch/firmware/wimaxfw.bin:system/vendor/firmware/wimaxfw.bin \
-    device/samsung/epic4gtouch/firmware/mfc_fw.bin:system/vendor/firmware/mfc_fw.bin \
-    device/samsung/epic4gtouch/firmware/wimaxloader.bin:system/vendor/firmware/wimaxloader.bin
+
 #copy kernel 
 PRODUCT_COPY_FILES += \
     device/samsung/epic4gtouch/kernel:kernel 

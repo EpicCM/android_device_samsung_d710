@@ -122,7 +122,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_COPY_FILES += \
 	device/samsung/epic4gtouch/configs/ip-up:system/etc/ppp/ip-up \
-	device/samsung/epic4gtouch/configs/ip-down:system/etc/ppp/ip-down\
 	device/samsung/epic4gtouch/configs/pppd_runner:system/bin/pppd_runner
 
 FRAMEWORKS_BASE_SUBDIRS += ../../$(LOCAL_PATH)/epicril/
