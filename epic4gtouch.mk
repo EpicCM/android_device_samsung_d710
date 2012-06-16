@@ -63,5 +63,5 @@ PRODUCT_COPY_FILES += \
 
 
 
-$(call inherit-product, frameworks/base/build/phone-hdpi-1024-dalvik-heap.mk)
+$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 $(call inherit-product-if-exists, vendor/samsung/epic4gtouch/epic4gtouch-vendor.mk)
