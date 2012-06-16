@@ -14,7 +14,8 @@ on early-init
     # for backwards compatibility
     symlink /mnt/sdcard /sdcard
     symlink /mnt/emmc /emmc
-
+    #my way is better than anyone	    
+    symlink /system/vendor /vendor
 # Disable CFQ slice idle delay
     write /sys/block/mmcblk0/queue/iosched/slice_idle 0
 
@@ -49,13 +50,6 @@ on fs
     chmod 0770 /data/misc/wifi
 
 on post-fs-data
-# insmod kernel modules
-    insmod /system/lib/modules/j4fs.ko
-    insmod /system/lib/modules/Si4709_driver.ko
-    
-# mount param.lfs
-    mount j4fs /dev/block/mmcblk0p4 /mnt/.lfs
-
 # bind external sd
     mount -o bind /mnt/emmc /mnt/sdcard/external_sd
 

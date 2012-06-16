@@ -23,12 +23,6 @@ on init
 on fs
     mount ext4 /dev/block/mmcblk0p9 /system noatime wait
 
-# insmod kernel modules
-    insmod /lib/modules/j4fs.ko
-
-# mount param.lfs
-    mount j4fs /dev/block/mmcblk0p4 /mnt/.lfs
-
 on boot
 
     ifup lo

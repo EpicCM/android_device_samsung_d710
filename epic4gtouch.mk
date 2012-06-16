@@ -51,32 +51,17 @@ PRODUCT_COPY_FILES += \
     device/samsung/epic4gtouch/usr/idc/qwerty2.idc:system/usr/idc/qwerty2.idc \
     device/samsung/epic4gtouch/usr/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc
 
-# kernel modules for ramdisk
-RAMDISK_MODULES := $(addprefix device/samsung/epic4gtouch/modules/,dhd.ko j4fs.ko \
-	scsi_wait_scan.ko cyasswitch.ko)
-PRODUCT_COPY_FILES += $(foreach module,\
-	$(RAMDISK_MODULES),\
-	$(module):root/lib/modules/$(notdir $(module)))
-
-# other kernel modules not in ramdisk
-PRODUCT_COPY_FILES += $(foreach module,\
-	$(filter-out $(RAMDISK_MODULES),$(wildcard device/samsung/epic4gtouch/modules/*.ko)),\
-	$(module):system/lib/modules/$(notdir $(module)))
-
-# kernel modules for recovery ramdisk
+# kernel modules
 PRODUCT_COPY_FILES += \
-    device/samsung/epic4gtouch/modules/j4fs.ko:recovery/root/lib/modules/j4fs.ko
-
-# kernel wifi firmware for ramdisk
+    device/samsung/epic4gtouch/dhd.ko:root/lib/modules/dhd.ko
+#todo move to prop samsung vendor
+#wimax firmware
 PRODUCT_COPY_FILES += \
-    device/samsung/epic4gtouch/firmware/wimaxfw.bin:root/vendor/firmware/wimaxfw.bin \
-    device/samsung/epic4gtouch/firmware/mfc_fw.bin:root/vendor/firmware/mfc_fw.bin \
-    device/samsung/epic4gtouch/firmware/wimaxloader.bin:root/vendor/firmware/wimaxloader.bin
+    device/samsung/epic4gtouch/firmware/wimaxfw.bin:system/vendor/firmware/wimaxfw.bin \
+    device/samsung/epic4gtouch/firmware/mfc_fw.bin:system/vendor/firmware/mfc_fw.bin \
+    device/samsung/epic4gtouch/firmware/wimaxloader.bin:system/vendor/firmware/wimaxloader.bin
 
 
-# the kernel itself
-PRODUCT_COPY_FILES += \
-    device/samsung/epic4gtouch/zImage:kernel 
 
-$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
+$(call inherit-product, frameworks/base/build/phone-hdpi-1024-dalvik-heap.mk)
 $(call inherit-product-if-exists, vendor/samsung/epic4gtouch/epic4gtouch-vendor.mk)
