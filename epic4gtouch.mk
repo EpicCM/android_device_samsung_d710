@@ -60,7 +60,9 @@ PRODUCT_COPY_FILES += \
     device/samsung/epic4gtouch/firmware/wimaxfw.bin:system/vendor/firmware/wimaxfw.bin \
     device/samsung/epic4gtouch/firmware/mfc_fw.bin:system/vendor/firmware/mfc_fw.bin \
     device/samsung/epic4gtouch/firmware/wimaxloader.bin:system/vendor/firmware/wimaxloader.bin
-
+#copy kernel 
+PRODUCT_COPY_FILES += \
+    device/samsung/epic4gtouch/kernel:kernel 
 
 
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
