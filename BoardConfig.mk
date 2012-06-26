@@ -68,6 +68,9 @@ TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/epic4gtouch/releas
 BOARD_EGL_CFG := device/samsung/epic4gtouch/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 
+# Enable WEBGL in WebKit
+ENABLE_WEBGL := true
+
 # HWComposer
 BOARD_USES_HWCOMPOSER := true
 BOARD_USE_SECTVOUT := true
