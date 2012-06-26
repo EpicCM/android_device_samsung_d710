@@ -138,7 +138,7 @@ BOARD_BATTERY_DEVICE_NAME := "battery"
 BOARD_CHARGER_RES := device/samsung/epic4gtouch/res/charger
 
 # assert
-TARGET_OTA_ASSERT_DEVICE := epic4gtouch,GT-I9100,GT-I9100M,GT-I9100T,SPH-D710
+TARGET_OTA_ASSERT_DEVICE := epic4gtouch,SPH-D710
 
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/epic4gtouch/BoardConfigVendor.mk
