@@ -18,7 +18,7 @@
 $(call inherit-product, vendor/cm/config/cdma.mk)
 
 # Release name
-PRODUCT_RELEASE_NAME := SGS2
+PRODUCT_RELEASE_NAME := epic4gtouch
 
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
@@ -32,5 +32,5 @@ PRODUCT_NAME := cm_epic4gtouch
 PRODUCT_BRAND := Samsung
 PRODUCT_MODEL := SPH-D710 
 
-#Set build fingerprint / ID / Prduct Name ect.
-PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=SPH-D710 BUILD_DISPLAY_ID=IMM76D BUILD_FINGERPRINT=samsung/SPH-D710/SPH-D710:4.0.3/IML74K/FC24:user/release-keys PRIVATE_BUILD_DESC="SPH-D710-user 4.0.3 IMM76D FC24 release-keys"
+#Set build fingerprint
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_FINGERPRINT=samsung/SPH-D710/SPH-D710:4.0.3/IML74K/FC24:user/release-keys PRIVATE_BUILD_DESC="SPH-D710-user 4.0.3 IMM76D FC24 release-keys"
