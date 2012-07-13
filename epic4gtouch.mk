@@ -51,14 +51,5 @@ PRODUCT_COPY_FILES += \
     device/samsung/epic4gtouch/usr/idc/qwerty2.idc:system/usr/idc/qwerty2.idc \
     device/samsung/epic4gtouch/usr/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc
 
-# kernel modules
-PRODUCT_COPY_FILES += \
-    device/samsung/epic4gtouch/dhd.ko:root/lib/modules/dhd.ko
-
-#copy kernel 
-PRODUCT_COPY_FILES += \
-    device/samsung/epic4gtouch/kernel:kernel 
-
-
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 $(call inherit-product-if-exists, vendor/samsung/epic4gtouch/epic4gtouch-vendor.mk)
