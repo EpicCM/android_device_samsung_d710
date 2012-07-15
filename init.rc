@@ -17,17 +17,18 @@ loglevel 3
     export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
     export LD_LIBRARY_PATH /vendor/lib:/system/lib
     export ANDROID_BOOTLOGO 1
+	export ANDROID_CACHE /cache
     export ANDROID_ROOT /system
     export ANDROID_ASSETS /system/app
     export ANDROID_DATA /data
 # Export SDCARD---***
     export EXTERNAL_STORAGE /mnt/sdcard
-    export EXTERNAL_STORAGE2 /mnt/sdcard/external_sd
-    export USBHOST_STORAGE /mnt/sdcard/usbStorage
+    export SECONDARY_STORAGE /mnt/emmc
+    export USBHOST_STORAGE /mnt/usbdisk
 
     export ASEC_MOUNTPOINT /mnt/asec
     export LOOP_MOUNTPOINT /mnt/obb
-    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/framework2.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar:/system/framework/filterfw.jar:/system/framework/sechardware.jar:/system/framework/wimax.jar
+    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar:/system/framework/filterfw.jar:/system/framework/wimax_service.jar
 
 # Backward compatibility
     symlink /system/etc /etc
@@ -40,6 +41,8 @@ loglevel 3
 # create mountpoints
     mkdir /mnt 0775 root system
     mkdir /mnt/sdcard 0000 system system
+	mkdir /mnt/emmc	0000 system system
+	mkdir /mnt/usbdisk	0000 system system
 
 #add booting sound property
     setprop audioflinger.bootsnd 1
@@ -60,7 +63,7 @@ loglevel 3
 
     mkdir /system
     mkdir /data 0771 system system
-    mkdir /cache 0770 system cache
+    mkdir /cache 0771 system cache
     mkdir /config 0500 root root
     mkdir /preload 0771 system system
 
@@ -119,22 +122,25 @@ loglevel 3
     # 5.0 %
     write /dev/cpuctl/bg_non_interactive/cpu.shares 52
 
+# Allow everybody to read the xt_qtaguid resource tracking misc dev.
+# This is needed by any process that uses socket tagging.
+    chmod 0644 /dev/xt_qtaguid
 on fs
 # mount ext4 partitions
     # Mount /system rw first to give the filesystem a chance to save a checkpoint
     #mount ext4 /dev/block/mmcblk0p9 /system
-    mount ext4 /dev/block/mmcblk0p9 /system noatime wait ro
+    mount ext4 /dev/block/mmcblk0p9 /system noatime nodiratime wait ro
     
     exec sfsck /dev/block/mmcblk0p7 ext4
-    mount ext4 /dev/block/mmcblk0p7 /cache nosuid nodev noatime wait
+    mount ext4 /dev/block/mmcblk0p7 /cache nosuid nodev noatime nodiratime wait noauto_da_alloc
 
     #exec sfsck /dev/block/mmcblk0p12 ext4
-    mount ext4 /dev/block/mmcblk0p12 /preload nosuid nodev noatime wait ro
+    mount ext4 /dev/block/mmcblk0p12 /preload nosuid nodev noatime nodiratime wait ro
     
     mkdir /efs
     #mount rfs /dev/block/mmcblk0p1 /efs nosuid nodev check=no
     exec sfsck /dev/block/mmcblk0p1 ext4
-    mount ext4 /dev/block/mmcblk0p1 /efs nosuid nodev noatime wait
+    mount ext4 /dev/block/mmcblk0p1 /efs nosuid nodev noatime nodiratime wait
     chown radio system /efs
     chmod 0771 /efs
     mkdir /efs/bluetooth
@@ -154,7 +160,7 @@ on fs
 
 on post-fs
     exec sfsck /dev/block/mmcblk0p10 ext4
-    mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime nodiratime wait noauto_da_alloc
 
     # once everything is setup, no need to modify /
     mount rootfs rootfs / ro remount
@@ -164,7 +170,7 @@ on post-fs
 
     # We chown/chmod /cache again so because mount is run as root + defaults
     chown system cache /cache
-    chmod 0770 /cache
+    chmod 0771 /cache
 
     # This may have been created by the recovery system with odd permissions
     chown system cache /cache/recovery
@@ -213,20 +219,21 @@ on post-fs-data
 
     # Same reason as /data above
     chown system cache /cache
-    chmod 0770 /cache
+    chmod 0771 /cache
 
   # Browser. Same reason as /data above
     chown system inet /app-cache
-    chmod 0770 /app-cache
+    chmod 0771 /app-cache
 
     # GPS
     chown root system /dev/ttySAC1
     chmod 0660 /dev/ttySAC1
-
-    # create data/gps for GPS demon
-    mkdir /data/gps 771 gps system
-    chown gps system /data/gps
-	
+    chown root system /sys/class/sec/gps/GPS_PWR_EN/value
+    chmod 0664 /sys/class/sec/gps/GPS_PWR_EN/value
+    chown root system /sys/class/sec/gps/GPS_nRST/value
+    chmod 0664 /sys/class/sec/gps/GPS_nRST/value
+    mkdir /data/gps 771 system system
+    chown system system /data/gps
 
     # create basic filesystem structure
     mkdir /data/misc 01775 system misc
@@ -234,7 +241,7 @@ on post-fs-data
     mkdir /data/misc/bluetooth 0770 system system
     mkdir /data/misc/keystore 0700 keystore keystore
     mkdir /data/misc/keychain 0771 system system
-    mkdir /data/misc/vpn 0770 system vpn
+    mkdir /data/misc/vpn 0777 system system
     mkdir /data/misc/systemkeys 0700 system system
     mkdir /data/misc/vpn/profiles 0770 system system
     mkdir /data/misc/radio 0775 radio system
@@ -260,8 +267,16 @@ on post-fs-data
     # create dalvik-cache and double-check the perms
     mkdir /data/dalvik-cache 0771 system system
     chown system system /data/dalvik-cache
-    chmod 0771 /data/dalvik-cache
-
+    chmod 0773 /data/dalvik-cache
+	mkdir /cache/dalvik-cache 0771 system system
+    chown system system /cache/dalvik-cache
+    chmod 0771 /cache/dalvik-cache
+	
+    # create resource-cache and double-check the perms
+    mkdir /data/resource-cache 0771 system system
+    chown system system /data/resource-cache
+    chmod 0771 /data/resource-cache
+	
     # create the lost+found directories, so as to enforce our permissions
     mkdir /data/lost+found 0770
 
@@ -269,6 +284,10 @@ on post-fs-data
     chown root root /data/lost+found
     chmod 0770 /data/lost+found
 
+    # create /data/system and double-check the perms, so as to enforce our permissions
+    mkdir /data/system 0775 system system
+    chown system system /data/system
+    chmod 0775 /data/system
     # create directory for DRM plug-ins
     mkdir /data/drm 0774 drm drm
 
@@ -357,9 +376,7 @@ on post-fs-data
 
     # create log system
     mkdir /data/log 0775 system log
-    mkdir /data/anr 0775 system log
     chown system log /data/log
-    chown system log /data/anr
 
     chmod 0775 /data/log
     chmod 0775 /data/anr
@@ -367,6 +384,8 @@ on post-fs-data
     chmod 0662 /dev/log/radio
     chmod 0662 /dev/log/main
     chmod 0662 /dev/log/event
+# Include extra init file
+    import /system/etc/init.local.rc
 
 on boot
 # basic network init
@@ -453,7 +472,7 @@ on boot
 
     chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/browser
     chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/camera
-    chmod 0664 /sys/devices/platform/sec-battery/power_supply/battery/camera
+    chmod 0666 /sys/devices/platform/sec-battery/power_supply/battery/camera
 
     # permission for HDMI audio path
     chown media audio /sys/class/hdmi_audio/hdmi_audio/hdmi_audio_set_ext
@@ -532,6 +551,9 @@ on boot
     chown system system /sys/class/leds/red/device/grpfreq
     chown system system /sys/class/leds/red/device/grppwm
     chown system system /sys/class/leds/red/device/blink
+	chown system system /sys/class/leds/red/trigger
+	chown system system /sys/class/leds/blue/trigger
+	chown system system /sys/class/leds/green/trigger
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/module/sco/parameters/disable_esco
     chown system system /sys/kernel/ipv4/tcp_wmem_min
@@ -582,6 +604,13 @@ chown radio system /sys/devices/platform/s3c2410-i2c.5/i2c-5/5-0066/max8997-muic
     chown system radio /sys/devices/platform/s5p-ehci/ehci_power
     chown system radio /sys/devices/platform/s5p-ehci/ehci_runtime
 
+# allow system to modify cpufreq control files
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 # Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.default 4096,87380,110208,4096,16384,110208
@@ -605,6 +634,8 @@ chown radio system /sys/devices/platform/s3c2410-i2c.5/i2c-5/5-0066/max8997-muic
 
 # Set this property so surfaceflinger is not started by system_init
     setprop system_init.startsurfaceflinger 0
+	# Run sysinit
+    exec /system/bin/sysinit
 
     class_start core
     class_start main
@@ -678,10 +709,15 @@ on property:persist.service.slate_mode=1
 
 on property:persist.service.slate_mode=0
     write /sys/class/power_supply/battery/slate_test_mode 0
+# DVFS - cpufreq ondemand
+    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential 5
+    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 85
 
 # DVFS - limit cpufreq during booting sequence
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor userspace
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed 1000000
+    write /data/dvfs "sleep 10 && echo 800000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed && sleep 30 && echo ondemand > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
+    chmod 0770 /data/dvfs
 
 ## Daemon processes to be run by init.
 ##
@@ -825,17 +861,6 @@ service gpsd /system/bin/gpsd
     class main   
     user system
     group system inet
-	
-
-service DR-deamon /system/bin/drexe
-    class main
-    user root
-    group system radio inet net_raw
-
-service mobex-daemon /system/bin/npsmobex
-    class main
-    user system
-    group system inet sdcard_rw
 
 service surfaceflinger /system/bin/surfaceflinger
     class main
@@ -852,7 +877,7 @@ service pppd_cdma /system/bin/pppd_runner
 
 service zygote /system/bin/app_process -Xzygote /system/bin --zygote --start-system-server
     class main
-    socket zygote stream 660 root system
+    socket zygote stream 666
     onrestart write /sys/android_power/request_state wake
     onrestart write /sys/power/state on
     onrestart restart media
@@ -869,21 +894,11 @@ service media /system/bin/mediaserver
     group system audio camera inet net_bt net_bt_admin
     ioprio rt 4
 
-service samsungani /system/bin/samsungani
-    class main
+service bootanim /system/bin/bootanimation
     user graphics
     group graphics
     disabled
     oneshot
-
-#for samsung boot sound
-service playsound /system/bin/playsound
-	class main
-	user media
-	group system
-	disabled
-	oneshot
-#for samsung boot sound
 
 service dbus /system/bin/dbus-daemon --system --nofork
     class main
@@ -989,17 +1004,3 @@ service rtc_log /system/bin/sh /system/bin/rtc_log.sh
     user shell
     group log
     oneshot
-
-# DVFS - limit cpufreq during booting sequence
-service dvfs /system/bin/sh /system/bin/dvfs.sh
-    class main
-    user root
-    oneshot
-    
-# 2011-12-08/systemsw/kyo/ bugreport is triggered by holding down volume down, volume up and power
-service bugreport /system/bin/bugmailer.sh -v
-	class main
-	disabled
-	oneshot
-	keycodes 114 115 116
-
