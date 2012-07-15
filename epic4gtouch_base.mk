@@ -23,6 +23,7 @@ PRODUCT_LOCALES += hdpi
 # Init files
 PRODUCT_COPY_FILES := \
 	device/samsung/epic4gtouch/lpm.rc:root/lpm.rc \
+	device/samsung/epic4gtouch/init.rc:root/init.rc \
 	device/samsung/epic4gtouch/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
 	device/samsung/epic4gtouch/init.smdk4210.rc:root/init.smdk4210.rc \
 	device/samsung/epic4gtouch/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
