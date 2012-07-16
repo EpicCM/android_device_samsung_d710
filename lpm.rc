@@ -17,6 +17,8 @@ on init
     mkdir /tmp
     mkdir /mnt 0775 root root
 
+on fs
+	mount ext4 /dev/block/mmcblk0p9 /system noatime wait
 
 on boot
 # CPU Frequency Governor
