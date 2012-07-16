@@ -5,7 +5,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#	  http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,38 +18,45 @@ $(call inherit-product, device/samsung/epic4gtouch/epic4gtouch_base.mk)
 
 # Keylayout
 PRODUCT_COPY_FILES += \
-    device/samsung/epic4gtouch/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
-    device/samsung/epic4gtouch/usr/keylayout/Generic.kl:system/usr/keylayout/Generic.kl \
-    device/samsung/epic4gtouch/usr/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-    device/samsung/epic4gtouch/usr/keylayout/max8997-muic.kl:system/usr/keylayout/max8997-muic.kl \
-    device/samsung/epic4gtouch/usr/keylayout/melfas-touchkey.kl:system/usr/keylayout/melfas-touchkey.kl \
-    device/samsung/epic4gtouch/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
-    device/samsung/epic4gtouch/usr/keylayout/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl \
-    device/samsung/epic4gtouch/usr/keylayout/sec_key.kl:system/usr/keylayout/sec_key.kl \
-    device/samsung/epic4gtouch/usr/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl \
-    device/samsung/epic4gtouch/usr/keylayout/Vendor_05ac_Product_0239.kl:system/usr/keylayout/Vendor_05ac_Product_0239.kl \
-    device/samsung/epic4gtouch/usr/keylayout/Vendor_22b8_Product_093d.kl:system/usr/keylayout/Vendor_22b8_Product_093d.kl \
-    device/samsung/epic4gtouch/usr/keylayout/Vendor_045e_Product_028e.kl:system/usr/keylayout/Vendor_045e_Product_028e.kl \
-    device/samsung/epic4gtouch/usr/keylayout/Vendor_046d_Product_c216.kl:system/usr/keylayout/Vendor_046d_Product_c216.kl \
-    device/samsung/epic4gtouch/usr/keylayout/Vendor_046d_Product_c294.kl:system/usr/keylayout/Vendor_046d_Product_c294.kl \
-    device/samsung/epic4gtouch/usr/keylayout/Vendor_046d_Product_c299.kl:system/usr/keylayout/Vendor_046d_Product_c299.kl \
-    device/samsung/epic4gtouch/usr/keylayout/Vendor_046d_Product_c532.kl:system/usr/keylayout/Vendor_046d_Product_c532.kl \
-    device/samsung/epic4gtouch/usr/keylayout/Vendor_054c_Product_0268.kl:system/usr/keylayout/Vendor_054c_Product_0268.kl
+	device/samsung/epic4gtouch/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
+	device/samsung/epic4gtouch/usr/keylayout/Generic.kl:system/usr/keylayout/Generic.kl \
+	device/samsung/epic4gtouch/usr/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+	device/samsung/epic4gtouch/usr/keylayout/max8997-muic.kl:system/usr/keylayout/max8997-muic.kl \
+	device/samsung/epic4gtouch/usr/keylayout/melfas-touchkey.kl:system/usr/keylayout/melfas-touchkey.kl \
+	device/samsung/epic4gtouch/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
+	device/samsung/epic4gtouch/usr/keylayout/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl \
+	device/samsung/epic4gtouch/usr/keylayout/sec_key.kl:system/usr/keylayout/sec_key.kl \
+	device/samsung/epic4gtouch/usr/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl \
+	device/samsung/epic4gtouch/usr/keylayout/Vendor_05ac_Product_0239.kl:system/usr/keylayout/Vendor_05ac_Product_0239.kl \
+	device/samsung/epic4gtouch/usr/keylayout/Vendor_22b8_Product_093d.kl:system/usr/keylayout/Vendor_22b8_Product_093d.kl \
+	device/samsung/epic4gtouch/usr/keylayout/Vendor_045e_Product_028e.kl:system/usr/keylayout/Vendor_045e_Product_028e.kl \
+	device/samsung/epic4gtouch/usr/keylayout/Vendor_046d_Product_c216.kl:system/usr/keylayout/Vendor_046d_Product_c216.kl \
+	device/samsung/epic4gtouch/usr/keylayout/Vendor_046d_Product_c294.kl:system/usr/keylayout/Vendor_046d_Product_c294.kl \
+	device/samsung/epic4gtouch/usr/keylayout/Vendor_046d_Product_c299.kl:system/usr/keylayout/Vendor_046d_Product_c299.kl \
+	device/samsung/epic4gtouch/usr/keylayout/Vendor_046d_Product_c532.kl:system/usr/keylayout/Vendor_046d_Product_c532.kl \
+	device/samsung/epic4gtouch/usr/keylayout/Vendor_054c_Product_0268.kl:system/usr/keylayout/Vendor_054c_Product_0268.kl
 
 # Keychars
 PRODUCT_COPY_FILES += \
-    device/samsung/epic4gtouch/usr/keychars/Generic.kcm:system/usr/keychars/Generic.kcm \
-    device/samsung/epic4gtouch/usr/keychars/qwerty.kcm:system/usr/keychars/qwerty.kcm \
-    device/samsung/epic4gtouch/usr/keychars/qwerty2.kcm:system/usr/keychars/qwerty2.kcm \
-    device/samsung/epic4gtouch/usr/keychars/Virtual.kcm:system/usr/keychars/Virtual.kcm
+	device/samsung/epic4gtouch/usr/keychars/Generic.kcm:system/usr/keychars/Generic.kcm \
+	device/samsung/epic4gtouch/usr/keychars/qwerty.kcm:system/usr/keychars/qwerty.kcm \
+	device/samsung/epic4gtouch/usr/keychars/qwerty2.kcm:system/usr/keychars/qwerty2.kcm \
+	device/samsung/epic4gtouch/usr/keychars/Virtual.kcm:system/usr/keychars/Virtual.kcm
+
+# kernel modules
+PRODUCT_COPY_FILES += \
+	device/samsung/epic4gtouch/dhd.ko:root/lib/modules/dhd.ko
+	device/samsung/epic4gtouch/cyasswitch.ko:root/lib/modules/cyasswitch.ko
+	device/samsung/epic4gtouch/j4fs.ko:root/lib/modules/j4fs.ko
+	device/samsung/epic4gtouch/scsi_wait_scan.ko:root/lib/modules/scsi_wait_scan.ko
 
 #idc
 PRODUCT_COPY_FILES += \
-    device/samsung/epic4gtouch/usr/idc/melfas_ts.idc:system/usr/idc/melfas_ts.idc \
-    device/samsung/epic4gtouch/usr/idc/mxt224_ts_input.idc:system/usr/idc/mxt224_ts_input.idc \
-    device/samsung/epic4gtouch/usr/idc/qwerty.idc:system/usr/idc/qwerty.idc \
-    device/samsung/epic4gtouch/usr/idc/qwerty2.idc:system/usr/idc/qwerty2.idc \
-    device/samsung/epic4gtouch/usr/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc
+	device/samsung/epic4gtouch/usr/idc/melfas_ts.idc:system/usr/idc/melfas_ts.idc \
+	device/samsung/epic4gtouch/usr/idc/mxt224_ts_input.idc:system/usr/idc/mxt224_ts_input.idc \
+	device/samsung/epic4gtouch/usr/idc/qwerty.idc:system/usr/idc/qwerty.idc \
+	device/samsung/epic4gtouch/usr/idc/qwerty2.idc:system/usr/idc/qwerty2.idc \
+	device/samsung/epic4gtouch/usr/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc
 
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 $(call inherit-product-if-exists, vendor/samsung/epic4gtouch/epic4gtouch-vendor.mk)

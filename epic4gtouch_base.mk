@@ -5,7 +5,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#	  http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -62,46 +62,46 @@ PRODUCT_COPY_FILES += \
 
 # Packages
 PRODUCT_PACKAGES := \
-        com.android.future.usb.accessory \
-        TvOut \
-        TvOutHack \
-        Camera \
-        camera.exynos4 \
-        Torch \
-        GalaxyS2Settings \
-        SamsungServiceMode
+	com.android.future.usb.accessory \
+	TvOut \
+	TvOutHack \
+	Camera \
+	camera.exynos4 \
+	Torch \
+	GalaxyS2Settings \
+	SamsungServiceMode
 
 # HAL 
 PRODUCT_PACKAGES += \
-        lights.SPH-D710 \
-        sensors.exynos4 \
-        libhwconverter \
-        libs5pjpeg \
-        libfimg
+	lights.SPH-D710 \
+	sensors.exynos4 \
+	libhwconverter \
+	libs5pjpeg \
+	libfimg
 
 # Charger
 PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images
+	charger \
+	charger_res_images
 
 # MFC API
 PRODUCT_PACKAGES += \
-        libstagefrighthw \
-        libseccscapi \
-        libsecbasecomponent \
-        libsecosal \
-        libSEC_OMX_Resourcemanager \
-        libSEC_OMX_Core \
-        libSEC_OMX_Vdec \
-        libOMX.SEC.AVC.Decoder \
-        libOMX.SEC.M4V.Decoder \
-        libOMX.SEC.WMV.Decoder \
-        libOMX.SEC.VP8.Decoder \
-        libSEC_OMX_Venc \
-        libOMX.SEC.AVC.Encoder \
-        libOMX.SEC.M4V.Encoder \
-        libSEC_OMX_Adec \
-        libOMX.SEC.MP3.Decoder 
+	libstagefrighthw \
+	libseccscapi \
+	libsecbasecomponent \
+	libsecosal \
+	libSEC_OMX_Resourcemanager \
+	libSEC_OMX_Core \
+	libSEC_OMX_Vdec \
+	libOMX.SEC.AVC.Decoder \
+	libOMX.SEC.M4V.Decoder \
+	libOMX.SEC.WMV.Decoder \
+	libOMX.SEC.VP8.Decoder \
+	libSEC_OMX_Venc \
+	libOMX.SEC.AVC.Encoder \
+	libOMX.SEC.M4V.Encoder \
+	libSEC_OMX_Adec \
+	libOMX.SEC.MP3.Decoder 
 
 # Ril
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -187,7 +187,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # Vold properties and default USB interface
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.vold.switchablepair=/mnt/emmc,/mnt/sdcard \
-        persist.sys.usb.config=mass_storage
+	persist.sys.usb.config=mass_storage
 
 # Include exynos4 platform specific parts
 TARGET_HAL_PATH := hardware/samsung/exynos4/hal
