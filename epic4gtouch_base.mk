@@ -23,14 +23,6 @@ PRODUCT_LOCALES += hdpi
 # Init files
 PRODUCT_COPY_FILES := \
 	device/samsung/epic4gtouch/lpm.rc:root/lpm.rc \
-	device/samsung/epic4gtouch/res/charger/battery_0.png:root/res/charger/battery_0.png \
-	device/samsung/epic4gtouch/res/charger/battery_1.png:root/res/charger/battery_1.png \
-	device/samsung/epic4gtouch/res/charger/battery_2.png:root/res/charger/battery_2.png \
-	device/samsung/epic4gtouch/res/charger/battery_3.png:root/res/charger/battery_3.png \
-	device/samsung/epic4gtouch/res/charger/battery_4.png:root/res/charger/battery_4.png \
-	device/samsung/epic4gtouch/res/charger/battery_5.png:root/res/charger/battery_5.png \
-	device/samsung/epic4gtouch/res/charger/battery_charge.png:root/res/charger/battery_charge.png \
-	device/samsung/epic4gtouch/res/charger/battery_fail.png:root/res/charger/battery_fail.png \
 	device/samsung/epic4gtouch/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
 	device/samsung/epic4gtouch/init.smdk4210.rc:root/init.smdk4210.rc \
 	device/samsung/epic4gtouch/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
