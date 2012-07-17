@@ -113,27 +113,20 @@ on fs
     mount ext4 /dev/block/mmcblk0p9 /system wait ro
     mount ext4 /dev/block/mmcblk0p7 /cache nosuid nodev noatime wait
     exec check_filesystem /dev/block/mmcblk0p10 ext4
-    mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait crypt discard,noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait discard,noauto_da_alloc
 
-    # SEC_DMCRYPT move mounting efs befor apply_disk_policy, and set group id to system
     mkdir /efs
     mount ext4 /dev/block/mmcblk0p1 /efs nosuid nodev noatime wait
     chown radio system /efs
     chmod 0771 /efs
 
-    # SEC_DMCRYPT efs or cache or lfs partition required
-    exec apply_sec_devenc_init
-    
     mount debugfs nil /sys/kernel/debug
 
 # create data/gps for GPS daemon
     mkdir /data/gps 771 gps system
     chown gps system /data/gps
 
-on post-fs
-    # verfiy filesystem (UMS)
-    exec apply_system_policy /dev/block/mmcblk0p11 vfat
-    
+on post-fs    
     # once everything is setup, no need to modify /
     mount rootfs rootfs / ro remount
 
