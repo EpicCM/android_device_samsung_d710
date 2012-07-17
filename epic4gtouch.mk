@@ -43,13 +43,6 @@ PRODUCT_COPY_FILES += \
 	device/samsung/epic4gtouch/usr/keychars/qwerty2.kcm:system/usr/keychars/qwerty2.kcm \
 	device/samsung/epic4gtouch/usr/keychars/Virtual.kcm:system/usr/keychars/Virtual.kcm
 
-# kernel modules
-PRODUCT_COPY_FILES += \
-	device/samsung/epic4gtouch/dhd.ko:root/lib/modules/dhd.ko \
-	device/samsung/epic4gtouch/cyasswitch.ko:root/lib/modules/cyasswitch.ko \
-	device/samsung/epic4gtouch/j4fs.ko:root/lib/modules/j4fs.ko \
-	device/samsung/epic4gtouch/scsi_wait_scan.ko:root/lib/modules/scsi_wait_scan.ko
-
 #idc
 PRODUCT_COPY_FILES += \
 	device/samsung/epic4gtouch/usr/idc/melfas_ts.idc:system/usr/idc/melfas_ts.idc \
