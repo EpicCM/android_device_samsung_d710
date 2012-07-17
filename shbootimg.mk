@@ -16,6 +16,12 @@
 
 LOCAL_PATH := $(call my-dir)
 
+PRODUCT_COPY_FILES += \
+	$(PRODUCT_OUT)/system/lib/modules/dhd.ko:$(PRODUCT_OUT)/root/lib/modules/dhd.ko \
+	$(PRODUCT_OUT)/system/lib/modules/cyasswitch.ko:$(PRODUCT_OUT)/root/lib/modules/cyasswitch.ko \
+	$(PRODUCT_OUT)/system/lib/modules/j4fs.ko:$(PRODUCT_OUT)/root/lib/modules/j4fs.ko \
+	$(PRODUCT_OUT)/system/lib/modules/scsi_wait_scan.ko:$(PRODUCT_OUT)/root/lib/modules/scsi_wait_scan.ko
+
 INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
 $(INSTALLED_BOOTIMAGE_TARGET): $(INSTALLED_KERNEL_TARGET) $(recovery_ramdisk) $(INSTALLED_RAMDISK_TARGET) $(PRODUCT_OUT)/utilities/flash_image $(PRODUCT_OUT)/utilities/busybox
 	$(call pretty,"Boot image: $@")
