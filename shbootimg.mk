@@ -24,7 +24,7 @@ $(MOD_CP): $(LOCAL_INSTALLED_MODULE)
 	@echo "Copy: $@ -> $(MODULES)"
 	@mkdir -p $(dir $@)
 	@rm -rf $@
-	$(hide) cp -rf /system/lib/$(MODULES) $@
+	$(hide) cp -rf $(PRODUCT_OUT)/system/lib/$(MODULES) $@
 
 $(INSTALLED_RAMDISK_TARGET): $(MOD_CP)
 
