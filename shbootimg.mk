@@ -17,17 +17,14 @@
 LOCAL_PATH := $(call my-dir)
 
 # copy modules
-MODULES := dhd.ko \
-	j4fs.ko \
-	cyasswitch.ko \
-	scsi_wait_scan.ko
+MODULES := modules
 
-MOD_CP := $(PRODUCT_OUT)/root/lib/modules/$(MODULES)
+MOD_CP := $(PRODUCT_OUT)/root/lib/$(MODULES)
 $(MOD_CP): $(LOCAL_INSTALLED_MODULE)
 	@echo "Copy: $@ -> $(MODULES)"
 	@mkdir -p $(dir $@)
 	@rm -rf $@
-	$(hide) cp -f /system/lib/modules/$(MODULES) $@
+	$(hide) cp -rf /system/lib/$(MODULES) $@
 
 $(INSTALLED_RAMDISK_TARGET): $(MOD_CP)
 
