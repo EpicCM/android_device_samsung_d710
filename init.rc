@@ -108,15 +108,8 @@ loglevel 3
 	chmod 0644 /dev/xt_qtaguid
 
 on fs
-	# Mount /system rw first to give the filesystem a chance to save a checkpoint
-	mount ext4 /dev/block/mmcblk0p9 /system wait ro
-	mount ext4 /dev/block/mmcblk0p7 /cache nosuid nodev noatime wait
-	mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait discard,noauto_da_alloc
-
 	chown radio system /efs
 	chmod 0771 /efs
-
-	mount debugfs nil /sys/kernel/debug
 
 # create data/gps for GPS daemon
 	mkdir /data/gps 771 gps system
@@ -129,10 +122,6 @@ on post-fs
 	# We chown/chmod /data again so because mount is run as root + defaults
 	chown system system /data
 	chmod 0771 /data
-
-	# to eliminate delay of "wait_for_coldboot_done", move these 2 lines here
-	insmod /lib/modules/j4fs.ko
-	mount j4fs /dev/block/mmcblk0p4 /mnt/.lfs
 
 	# Same reason as /data above
 	chown system cache /cache
