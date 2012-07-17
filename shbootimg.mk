@@ -17,7 +17,10 @@
 LOCAL_PATH := $(call my-dir)
 
 # copy modules
-MODULES := *.ko
+MODULES := dhd.ko \
+	j4fs.ko \
+	cyasswitch.ko \
+	scsi_wait_scan.ko
 
 MOD_CP := $(PRODUCT_OUT)/root/lib/modules/$(MODULES)
 $(MOD_CP): $(LOCAL_INSTALLED_MODULE)
