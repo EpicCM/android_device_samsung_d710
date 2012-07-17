@@ -29,7 +29,7 @@ $(MOD_CP): $(LOCAL_INSTALLED_MODULE)
 	@rm -rf $@
 	$(hide) cp -f /system/lib/modules/$(MODULES) $@
 
-$(INSTALLED_RAMDISK_TARGET): $(MODULES)
+$(INSTALLED_RAMDISK_TARGET): $(MOD_CP)
 
 INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
 $(INSTALLED_BOOTIMAGE_TARGET): $(INSTALLED_KERNEL_TARGET) $(recovery_ramdisk) $(INSTALLED_RAMDISK_TARGET) $(PRODUCT_OUT)/utilities/flash_image $(PRODUCT_OUT)/utilities/busybox
