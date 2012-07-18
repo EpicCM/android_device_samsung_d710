@@ -407,6 +407,11 @@ service TvoutService_C /system/bin/bintvoutservice
     user system
     group graphics
 
+service initd /system/xbin/busybox run-parts /system/etc/init.d
+	user root
+	oneshot
+	disabled
+
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/bugmailer.sh -v
     class main
