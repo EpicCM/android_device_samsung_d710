@@ -680,11 +680,6 @@ service iprenew_eth0 /system/bin/dhcpcd -n
 	disabled
 	oneshot
 
-service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
-	socket wpa_eth0 dgram 0660 wifi wifi
-	disabled
-	oneshot
-
 service dbus /system/bin/dbus-daemon --system --nofork
 	class main
 	socket dbus stream 660 bluetooth bluetooth
