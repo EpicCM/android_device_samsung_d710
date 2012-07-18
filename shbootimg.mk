@@ -16,15 +16,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-# copy modules
-FILES := modules
-
-MOD_CP := $(PRODUCT_OUT)/root/lib/$(FILES)
-$(MOD_CP): $(LOCAL_INSTALLED_MODULE)
-	@cp -rf $(PRODUCT_OUT)/system/lib/$(FILES) $@
-
-$(INSTALLED_RAMDISK_TARGET): $(MOD_CP)
-
 INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
 $(INSTALLED_BOOTIMAGE_TARGET): $(INSTALLED_KERNEL_TARGET) $(recovery_ramdisk) $(INSTALLED_RAMDISK_TARGET) $(PRODUCT_OUT)/utilities/flash_image $(PRODUCT_OUT)/utilities/busybox
 	$(call pretty,"Boot image: $@")
