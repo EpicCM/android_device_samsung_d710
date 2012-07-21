@@ -50,6 +50,12 @@ on fs
     chmod 0770 /data/misc/wifi
 
 on post-fs-data
+#load modules
+    insmod /system/lib/modules/cyasswitch.ko
+    insmod /system/lib/modules/dhd.ko
+    insmod /system/lib/modules/j4fs.ko
+    insmod /system/lib/modules/scsi_wait_scan.ko
+
 # bind external sd
     mount -o bind /mnt/emmc /mnt/sdcard/external_sd
 
