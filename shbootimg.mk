@@ -16,6 +16,18 @@
 
 LOCAL_PATH := $(call my-dir)
 
+# Wifi module symlink
+WIFI_MODULE := dhd.ko
+
+WIFI_SYMLINK := $(PRODUCT_OUT)/root/lib/modules/$(WIFI_MODULE)
+$(WIFI_SYMLINK): $(LOCAL_INSTALLED_MODULE)
+	@echo "Symlink: $@ -> $(WIFI_MODULE)"
+	@mkdir -p $(PRODUCT_OUT)/root/lib/modules
+	@rm -f $@
+	$(hide) ln -sf /system/lib/modules/$(WIFI_MODULE) $@
+
+$(INSTALLED_RAMDISK_TARGET): $(WIFI_SYMLINK)
+
 INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
 $(INSTALLED_BOOTIMAGE_TARGET): $(INSTALLED_KERNEL_TARGET) $(recovery_ramdisk) $(INSTALLED_RAMDISK_TARGET) $(PRODUCT_OUT)/utilities/flash_image $(PRODUCT_OUT)/utilities/busybox
 	$(call pretty,"Boot image: $@")
