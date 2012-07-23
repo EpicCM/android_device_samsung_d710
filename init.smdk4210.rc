@@ -52,7 +52,6 @@ on fs
 on post-fs-data
 #load modules
     insmod /system/lib/modules/cyasswitch.ko
-    insmod /system/lib/modules/dhd.ko
     insmod /system/lib/modules/j4fs.ko
     insmod /system/lib/modules/scsi_wait_scan.ko
 
