@@ -17,10 +17,14 @@
 LOCAL_PATH := $(call my-dir)
 
 # Wifi module symlink
-WIFI_SYMLINK := $(PRODUCT_OUT)/root/lib/modules/dhd.ko
+WIFI_MODULE := dhd.ko
+
+WIFI_SYMLINK := $(PRODUCT_OUT)/root/lib/modules/$(WIFI_MODULE)
 $(WIFI_SYMLINK): $(LOCAL_INSTALLED_MODULE)
-	@rm -f $(PRODUCT_OUT)/root/lib/modules/dhd.ko
-	$(hide) ln -sf /system/lib/modules/dhd.ko $(PRODUCT_OUT)/root/lib/modules/dhd.ko
+	@echo "Symlink: $@ -> $(WIFI_MODULE)"
+	@mkdir -p $(PRODUCT_OUT)/root/lib/modules
+	@rm -f $(PRODUCT_OUT)/root/lib/modules/$(WIFI_MODULE)
+	$(hide) ln -sf /system/lib/modules/$(WIFI_MODULE) $(PRODUCT_OUT)/root/lib/modules/$(WIFI_MODULE)
 
 $(INSTALLED_RAMDISK_TARGET): $(WIFI_SYMLINK)
 
