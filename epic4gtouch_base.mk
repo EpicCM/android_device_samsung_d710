@@ -113,8 +113,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	net.cdma.pppd.user=user[SPACE]SprintNextel \
 	net.cdma.datalinkinterface=/dev/ttyCDMA0 \
 	net.interfaces.defaultroute=cdma \
-	ro.telephony.ril_class=EpicRIL \
-	ro.ril.samsung_cdma=true \
+	ro.telephony.ril_class=SamsungCDMAv6RIL \
 	ro.carrier=Sprint \
 	ro.wimax.interface=uwbr0 \
 	ro.cdma.ppp.interface=ppp0 \
@@ -124,8 +123,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
 	device/samsung/epic4gtouch/configs/ip-up:system/etc/ppp/ip-up \
 	device/samsung/epic4gtouch/configs/pppd_runner:system/bin/pppd_runner
-
-FRAMEWORKS_BASE_SUBDIRS += ../../$(LOCAL_PATH)/epicril/
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
