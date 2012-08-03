@@ -423,3 +423,8 @@ service bugreport /system/bin/bugmailer.sh -v
     disabled
     oneshot
     keycodes 114 115 116
+
+service wimax_route /system/bin/route add default dev uwbr0
+    class main
+    disabled
+    oneshot
