@@ -19,7 +19,7 @@
 USE_CAMERA_STUB := true
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_LIBSECRIL_STUB := true
-
+BOARD_USE_SKIA_LCDTEXT := true
 TARGET_BOOTANIMATION_PRELOAD := true
 
 TARGET_CPU_ABI := armeabi-v7a
@@ -27,8 +27,11 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a9
-ARCH_ARM_HAVE_NEON := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
+ARCH_ARM_HAVE_NEON := true
+TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
+
 EXYNOS4210_ENHANCEMENTS := true
 
 ifdef EXYNOS4210_ENHANCEMENTS
@@ -38,7 +41,7 @@ endif
 
 TARGET_BOARD_PLATFORM := exynos4
 TARGET_SOC := exynos4210
-TARGET_BOOTLOADER_BOARD_NAME := SPH-D710 
+TARGET_BOOTLOADER_BOARD_NAME := smdk4210
 TARGET_BOARD_INFO_FILE := device/samsung/epic4gtouch/board-info.txt
 
 TARGET_NO_BOOTLOADER := true
@@ -72,14 +75,29 @@ TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/epic4gtouch/releas
 # Graphics
 BOARD_EGL_CFG := device/samsung/epic4gtouch/configs/egl.cfg
 USE_OPENGL_RENDERER := true
+EGL_ALWAYS_ASYNC := true
 
 # Enable WEBGL in WebKit
 ENABLE_WEBGL := true
+
+# Charging mode
+BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
+BOARD_BATTERY_DEVICE_NAME := "battery"
+BOARD_CHARGER_RES := device/samsung/epic4gtouch/res/charger
+
+
+# Notification LED
+BOARD_HAS_LED_NOTIF := true
 
 # HWComposer
 BOARD_USES_HWCOMPOSER := true
 BOARD_USE_SECTVOUT := true
 BOARD_USES_FIMGAPI := true
+BOARD_SAMSUNG_TVOUT := true
+BOARD_HDMI_DDC_CH := DDC_CH_I2C_7
+
+BOARD_HAL_PATH := hardware/samsung/exynos4/hal
+BOARD_MM_PATH := hardware/samsung/exynos/multimedia
 
 # OMX
 BOARD_HAVE_CODEC_SUPPORT := SAMSUNG_CODEC_SUPPORT
@@ -93,6 +111,9 @@ BOARD_USES_MFC_FPS := true
 BOARD_USE_YAMAHAPLAYER := true
 BOARD_USE_SAMSUNG_SEPARATEDSTREAM := true
 BOARD_HAS_SAMSUNG_VOLUME_BUG := true
+
+# Camera
+COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
 
 # RIL
 BOARD_MOBILEDATA_INTERFACE_NAME := "ppp0"
@@ -129,7 +150,8 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/f_mass_storage/lun%d/
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/epic4gtouch/recovery/recovery_keys.c
 BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/epic4gtouch/recovery/graphics.c
-BOARD_UMS_LUNFILE := "/sys/class/android_usb/f_mass_storage/lun0/file"
+BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun0/file"
+TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
@@ -137,11 +159,6 @@ BOARD_SUPPRESS_EMMC_WIPE := true
 
 # Device specific headers
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/epic4gtouch/overlay/include
-
-# Charging mode
-BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
-BOARD_BATTERY_DEVICE_NAME := "battery"
-BOARD_CHARGER_RES := device/samsung/epic4gtouch/res/charger
 
 # assert
 TARGET_OTA_ASSERT_DEVICE := epic4gtouch,SPH-D710
