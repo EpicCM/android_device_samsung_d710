@@ -1,8 +1,8 @@
 import init.smdk4210.usb.rc
 
 on early-init
-    export EXTERNAL_STORAGE /mnt/sdcard
-    export SECONDARY_STORAGE /mnt/emmc
+    export EXTERNAL_STORAGE2 /mnt/sdcard
+    export EXTERNAL_STORAGE /mnt/emmc
     mkdir /mnt 0775 system system
     mkdir /mnt/sdcard 0775 system system
     mkdir /mnt/sdcard/external_sd 0775 system system
@@ -54,9 +54,6 @@ on post-fs-data
     insmod /system/lib/modules/cyasswitch.ko
     insmod /system/lib/modules/j4fs.ko
     insmod /system/lib/modules/scsi_wait_scan.ko
-
-# bind external sd
-    mount -o bind /mnt/sdcard /mnt/sdcard/external_sd
 
 # GPS
     chown root system /dev/ttySAC1
