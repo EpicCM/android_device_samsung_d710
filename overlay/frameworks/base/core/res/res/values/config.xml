@@ -20,16 +20,16 @@
 <!-- These resources are around just to allow their values to be customized
      for different hardware and product builds. -->
 <resources>
-
-    <!-- Default color for notification LED is white. -->
-    <color name="config_defaultNotificationColor">#ffffffff</color>
-
+     
+     <!-- Default color for notification LED is white -->
+     <color name="config_defaultNotificationColor">#ffff0000</color>
+	
     <!-- Default LED on time for notification LED in milliseconds. -->
     <integer name="config_defaultNotificationLedOn">1000</integer>
 
     <!-- Default LED off time for notification LED in milliseconds. -->
-    <integer name="config_defaultNotificationLedOff">9000</integer>
-
+    <integer name="config_defaultNotificationLedOff">14000</integer>
+ 	
     <!-- Default value for led color when battery is low on charge -->
     <integer name="config_notificationsBatteryLowARGB">0xFFFF00FF</integer>
 
@@ -102,11 +102,12 @@
          than the size of the config_autoBrightnessLevels array.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessButtonBacklightValues">
-        <item>255</item>
-        <item>255</item>
-        <item>255</item>
-        <item>255</item>
-        <item>255</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </integer-array>
 
     <!-- Array of output values for keyboard backlight corresponding to the LUX values
@@ -114,12 +115,13 @@
          than the size of the config_autoBrightnessLevels array.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessKeyboardBacklightValues">
-        <item>255</item>
-        <item>255</item>
-        <item>255</item>
-        <item>255</item>
-        <item>255</item>
-    </integer-array>  
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
     <integer name="config_screenBrightnessDim">29</integer>
@@ -140,8 +142,8 @@
         <item>"mobile_supl,3,0,2,60000,true"</item>
         <item>"mobile_dun,4,0,3,60000,true"</item>
         <item>"mobile_hipri,5,0,3,60000,true"</item>
-	<item>"wimax,6,6,1,60000,true"</item>
         <item>"mobile_bluetooth,7,7,1,-1,true"</item>
+		<item>"wimax,6,6,1,60000,true"</item>
         <item>"wifi_p2p,13,1,0,-1,true"</item>
     </string-array>
 
@@ -150,7 +152,7 @@
     <string-array translatable="false" name="radioAttributes">
         <item>"1,1"</item>
         <item>"0,1"</item>
-	<item>"6,1"</item>
+		<item>"6,1"</item>
         <item>"7,1"</item>
     </string-array>
 
@@ -160,6 +162,10 @@
     <string-array translatable="false" name="config_tether_usb_regexs">
         <item>"usb0"</item>
         <item>"rndis0"</item>
+    </string-array>
+
+    <string-array name="config_tether_wimax_regexs">
+        <item>"uwbr0"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable 

@@ -44,3 +44,6 @@ class EdifyGenerator(edify_generator.EdifyGenerator):
         self.script.append('unmount("%s");' %
 								(p.mount_point))
         self.mounts.add(p.mount_point)
+
+	def RunBackup(self, command):
+		edify_generator.EdifyGenerator.RunBackup(self, command)

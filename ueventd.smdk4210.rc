@@ -29,6 +29,8 @@
 /dev/block/mmcblk0p8      0660   system     radio
 /dev/akm8975              0660   system     system
 /dev/accelerometer        0660   system     system
+/dev/graphics/fb0         0777   root       graphics
+/dev/rfkill               0666   root       root
 #SISO Data Call Changes S [ From CL 43524 ]
 # CDMA radio interface MUX
 /dev/ts0710mux*           0640   radio      radio
