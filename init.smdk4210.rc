@@ -54,6 +54,8 @@ on post-fs-data
     insmod /system/lib/modules/cyasswitch.ko
     insmod /system/lib/modules/j4fs.ko
     insmod /system/lib/modules/scsi_wait_scan.ko
+    
+    mount j4fs /dev/block/mmcblk0p4 /mnt/.lfs
 
 # GPS
     chown root system /dev/ttySAC1
