@@ -1,14 +1,14 @@
 import init.smdk4210.usb.rc
 
 on early-init
-    export EXTERNAL_STORAGE /mnt/sdcard
-    export EXTERNAL_STORAGE2 /mnt/sdcard1
+    export EXTERNAL_STORAGE2 /mnt/sdcard
+    export EXTERNAL_STORAGE /mnt/sdcard1
+    export USBHOST_STORAGE /mnt/sdcard/usbStorage
     mkdir /mnt 0775 system system
     mkdir /mnt/sdcard 0775 system system
     mkdir /mnt/sdcard1 0775 system system
     mkdir /mnt/sdcard/external_sd 0775 system system
-    mkdir /mnt/emmc 0775 system system
-    mkdir /mnt/usbStorage 0775 system system
+    mkdir /mnt/sdcard/usbStorage 0775 system system
     mkdir /efs 0771 radio system
     mkdir /preload 0771 system system
     mkdir /mnt/.lfs 0755 root root
