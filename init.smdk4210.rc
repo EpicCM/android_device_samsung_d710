@@ -6,6 +6,7 @@ on early-init
     mkdir /mnt 0775 system system
     mkdir /mnt/sdcard 0775 system system
     mkdir /mnt/sdcard1 0775 system system
+    mkdir /mnt/usbdisk 0775 system system
     mkdir /mnt/sdcard/external_sd 0775 system system
     mkdir /efs 0771 radio system
     mkdir /preload 0771 system system
