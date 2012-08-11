@@ -35,6 +35,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/samsung/epic4gtouch/configs/vold.fstab:system/etc/vold.fstab
 
+# Local Init
+PRODUCT_COPY_FILES += \
+	device/samsung/epic4gtouch/configs/init.local.rc:system/etc/init.local.rc
+
 # Media
 PRODUCT_COPY_FILES += \
 	device/samsung/epic4gtouch/configs/media_profiles.xml:system/etc/media_profiles.xml
