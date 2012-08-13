@@ -16,7 +16,7 @@
 dev_mount sdcard /mnt/sdcard 11 /devices/platform/dw_mmc/mmc_host/mmc0/mmc0 nonremovable,encryptable
 
 # external sdcard
-dev_mount sdcard1 /mnt/sdcard1 auto /devices/virtual/block/cyasblkdevblk0
+dev_mount external_sd /mnt/external_sd auto /devices/virtual/block/cyasblkdevblk0
 
 #usb host device 
 dev_mount usbdisk /mnt/usbdisk auto /devices/platform/s5p-ehci

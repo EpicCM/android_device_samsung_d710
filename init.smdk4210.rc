@@ -1,7 +1,7 @@
 import init.smdk4210.usb.rc
 
 on early-init
-    export EXTERNAL_STORAGE /mnt/sdcard
+    export EXTERNAL_STORAGE /mnt/external_sd
     mkdir /mnt 0775 system system
     mkdir /mnt/sdcard 0775 system system
     mkdir /mnt/sdcard1 0775 system system
@@ -11,8 +11,7 @@ on early-init
     mkdir /mnt/.lfs 0755 root root
     # for backwards compatibility
     symlink /mnt/sdcard /sdcard
-    symlink /mnt/sdcard1 /sdcard1
-    symlink /mnt/sdcard1 /sdcard/external_sd
+    symlink /mnt/external_sd /external_sd
     #my way is better than anyone	    
     symlink /system/vendor /vendor
 # Disable CFQ slice idle delay
