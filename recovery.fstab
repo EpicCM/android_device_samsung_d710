@@ -10,4 +10,4 @@
 /preload 		ext4		/dev/block/mmcblk0p12
 
 /sdcard			vfat		/dev/block/mmcblk0p11
-/external_sdcard	vfat  	/dev/block/cyasblkdevblk0p1
+/external_sd	vfat  	/dev/block/cyasblkdevblk0p1
