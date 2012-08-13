@@ -187,7 +187,6 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Vold properties and default USB interface
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.vold.switchablepair=/mnt/sdcard,/mnt/sdcard1 \
 	persist.sys.usb.config=mass_storage
 
 # Include exynos4 platform specific parts
