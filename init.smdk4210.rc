@@ -1,8 +1,7 @@
 import init.smdk4210.usb.rc
 
 on early-init
-    export EXTERNAL_STORAGE /mnt/sdcard1
-    export EXTERNAL_STORAGE2 /mnt/sdcard
+    export EXTERNAL_STORAGE /mnt/sdcard
     mkdir /mnt 0775 system system
     mkdir /mnt/sdcard 0775 system system
     mkdir /mnt/sdcard1 0775 system system
@@ -12,9 +11,7 @@ on early-init
     mkdir /mnt/.lfs 0755 root root
     # for backwards compatibility
     symlink /mnt/sdcard /sdcard
-    symlink /mnt/sdcard /emmc
     symlink /mnt/sdcard1 /sdcard1
-    mkdir /mnt/sdcard/external_sd 0775 system system
     symlink /mnt/sdcard1 /sdcard/external_sd
     #my way is better than anyone	    
     symlink /system/vendor /vendor
@@ -255,6 +252,7 @@ on property:ril.cdma.data_state=0
     chown system media_rw /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/scenario
     chown system media_rw /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/negative
     write /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/scenario 4
+    chown system media_rw /sys/vibrator/pwm_val
 
 # Permissions for uart_sel and usb_sel
     chown system radio /sys/class/sec/switch/uart_sel/value
