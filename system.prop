@@ -11,3 +11,7 @@ ro.telephony.call_ring.multiple=0
 
 # Set ring delay to 0ms
 ro.telephony.call_ring.delay=0
+
+# notify vold we have internal and external sd
+ro.additionalmounts=/mnt/emmc
+ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc
