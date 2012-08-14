@@ -1,8 +1,7 @@
 import init.smdk4210.usb.rc
 
 on early-init
-    export EXTERNAL_STORAGE /mnt/emmc
-    export EXTERNAL_STORAGE2 /mnt/external_sd
+    export EXTERNAL_STORAGE /mnt/sdcard
     mkdir /mnt 0775 system system
     mkdir /mnt/sdcard 0775 system system
     mkdir /mnt/sdcard 0775 system system
