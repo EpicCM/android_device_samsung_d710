@@ -4,7 +4,6 @@ on early-init
     export EXTERNAL_STORAGE /mnt/sdcard
     mkdir /mnt 0775 system system
     mkdir /mnt/sdcard 0000 system system
-    mkdir /mnt/emmc 0000 system system    
     mkdir /mnt/external_sd 0000 system system
     mkdir /mnt/usbdisk 0000 system system
     mkdir /efs 0771 radio system
@@ -12,7 +11,6 @@ on early-init
     mkdir /mnt/.lfs 0755 root root
     # for backwards compatibility
     symlink /mnt/sdcard /sdcard
-    symlink /mnt/emmc /emmc
     symlink /mnt/external_sd /external_sd
     #my way is better than anyone	    
     symlink /system/vendor /vendor
