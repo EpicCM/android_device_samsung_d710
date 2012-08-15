@@ -42,10 +42,4 @@
     <item>100</item>
   </string-array>
 
-  <string-array name="hspa_entries">
-    <item>UMTS</item>
-    <item>HSDPA</item>
-    <item>HSDPA + HSUPA</item>
-  </string-array>
-
 </resources>

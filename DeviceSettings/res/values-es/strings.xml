@@ -2,10 +2,6 @@
 <resources>
     <string name="app_name">Ajustes de Galaxy S II</string>
 
-    <string name="category_radio_title">Radio</string>
-    <string name="hspa_title_head">HSPA</string>
-    <string name="hspa_summary_head">Activar HSDPA/HSUPA</string>
-
     <string name="category_mdnie_title">Pantalla</string>
     <string name="screen_colors_title">Colores</string>
     <string name="mdnie_scenario_title_head">Escenario</string>

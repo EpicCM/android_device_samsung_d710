@@ -42,10 +42,4 @@
         <item>100</item>
     </string-array>
 
-    <string-array name="hspa_entries">
-        <item>Vain UMTS</item>
-        <item>Vain HSDPA</item>
-        <item>HSDPA + HSUPA</item>
-    </string-array>
-
 </resources>

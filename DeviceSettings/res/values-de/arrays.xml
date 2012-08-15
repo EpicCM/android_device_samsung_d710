@@ -50,10 +50,4 @@
         <item>100%</item>
     </string-array>
 
-    <string-array name="hspa_entries">
-	    <item>Nur UMTS</item>
-	    <item>Nur HSDPA</item>
-	    <item>HSDPA + HSUPA</item>
-    </string-array>
-
 </resources>
