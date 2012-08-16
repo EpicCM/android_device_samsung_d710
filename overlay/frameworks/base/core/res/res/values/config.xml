@@ -46,7 +46,7 @@
     <integer name="config_carDockKeepsScreenOn">1</integer>
 
     <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
-    <bool name="config_unplugTurnsOnScreen">true</bool>
+    <bool name="config_unplugTurnsOnScreen">false</bool>
 
     <!-- Component name of the service providing network location support. -->
     <string name="config_networkLocationProvider">com.google.android.location.NetworkLocationProvider</string>
@@ -180,9 +180,13 @@
          should be empty.  An example would be "softap.*" -->
     <string-array translatable="false" name="config_tether_wifi_regexs">
         <item>"wlan0"</item>
-        <item>"uwbr0"</item>
     </string-array>
 
+    <string-array translatable="false" name="config_tether_upstream_regexs">
+        <item>"rmnet\\d"</item>
+        <item>"eth\\d"</item>
+        <item>"wimax\\d"</item>
+    </string-array>
     <!-- Array of allowable ConnectivityManager network types for tethering -->
     <!-- Common options are [1, 4] for wifi and dun or [0,1,5,7] for -->
     <!-- mobile, wifi, hipri and bluetooth -->
@@ -207,12 +211,6 @@
     <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
 
     <bool name="config_ui_enableFadingMarquee">false</bool>
-
-    <!-- Component name of the service providing network location support. -->
-    <string name="config_networkLocationProvider">com.google.android.location.NetworkLocationProvider</string>
-
-    <!-- Component name of the service providing geocoder API support. -->
-    <string name="config_geocodeProvider">com.google.android.location.GeocodeProvider</string>
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
