@@ -1,7 +1,7 @@
 import init.smdk4210.usb.rc
 
 on early-init
-    export EXTERNAL_STORAGE /mnt/external_sd
+    export EXTERNAL_STORAGE /mnt/sdcard
     mkdir /mnt 0775 system system
     mkdir /mnt/sdcard 0000 system system
     mkdir /mnt/external_sd 0000 system system
@@ -74,7 +74,9 @@ on post-fs-data
 
 # LED Light Triggers
     chown system system /sys/class/leds/red/trigger
+    chmod 0660 /sys/class/leds/red/trigger
     chown system system /sys/class/leds/blue/trigger
+    chmod 0660 /sys/class/leds/blue/trigger
 
 #DRM directory creation
     mkdir /system/etc/security/.drm 0775
@@ -111,13 +113,13 @@ on post-fs-data
     chown system system /dev/usb_mtp_gadget
 
 # terminal mode
-    chmod 0660 /sys/class/android_usb/android0/terminal_version
     chown system system /sys/class/android_usb/android0/terminal_version
+    chmod 0660 /sys/class/android_usb/android0/terminal_version
 
 # NFC
-    setprop ro.nfc.port "I2C"
-    chmod 0600 /dev/pn544
-    chown nfc nfc /dev/pn544
+#    setprop ro.nfc.port "I2C"
+#    chmod 0600 /dev/pn544
+#    chown nfc nfc /dev/pn544
 
 # setup for alsa snd device
     chmod 0770 /dev/snd/pcmC0D0c
@@ -173,8 +175,8 @@ on post-fs-data
     chown system radio /sys/devices/platform/sec-battery/power_supply/battery/batt_vol
     chown system radio /sys/devices/platform/sec-battery/power_supply/battery/wimax
 
-    chown system system /sys/class/backlight/panel/brightness
-    chown system system /sys/class/power_supply/battery/temp
+    chown system radio /sys/class/backlight/panel/brightness
+    chown system radio /sys/class/power_supply/battery/temp
 
 # Permissions for input devices
     chown system radio /sys/devices/virtual/sec/sec_key/sec_key_pressed
@@ -221,39 +223,49 @@ on post-fs-data
 
 # Permissions for bluetooth
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
-    chown bluetooth bluetooth ro.bt.bdaddr_path
+    chown bluetooth bluetooth /efs/bluetooth/bt_addr
     chown bluetooth bluetooth /dev/ttySAC0
+    chmod 0600 /efs/bluetooth/bt_addr
     chmod 0600 /dev/ttySAC0
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
 
 on property:ril.cdma.data_state=1
-     restart pppd_cdma
+    restart pppd_cdma
 
 on property:ril.cdma.data_state=0
     stop pppd_cdma
 
 # Vibetonz
-    chmod 0660 /dev/tspdrv
     chown root shell /dev/tspdrv
-    chmod 0660 /sys/vibrator/pwm_val
+    chmod 0660 /dev/tspdrv
     chown system system /sys/vibrator/pwm_val
+    chmod 0660 /sys/vibrator/pwm_val
 
 # Permissions for LCD
     chown system radio /sys/class/lcd/panel/lcd_power
+    chmod 0660 /sys/class/lcd/panel/lcd_power
     chown system radio /sys/class/lcd/panel/lcd_type
-    chown system media_rw /sys/class/lcd/panel/gamma_mode
-    chown system media_rw /sys/class/lcd/panel/power_reduce
-    chown system system /sys/class/backlight/panel/auto_brightness
+    chmod 0660 /sys/class/lcd/panel/lcd_type
+    chown system radio /sys/class/lcd/panel/gamma_mode
+    chmod 0660 /sys/class/lcd/panel/gamma_mode
+    chown system radio /sys/class/lcd/panel/power_reduce
+    chmod 0660 /sys/class/lcd/panel/power_reduce
+    chown system radio /sys/class/backlight/panel/auto_brightness
+    chmod 0660 /sys/class/backlight/panel/auto_brightness
 
-# Permissions for mDNIe
-    chown system media_rw /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/mode
-    chown system media_rw /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/outdoor
-    chown system media_rw /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/scenario
-    chown system media_rw /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/negative
+# Permissions for mDNIe 
+    chown system radio /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/mode
+    chmod 0660 /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/mode
+    chown system radio /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/outdoor
+    chmod 0660 /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/outdoor
+    chown system radio /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/scenario
+    chmod 0660 /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/scenario
+    chown system radio /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/negative
+    chmod 0660 /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/negative
     write /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/scenario 4
-    chown system media_rw /sys/vibrator/pwm_val
+
 
 # Permissions for uart_sel and usb_sel
     chown system radio /sys/class/sec/switch/uart_sel/value
@@ -286,9 +298,9 @@ on property:ril.cdma.data_state=0
     write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 85
 
 on boot
-    chown system system /sys/class/backlight/pwm-backlight/brightness
+    chown system radio /sys/class/backlight/pwm-backlight/brightness
     chmod 0660 /sys/class/backlight/pwm-backlight/brightness
-    chown radio system /sys/devices/virtual/misc/melfas_touchkey/brightness
+    chown system radio /sys/devices/virtual/misc/melfas_touchkey/brightness
     chmod 0660 /sys/devices/virtual/misc/melfas_touchkey/brightness
 
 #panorama directory creation
@@ -312,19 +324,19 @@ on boot
     setprop ro.radio.noril yes
 
 # Permisions for sensors
-    chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_selftest
-    chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_get_temp
-    chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_power_on
-    chown radio system /sys/devices/virtual/accelerometer/accelerometer/acc_file
-    chown radio system /sys/devices/virtual/sec/gsensorcal/calibration
+    chown system radio /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_selftest
+    chown system radio /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_get_temp
+    chown system radio /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_power_on
+    chown system radio /sys/devices/virtual/accelerometer/accelerometer/acc_file
+    chown system radio /sys/devices/virtual/sec/gsensorcal/calibration
 
 # for device encryption
     setprop vold.post_fs_data_done 1
 
 # permissions for NFC
-    setprop ro.nfc.port "I2C"
-    chmod 0600 /dev/pn544
-    chown nfc nfc /dev/pn544
+#    setprop ro.nfc.port "I2C"
+#    chmod 0600 /dev/pn544
+#    chown nfc nfc /dev/pn544
 
 # Device Encryption by B2B Security Lab. 
     setprop ro.crypto.keyfile.userdata /efs/metadata
@@ -417,11 +429,11 @@ service initd /system/xbin/busybox run-parts /system/etc/init.d
 	disabled
 
 # bugreport is triggered by holding down volume down, volume up and power
-service bugreport /system/bin/bugmailer.sh -v
-    class main
-    disabled
-    oneshot
-    keycodes 114 115 116
+#service bugreport /system/bin/bugmailer.sh -v
+#    class main
+#    disabled
+#    oneshot
+#    keycodes 114 115 116
 
 service wimax_route /system/bin/route add default dev uwbr0
     class main
