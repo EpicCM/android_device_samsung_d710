@@ -13,6 +13,6 @@ ro.telephony.call_ring.multiple=0
 ro.telephony.call_ring.delay=0
 
 # notify vold we have internal and external sd
-ro.additionalmounts=/mnt/external_sd
+#ro.additionalmounts=/mnt/external_sd
 ro.vold.switchablepair=/mnt/sdcard,/mnt/external_sd
-#persist.sys.vold.switchexternal=1
+persist.sys.vold.switchexternal=1
