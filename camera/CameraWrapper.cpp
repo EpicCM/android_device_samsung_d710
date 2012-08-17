@@ -92,7 +92,7 @@ static int check_vendor_module()
 }
 
 const static char * video_preview_sizes[] = {
-    "1920x1080,1280x720,640x480",
+    "1920x1080,1280x720,720x480",
     "640x480,352x288,320x240,176x144"
 };
 
@@ -125,7 +125,6 @@ char * camera_fixup_setparams(int id, const char * settings)
     if(params.get("cam_mode"))
     {
         const char* previewSize = params.get(android::CameraParameters::KEY_PREVIEW_SIZE);
-        params.set(android::CameraParameters::KEY_VIDEO_SIZE, previewSize);
         params.set(android::CameraParameters::KEY_PREFERRED_PREVIEW_SIZE_FOR_VIDEO, previewSize);
         params.set(android::CameraParameters::KEY_SUPPORTED_VIDEO_SIZES, video_preview_sizes[id]);
     }
