@@ -160,12 +160,12 @@
          USB interfaces.  If the device doesn't want to support tething over USB this should
          be empty.  An example would be "usb.*" -->
     <string-array translatable="false" name="config_tether_usb_regexs">
-        <item>"usb0"</item>
-        <item>"rndis0"</item>
+        <item>"usb\\d"</item>
+        <item>"rndis\\d"</item>
     </string-array>
 
     <string-array name="config_tether_wimax_regexs">
-        <item>"uwbr0"</item>
+        <item>"uwbr\\d"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable 
@@ -179,14 +179,11 @@
          Wifi interfaces.  If the device doesn't want to support tethering over Wifi this
          should be empty.  An example would be "softap.*" -->
     <string-array translatable="false" name="config_tether_wifi_regexs">
-        <item>"wlan0"</item>
+        <item>"wlan\\d"</item>
+        <item>"eth\\d"</item>
+        <item>"uwbr\\d"</item>
     </string-array>
 
-    <string-array translatable="false" name="config_tether_upstream_regexs">
-        <item>"rmnet\\d"</item>
-        <item>"eth\\d"</item>
-        <item>"wimax\\d"</item>
-    </string-array>
     <!-- Array of allowable ConnectivityManager network types for tethering -->
     <!-- Common options are [1, 4] for wifi and dun or [0,1,5,7] for -->
     <!-- mobile, wifi, hipri and bluetooth -->
