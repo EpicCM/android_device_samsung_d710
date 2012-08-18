@@ -36,7 +36,7 @@ public class Utils {
             FileOutputStream fos = new FileOutputStream(new File(filename));
             fos.write(value.getBytes());
             fos.flush();
-            fos.getFD().sync();
+        /*  fos.getFD().sync(); */ //We really don't need to sync sysfs.. its throwing exceptions..
             fos.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
