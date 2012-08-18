@@ -87,3 +87,18 @@ on property:sys.usb.config=mass_storage,adb
     write /sys/class/android_usb/android0/enable 1
     start adbd
     setprop sys.usb.state $sys.usb.config
+    
+on property:cm.usb.autoprime=AP
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/devices/virtual/sec/switch/set_usb_path AP
+    write /sys/class/android_usb/android0/enable 1
+    
+on property:cm.usb.autoprime=CP
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/devices/virtual/sec/switch/set_usb_path CP
+    write /sys/class/android_usb/android0/enable 1
+
+on property:cm.usb.autoprime=ALL
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/devices/virtual/sec/switch/set_usb_path ALL
+    write /sys/class/android_usb/android0/enable 1
