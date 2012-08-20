@@ -9,5 +9,5 @@
 /data           ext4      /dev/block/mmcblk0p10
 /preload        ext4      /dev/block/mmcblk0p12
 
-/sdcard         vfat      /dev/block/mmcblk0p11                                     lun=/sys/class/android_usb/android0/f_mass_storage/lun0/file
-/external_sd    vfat      /dev/block/cyasblkdevblk0p1   /dev/block/cyasblkdevblk0   lun=/sys/class/android_usb/android0/f_mass_storage/lun1/file
+/sdcard         vfat      /dev/block/mmcblk0p11                                     lun=/sys/devices/platform/s3c-usbgadget/gadget/lun0/file
+/external_sd    vfat      /dev/block/cyasblkdevblk0p1   /dev/block/cyasblkdevblk0   lun=/sys/devices/platform/s3c-usbgadget/gadget/lun1/file
