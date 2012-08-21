@@ -283,7 +283,7 @@
     <!-- Name of the wimax manager class -->
     <string name="config_wimaxManagerClassname">android.net.fourG.wimax.Wimax4GManager</string>
     <!-- Name of the wimax service class -->
-    <string name="config_wimaxServiceClassname">android.net.fourG.wimax.IWimax4GManager</string>
+    <string name="config_wimaxServiceClassname">android.net.fourG.net4GManager</string>
     <!-- Name of the wimax state tracker class -->
     <string name="config_wimaxStateTrackerClassname">android.net.fourG.wimax.WimaxStateTracker</string>
     <!-- Set to true if the RSSI should always display CDMA signal
