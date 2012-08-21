@@ -2,10 +2,8 @@
 
 # Use interface name if linkname is not available
 NAME=${LINKNAME:-"$1"}
-/system/bin/setprop "net.interfaces.defaultroute" "cdma"
-/system/bin/setprop "net.cdma.ppp.interface" "$NAME"
+
 /system/bin/setprop "net.$NAME.dns1" "$DNS1"
 /system/bin/setprop "net.$NAME.dns2" "$DNS2" 
 /system/bin/setprop "net.$NAME.local-ip" "$IPLOCAL" 
 /system/bin/setprop "net.$NAME.remote-ip" "$IPREMOTE" 
-
