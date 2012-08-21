@@ -38,9 +38,6 @@ etc/wifi/bcm4330_mfg.bin
 etc/wifi/bcm4330_p2p.bin
 etc/wifi/bcm4330_sta.bin
 etc/wimax_boot.bin
-firmware/mfc_fw.bin
-firmware/wimaxfw.bin
-firmware/wimaxloader.bin
 framework/com.google.widevine.software.drm.jar
 framework/com.samsung.device.jar
 framework/com.yamaha.android.media.jar
