@@ -129,3 +129,6 @@ usr/share/alsa/pcm/surround41.conf
 usr/share/alsa/pcm/surround50.conf
 usr/share/alsa/pcm/surround51.conf
 usr/share/alsa/pcm/surround71.conf
+vendor/firmware/wimaxfw.bin
+vendor/firmware/mfc_fw.bin
+vendor/firmware/wimaxloader.bin
