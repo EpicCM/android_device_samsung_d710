@@ -49,7 +49,7 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_COPY_FILES += \
-	device/samsung/epic4gtouch/configs/nvram_net.txt:system/etc/nvram_net.txt \
+	device/samsung/epic4gtouch/configs/nvram_net.txt:system/etc/wifi/nvram_net.txt \
 	device/samsung/epic4gtouch/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
 	device/samsung/epic4gtouch/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
 
