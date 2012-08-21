@@ -455,3 +455,9 @@ service wimax_route /system/bin/route add default dev uwbr0
     class main
     disabled
     oneshot
+
+service wlandutservice /system/bin/wlandutservice
+    user system
+    group wifi net_raw net_admin system inet
+    disabled
+    oneshot
