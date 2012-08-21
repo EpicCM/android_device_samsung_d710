@@ -38,6 +38,7 @@ framework/com.google.widevine.software.drm.jar
 framework/com.samsung.device.jar
 framework/com.yamaha.android.media.jar
 framework/seccamera.jar
+framework/sec_feature.jar
 framework/wimax.jar
 lib/drm/libdrmwvmplugin.so
 lib/egl/libEGL_mali.so
@@ -54,7 +55,6 @@ lib/hw/gralloc.exynos4.so
 lib/hw/hwcomposer.exynos4.so
 lib/libakm.so
 lib/libasound.so
-lib/libcamera_client.so
 lib/libcaps.so
 lib/libcec.so
 lib/libddc.so
