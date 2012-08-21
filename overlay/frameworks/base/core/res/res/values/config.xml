@@ -277,13 +277,14 @@
     <!-- Set and Unsets WiMAX -->
     <bool name="config_wimaxEnabled">true</bool>
     <!-- Location of the wimax framwork jar location -->
-    <string name="config_wimaxServiceJarLocation">/system/framework/wimax_service.jar</string>
+    <string name="config_wimaxServiceJarLocation">/system/framework/wimax.jar</string>
     <!-- Location of the wimax native library locaiton -->
     <string name="config_wimaxNativeLibLocation">/system/lib/libSECmWiMAXcAPI.so</string>
     <!-- Name of the wimax manager class -->
     <string name="config_wimaxManagerClassname">android.net.fourG.wimax.Wimax4GManager</string>
     <!-- Name of the wimax service class -->
-    <string name="config_wimaxServiceClassname">com.android.server.WimaxService</string>
+    <!-- FH13 prop doesn't have this class at all -->
+    <!--<string name="config_wimaxServiceClassname">com.android.server.WimaxService</string>-->
     <!-- Name of the wimax state tracker class -->
     <string name="config_wimaxStateTrackerClassname">android.net.fourG.wimax.WimaxStateTracker</string>
     <!-- Set to true if the RSSI should always display CDMA signal
