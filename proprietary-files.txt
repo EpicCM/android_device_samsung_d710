@@ -1,7 +1,6 @@
 app/PhoneInfo.apk
 app/Phone_Util.apk
 app/serviceModeApp.apk
-app/SprintMenu.apk
 app/SystemUpdateUI.apk
 app/WiMAXHiddenMenu.apk
 app/WiMAXSettings.apk
@@ -9,8 +8,6 @@ bin/bcm4330B1.hcd
 bin/bintvoutservice
 bin/gpsd
 bin/immvibed
-bin/ip6tables
-bin/iptables
 bin/rild
 bin/smd
 bin/wlandutservice
@@ -27,7 +24,6 @@ etc/audio/Tx_ControlParams_SPEAKER_WIDEBAND.txt
 etc/audio/Tx_ControlParams_WIRED_HEADPHONE_WIDEBAND.txt
 etc/audio/Tx_ControlParams_WIRED_HEADSET_WIDEBAND.txt
 etc/firmware/RS_M5LS_TB.bin
-etc/mkshrc
 etc/permissions/com.google.widevine.software.drm.xml
 etc/permissions/com.samsung.device.xml
 etc/permissions/com.yamaha.android.media.xml
@@ -59,13 +55,11 @@ lib/hw/hwcomposer.exynos4.so
 lib/libakm.so
 lib/libasound.so
 lib/libcamera_client.so
-lib/libcameraservice.so
 lib/libcaps.so
 lib/libcec.so
 lib/libddc.so
 lib/libedid.so
 lib/libfimc.so
-lib/libfimg.so
 lib/libGLESv1_CM.so
 lib/libGLESv2_dbg.so
 lib/libGLESv2.so
@@ -73,7 +67,6 @@ lib/libhdmiclient.so
 lib/libhdmi.so
 lib/libImmVibeJ.so
 lib/libion.so
-lib/libiprouteutil.so
 lib/liblvvefs.so
 lib/libMali.so
 lib/libmediayamaha_jni.so
