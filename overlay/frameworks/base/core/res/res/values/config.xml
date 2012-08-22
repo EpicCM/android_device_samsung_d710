@@ -281,7 +281,7 @@
     <!-- Location of the wimax native library locaiton -->
     <string name="config_wimaxNativeLibLocation">/system/lib/libSECmWiMAXcAPI.so</string>
     <!-- Name of the wimax manager class -->
-    <string name="config_wimaxManagerClassname">android.net.fourG.net4GManager</string>
+    <string name="config_wimaxManagerClassname">android.net.fourG.wimax.Wimax4GManager</string>
     <!-- Name of the wimax service class -->
     <string name="config_wimaxServiceClassname">com.android.server.WimaxService</string>
     <!-- Name of the wimax state tracker class -->
