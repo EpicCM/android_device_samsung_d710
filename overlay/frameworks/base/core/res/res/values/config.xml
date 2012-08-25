@@ -164,7 +164,7 @@
     </string-array>
 
     <string-array name="config_tether_wimax_regexs">
-        <item>"wlan\\d"</item>
+        <item>"uwbr\\d"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable 
@@ -179,20 +179,14 @@
          should be empty.  An example would be "softap.*" -->
     <string-array translatable="false" name="config_tether_wifi_regexs">
         <item>"wlan\\d"</item>
-        <item>"eth\\d"</item>
-        <item>"uwbr\\d"</item>
     </string-array>
 
-    <!-- Array of allowable ConnectivityManager network types for tethering -->
-    <!-- Common options are [1, 4] for wifi and dun or [0,1,5,7] for -->
-    <!-- mobile, wifi, hipri and bluetooth -->
-    <integer-array translatable="false" name="config_tether_upstream_types">
-        <item>0</item>
-        <item>1</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-    </integer-array>
+   <string-array translatable="false" name="config_tether_upstream_regexs">
+        <item>"uwbr\\d"</item>
+        <item>"ppp\\d"</item>
+        <item>"rmnet\\d"</item>
+        <item>"eth\\d"</item>
+    </string-array>
 
     <!-- The VoiceMail default value is displayed to my own number if it is true -->
     <bool name="config_telephony_use_own_number_for_voicemail">true</bool>
