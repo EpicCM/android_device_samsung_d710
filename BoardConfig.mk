@@ -62,7 +62,7 @@ BOARD_KERNEL_BASE := 0x40000000
 BOARD_KERNEL_CMDLINE := console=ttySAC2,115200 consoleblank=0
 
 # Inline kernel building
-TARGET_KERNEL_SOURCE := kernel/samsung/d710
+TARGET_KERNEL_SOURCE := kernel/samsung/smdk4210
 TARGET_KERNEL_CONFIG := cyanogenmod_d710_defconfig
 
 # Filesystem
