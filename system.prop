@@ -1,5 +1,5 @@
 #
-# system.prop for epic4gtouch
+# system.prop for d710
 #
 
 rild.libpath=/system/lib/libsec-ril40.so
