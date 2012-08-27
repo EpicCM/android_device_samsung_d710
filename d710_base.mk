@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-DEVICE_PACKAGE_OVERLAYS := device/samsung/epic4gtouch/overlay
+DEVICE_PACKAGE_OVERLAYS := device/samsung/d710/overlay
 
 # This device is hdpi.
 PRODUCT_AAPT_CONFIG := normal hdpi
@@ -22,26 +22,26 @@ PRODUCT_LOCALES += hdpi
 
 # Init files
 PRODUCT_COPY_FILES := \
-	device/samsung/epic4gtouch/lpm.rc:root/lpm.rc \
-	device/samsung/epic4gtouch/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
-	device/samsung/epic4gtouch/init.smdk4210.rc:root/init.smdk4210.rc \
-	device/samsung/epic4gtouch/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
+	device/samsung/d710/lpm.rc:root/lpm.rc \
+	device/samsung/d710/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
+	device/samsung/d710/init.smdk4210.rc:root/init.smdk4210.rc \
+	device/samsung/d710/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
 
 # Audio
 PRODUCT_COPY_FILES += \
-	device/samsung/epic4gtouch/configs/asound.conf:system/etc/asound.conf
+	device/samsung/d710/configs/asound.conf:system/etc/asound.conf
 
 # Vold
 PRODUCT_COPY_FILES += \
-	device/samsung/epic4gtouch/configs/vold.fstab:system/etc/vold.fstab
+	device/samsung/d710/configs/vold.fstab:system/etc/vold.fstab
 
 # Local Init
 PRODUCT_COPY_FILES += \
-	device/samsung/epic4gtouch/configs/init.local.rc:system/etc/init.local.rc
+	device/samsung/d710/configs/init.local.rc:system/etc/init.local.rc
 
 # Media
 PRODUCT_COPY_FILES += \
-	device/samsung/epic4gtouch/configs/media_profiles.xml:system/etc/media_profiles.xml
+	device/samsung/d710/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 # Bluetooth configuration files
 PRODUCT_COPY_FILES += \
@@ -49,9 +49,9 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_COPY_FILES += \
-	device/samsung/epic4gtouch/configs/nvram_net.txt:system/etc/wifi/nvram_net.txt \
-	device/samsung/epic4gtouch/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-	device/samsung/epic4gtouch/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
+	device/samsung/d710/configs/nvram_net.txt:system/etc/wifi/nvram_net.txt \
+	device/samsung/d710/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+	device/samsung/d710/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
 
 PRODUCT_PROPERTY_OVERRIDES := \
 	wifi.interface=wlan0 \
@@ -61,8 +61,8 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330
 
 # Gps
 PRODUCT_COPY_FILES += \
-	device/samsung/epic4gtouch/configs/gps.conf:system/etc/gps.conf \
-	device/samsung/epic4gtouch/configs/sirfgps.conf:system/etc/sirfgps.conf
+	device/samsung/d710/configs/gps.conf:system/etc/gps.conf \
+	device/samsung/d710/configs/sirfgps.conf:system/etc/sirfgps.conf
 
 # Packages
 PRODUCT_PACKAGES := \
@@ -125,9 +125,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	mobiledata.interfaces=ppp0,uwbr0
 
 PRODUCT_COPY_FILES += \
-	device/samsung/epic4gtouch/configs/ip-up:system/etc/ppp/ip-up \
-	device/samsung/epic4gtouch/configs/ip-up:system/etc/ppp/ip-down \
-	device/samsung/epic4gtouch/configs/pppd_runner:system/bin/pppd_runner
+	device/samsung/d710/configs/ip-up:system/etc/ppp/ip-up \
+	device/samsung/d710/configs/ip-up:system/etc/ppp/ip-down \
+	device/samsung/d710/configs/pppd_runner:system/bin/pppd_runner
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \

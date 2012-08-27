@@ -15,4 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_epic4gtouch.mk
+    $(LOCAL_DIR)/full_d710.mk

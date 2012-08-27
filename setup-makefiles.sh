@@ -1,5 +1,5 @@
 VENDOR=samsung
-DEVICE=epic4gtouch
+DEVICE=d710
 OUTDIR=vendor/$VENDOR/$DEVICE
 MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs.mk
 
