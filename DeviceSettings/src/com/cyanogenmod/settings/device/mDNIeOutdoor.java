@@ -31,7 +31,7 @@ public class mDNIeOutdoor extends ListPreference implements OnPreferenceChangeLi
         this.setOnPreferenceChangeListener(this);
     }
 
-    private static final String FILE = "/sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/outdoor";
+    private static final String FILE = "/sys/class/mdnie/mdnie/outdoor";
 
     public static boolean isSupported() {
         return Utils.fileExists(FILE);

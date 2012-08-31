@@ -16,30 +16,30 @@
 
 package com.cyanogenmod.settings.device;
 
+import java.io.IOException;
 import android.content.Context;
-
-import android.content.SharedPreferences;
 import android.util.AttributeSet;
+import android.content.SharedPreferences;
 import android.preference.Preference;
 import android.preference.ListPreference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
-public class mDNIeScenario extends ListPreference implements OnPreferenceChangeListener {
+public class TouchkeyTimeout extends ListPreference implements OnPreferenceChangeListener {
 
-    public mDNIeScenario(Context context, AttributeSet attrs) {
-        super(context,attrs);
+    public TouchkeyTimeout(Context context, AttributeSet attrs) {
+        super(context, attrs);
         this.setOnPreferenceChangeListener(this);
     }
 
-    private static final String FILE = "/sys/class/mdnie/mdnie/scenario";
+    private static final String FILE_TOUCHKEY_TIMEOUT = "/sys/class/sec/sec_touchkey/led_timeout";
 
     public static boolean isSupported() {
-        return Utils.fileExists(FILE);
+        return Utils.fileExists(FILE_TOUCHKEY_TIMEOUT);
     }
 
     /**
-     * Restore mdnie "camera" setting from SharedPreferences. (Write to kernel.)
+     * Restore touchscreen sensitivity setting from SharedPreferences. (Write to kernel.)
      * @param context       The context to read the SharedPreferences from
      */
     public static void restore(Context context) {
@@ -48,11 +48,11 @@ public class mDNIeScenario extends ListPreference implements OnPreferenceChangeL
         }
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        Utils.writeValue(FILE, sharedPrefs.getString(DeviceSettings.KEY_MDNIE_SCENARIO, "4"));
+        Utils.writeValue(FILE_TOUCHKEY_TIMEOUT, sharedPrefs.getString(DeviceSettings.KEY_TOUCHKEY_TIMEOUT, "3"));
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Utils.writeValue(FILE, (String) newValue);
+        Utils.writeValue(FILE_TOUCHKEY_TIMEOUT, (String) newValue);
         return true;
     }
 
