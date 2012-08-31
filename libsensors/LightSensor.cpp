@@ -28,7 +28,7 @@
 
 #include "LightSensor.h"
 
-// #define LOG_NDEBUG 0
+// #define ALOG_NDEBUG 0
 
 /*****************************************************************************/
 
@@ -137,7 +137,7 @@ int LightSensor::readEvents(sensors_event_t* data, int count)
         if (type == EV_ABS) {
             if (event->code == EVENT_TYPE_LIGHT) {
                 if (event->value != -1) {
-                    LOGV("LightSensor: event (value=%d)", event->value);
+                    ALOGV("LightSensor: event (value=%d)", event->value);
                     // FIXME: not sure why we're getting -1 sometimes
                     mPendingEvent.light = event->value;
                 }
@@ -150,7 +150,7 @@ int LightSensor::readEvents(sensors_event_t* data, int count)
                 numEventReceived++;
             }
         } else {
-            LOGE("LightSensor: unknown event (type=%d, code=%d)",
+            ALOGE("LightSensor: unknown event (type=%d, code=%d)",
                     type, event->code);
         }
         mInputReader.next();

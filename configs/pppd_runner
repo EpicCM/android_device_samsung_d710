@@ -1,6 +1,0 @@
-#!/system/bin/sh
-
-PATH="/system/bin"
-
-ttyname=`getprop net.cdma.datalinkinterface`
-exec pppd "$ttyname" 115200 user SprintNextel nodetach usepeerdns defaultroute

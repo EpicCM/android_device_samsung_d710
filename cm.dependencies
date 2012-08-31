@@ -1,6 +1,12 @@
 [
     {
         "repository": "android_packages_apps_SamsungServiceMode",
-        "target_path": "packages/apps/SamsungServiceMode"
+        "target_path": "packages/apps/SamsungServiceMode",
+        "branch": "ics"
+    },
+    {
+        "repository": "android_prebuilts_gcc_linux-x86_arm_arm-eabi-4.6",
+        "target_path": "prebuilts/gcc/linux-x86/arm/arm-eabi-4.6",
+        "branch": "jellybean"
     }
 ]

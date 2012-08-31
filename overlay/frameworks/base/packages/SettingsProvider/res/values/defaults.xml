@@ -19,5 +19,5 @@
 <resources>
     <bool name="def_accelerometer_rotation">true</bool>
     <!-- Comma-separated list of bluetooth, wifi, and cell. -->
-    <string name="def_airplane_mode_radios" translatable="false">cell,bluetooth,wifi</string>
+    <string name="def_airplane_mode_radios" translatable="false">cell,bluetooth</string>
 </resources>

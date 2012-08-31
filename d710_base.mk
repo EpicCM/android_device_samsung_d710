@@ -13,8 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-DEVICE_PACKAGE_OVERLAYS := device/samsung/d710/overlay
 
+DEVICE_PACKAGE_OVERLAYS := device/samsung/d710/overlay \
+	device/samsung/galaxys2-common/overlay
+
+# Screen density is actually considered a locale (since it is taken into account
+# the the build-time selection of resources). The product definitions including
+# this file must pay attention to the fact that the first entry in the final
+# PRODUCT_LOCALES expansion must not be a density.
 # This device is hdpi.
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
@@ -22,14 +28,14 @@ PRODUCT_LOCALES += hdpi
 
 # Init files
 PRODUCT_COPY_FILES := \
-	device/samsung/d710/lpm.rc:root/lpm.rc \
-	device/samsung/d710/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
+	device/samsung/galaxys2-common/lpm.rc:root/lpm.rc \
+	device/samsung/galaxys2-common/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
 	device/samsung/d710/init.smdk4210.rc:root/init.smdk4210.rc \
 	device/samsung/d710/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
 
 # Audio
 PRODUCT_COPY_FILES += \
-	device/samsung/d710/configs/asound.conf:system/etc/asound.conf
+	device/samsung/galaxys2-common/configs/asound.conf:system/etc/asound.conf
 
 # Vold
 PRODUCT_COPY_FILES += \
@@ -38,10 +44,17 @@ PRODUCT_COPY_FILES += \
 # Local Init
 PRODUCT_COPY_FILES += \
 	device/samsung/d710/configs/init.local.rc:system/etc/init.local.rc
-
+# Misc	
+PRODUCT_COPY_FILES += \
+	device/samsung/d710/configs/apns-conf.xml:system/etc/apns-conf.xml
+	
+# gps
+PRODUCT_COPY_FILES += \
+  device/samsung/d710/gpsfix:system/bin/gpsfix
 # Media
 PRODUCT_COPY_FILES += \
-	device/samsung/d710/configs/media_profiles.xml:system/etc/media_profiles.xml
+	device/samsung/galaxys2-common/configs/media_profiles.xml:system/etc/media_profiles.xml \
+	device/samsung/galaxys2-common/configs/media_codecs.xml:system/etc/media_codecs.xml
 
 # Bluetooth configuration files
 PRODUCT_COPY_FILES += \
@@ -49,8 +62,6 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_COPY_FILES += \
-	device/samsung/d710/configs/nvram_net.txt:system/etc/wifi/nvram_net.txt \
-	device/samsung/d710/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
 	device/samsung/d710/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
 
 PRODUCT_PROPERTY_OVERRIDES := \
@@ -66,27 +77,27 @@ PRODUCT_COPY_FILES += \
 
 # Packages
 PRODUCT_PACKAGES := \
+    TvOut \
+	audio.a2dp.default \
 	com.android.future.usb.accessory \
-	TvOut \
-	TvOutHack \
-	Camera \
-	camera.exynos4 \
-	Torch \
+	smdk4210_hdcp_keys \
 	GalaxyS2Settings \
-	SamsungServiceMode
-
-# HAL 
+	SamsungServiceMode \
+	libsurfaceflinger_client
+	
+# Camera
 PRODUCT_PACKAGES += \
-	lights.exynos4 \
-	sensors.exynos4 \
-	libhwconverter \
-	libs5pjpeg \
-	libfimg
+	camera.exynos4
 
 # Charger
 PRODUCT_PACKAGES += \
 	charger \
 	charger_res_images
+
+# Sensors
+PRODUCT_PACKAGES += \
+	lights.exynos4 \
+	sensors.exynos4
 
 # MFC API
 PRODUCT_PACKAGES += \
@@ -107,6 +118,13 @@ PRODUCT_PACKAGES += \
 	libSEC_OMX_Adec \
 	libOMX.SEC.MP3.Decoder 
 
+# WIMAX
+PRODUCT_PACKAGES += \
+    WiMAXSettings \
+    SprintMenu \
+    WiMAXHiddenMenu \
+    SystemUpdateUI
+
 # Ril
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.telephony.default_network=4 \
@@ -121,13 +139,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.carrier=Sprint \
 	ro.wimax.interface=uwbr0 \
 	ro.cdma.ppp.interface=ppp0 \
-	net.tcp.buffersize.wimax=4096,524288,1048576,4096,16384,110208 \
 	mobiledata.interfaces=ppp0,uwbr0
+	net.tcp.buffersize.wimax   4096,87380,256960,4096,16384,256960
 
 PRODUCT_COPY_FILES += \
 	device/samsung/d710/configs/ip-up:system/etc/ppp/ip-up \
-	device/samsung/d710/configs/ip-up:system/etc/ppp/ip-down \
-	device/samsung/d710/configs/pppd_runner:system/bin/pppd_runner
+	device/samsung/d710/configs/ip-up:system/etc/ppp/ip-down 
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -190,7 +207,17 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mass_storage
 
-# Include exynos4 platform specific parts
-TARGET_HAL_PATH := hardware/samsung/exynos4/hal
-TARGET_OMX_PATH := hardware/samsung/exynos/multimedia/openmax
+# we have enough storage space to hold precise GC data
+PRODUCT_TAGS += dalvik.gc.type-precise
+
+# enable repeatable keys in cwm
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.cwm.enable_key_repeat=true
+
+$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
+
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
+$(call inherit-product-if-exists, vendor/samsung/galaxys2-common/common-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
+$(call inherit-product-if-exists, vendor/common/common.mk)
 $(call inherit-product, hardware/samsung/exynos4210.mk)

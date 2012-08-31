@@ -32,7 +32,7 @@ public class mDNIeMode extends ListPreference implements OnPreferenceChangeListe
         this.setOnPreferenceChangeListener(this);
     }
 
-    private static final String FILE = "/sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/mode";
+    private static final String FILE = "/sys/class/mdnie/mdnie/mode";
 
     public static boolean isSupported() {
         return Utils.fileExists(FILE);

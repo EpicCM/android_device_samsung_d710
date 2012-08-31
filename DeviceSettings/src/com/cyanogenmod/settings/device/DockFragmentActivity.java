@@ -16,11 +16,12 @@
 
 package com.cyanogenmod.settings.device;
 
+import android.app.ActivityManagerNative;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
@@ -30,17 +31,16 @@ import android.util.Log;
 
 import com.cyanogenmod.settings.device.R;
 
-public class HapticFragmentActivity extends PreferenceFragment {
+public class DockFragmentActivity extends PreferenceFragment {
 
     private static final String PREF_ENABLED = "1";
-    private static final String TAG = "GalaxyS2Settings_Haptic";
+    private static final String TAG = "GalaxyS2Settings_Dock";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.haptic_preferences);
-
+        addPreferencesFromResource(R.xml.dock_preferences);
         PreferenceScreen prefSet = getPreferenceScreen();
 
     }
@@ -53,14 +53,23 @@ public class HapticFragmentActivity extends PreferenceFragment {
 
         Log.w(TAG, "key: " + key);
 
-        return true;
-    }
+        if (key.compareTo(DeviceSettings.KEY_USE_DOCK_AUDIO) == 0) {
+            boxValue = (((CheckBoxPreference)preference).isChecked() ? "1" : "0");
+            Intent i = new Intent("com.cyanogenmod.settings.SamsungDock");
+            i.putExtra("data", boxValue);
+            ActivityManagerNative.broadcastStickyIntent(i, null);
+        }
 
-    public static boolean isSupported(String FILE) {
-        return Utils.fileExists(FILE);
+        return true;
     }
 
     public static void restore(Context context) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean dockAudio = sharedPrefs.getBoolean(DeviceSettings.KEY_USE_DOCK_AUDIO, false);
+        Intent i = new Intent("com.cyanogenmod.settings.SamsungDock");
+        i.putExtra("data", (dockAudio? "1" : "0"));
+        ActivityManagerNative.broadcastStickyIntent(i, null);
+
     }
+
 }
