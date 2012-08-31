@@ -24,7 +24,6 @@ BOARD_USE_SKIA_LCDTEXT := true
 # Boot Animation
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
-#TARGET_BOOTANIMATION_USE_RGB565 := true
 
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
@@ -61,8 +60,8 @@ BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_BASE := 0x40000000
 BOARD_KERNEL_CMDLINE := console=ttySAC2,115200 consoleblank=0
 
-# Inline kernel building
-TARGET_KERNEL_SOURCE := kernel/samsung/d710
+# Kernel Config
+TARGET_KERNEL_SOURCE := kernel/samsung/smdk4210
 TARGET_KERNEL_CONFIG := cyanogenmod_d710_defconfig
 
 # Filesystem
@@ -102,6 +101,7 @@ BOARD_HDMI_DDC_CH := DDC_CH_I2C_7
 
 BOARD_HAL_PATH := hardware/samsung/exynos4/hal
 BOARD_MM_PATH := hardware/samsung/exynos/multimedia
+BOARD_USES_PROPRIETARY_LIBFIMC := true
 
 # OMX
 BOARD_HAVE_CODEC_SUPPORT := SAMSUNG_CODEC_SUPPORT
@@ -115,9 +115,11 @@ BOARD_USES_MFC_FPS := true
 BOARD_USE_YAMAHAPLAYER := true
 BOARD_USE_SAMSUNG_SEPARATEDSTREAM := true
 BOARD_HAS_SAMSUNG_VOLUME_BUG := true
+COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB
 
 # Camera
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
+BOARD_USES_PROPRIETARY_LIBCAMERA := true
 
 # RIL
 BOARD_MOBILEDATA_INTERFACE_NAME := "ppp0"
@@ -138,6 +140,7 @@ WIFI_DRIVER_FW_PATH_P2P          := "/system/etc/wifi/bcm4330_p2p.bin"
 WIFI_DRIVER_MODULE_NAME          := "dhd"
 WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/etc/wifi/bcm4330_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
 WIFI_BAND                        := 802_11_ABG
+BOARD_LEGACY_NL80211_STA_EVENTS  := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -145,7 +148,7 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 12
-BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := false
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_VOLD_DISC_HAS_MULTIPLE_MAJORS := true
 
 # MTP
@@ -154,6 +157,7 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/s3c-usbgadget/gadget/l
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d710/recovery/recovery_keys.c
 BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/d710/recovery/graphics.c
+BOARD_UMS_LUNFILE := "/sys/devices/platform/s3c-usbgadget/gadget/lun%d/file"
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
