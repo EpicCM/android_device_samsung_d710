@@ -32,7 +32,7 @@ public class mDNIeNegative extends ListPreference implements OnPreferenceChangeL
         this.setOnPreferenceChangeListener(this);
     }
 
-    private static final String FILE = "/sys/class/mdnie/mdnie/negative";
+    private static final String FILE = "/sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/negative";
 
     public static boolean isSupported() {
         return Utils.fileExists(FILE);

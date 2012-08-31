@@ -38,8 +38,12 @@ int device_handle_key(int key_code, int visible) {
                     return GO_BACK;
                 break;
             case KEY_POWER:
-			case KEY_SEARCH:
-                return SELECT_ITEM;
+                if (ui_get_showing_back_button()) {
+                    return SELECT_ITEM;
+                }
+                if (!get_allow_toggle_display())
+                    return GO_BACK;
+                break;
             case KEY_LEFTBRACE:
             case KEY_ENTER:
             case BTN_MOUSE:
@@ -48,6 +52,7 @@ int device_handle_key(int key_code, int visible) {
             case KEY_SEND:            
             case KEY_END:
             case KEY_BACKSPACE:
+            case KEY_SEARCH:
             case KEY_BACK:
                 return GO_BACK;
         }

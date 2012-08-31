@@ -24,7 +24,9 @@
         </receiver>
       
         <activity android:name=".mDNIeFragmentActivity" />
-        <activity android:name=".ScreenFragmentActivity" />
+	<activity android:name=".HapticFragmentActivity" />
+	<activity android:name=".SensorsFragmentActivity" />
+
         
     </application>
 </manifest>

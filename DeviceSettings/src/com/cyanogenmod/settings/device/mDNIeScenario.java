@@ -32,7 +32,7 @@ public class mDNIeScenario extends ListPreference implements OnPreferenceChangeL
         this.setOnPreferenceChangeListener(this);
     }
 
-    private static final String FILE = "/sys/class/mdnie/mdnie/scenario";
+    private static final String FILE = "/sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/scenario";
 
     public static boolean isSupported() {
         return Utils.fileExists(FILE);

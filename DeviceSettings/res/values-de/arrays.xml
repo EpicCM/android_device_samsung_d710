@@ -2,30 +2,30 @@
 
     <string-array name="mdnie_scenario_entries">
         <item>Kamera (Standard)</item>
-        <item>Video</item>
-        <item>Video warm</item>
-        <item>Video kalt</item>
-        <item>UI</item>
-        <item>Navigation</item>
-        <item>Gallerie</item>
+	    <item>Video</item>
+	    <item>Video warm</item>
+	    <item>Video kalt</item>
+	    <item>UI</item>
+	    <item>Navigation</item>
+	    <item>Gallerie</item>
         <item>VT</item>
     </string-array>
 
     <string-array name="mdnie_mode_entries">
-        <item>Standard</item>
-        <item>Dynamisch</item>
+	    <item>Standard</item>
+	    <item>Dynamisch</item>
         <item>Natürlich</item>
-        <item>Film</item>
+	    <item>Film</item>
     </string-array>
 
     <string-array name="mdnie_negative_entries">
-        <item>Normal</item>
-        <item>Invertiert</item>
+	    <item>Normal</item>
+	    <item>Invertiert</item>
     </string-array>
 
     <string-array name="mdnie_outdoor_entries">
-        <item>Deaktiviert</item>
-        <item>Aktiviert</item>
+	    <item>Deaktiviert</item>
+	    <item>Aktiviert</item>
     </string-array>
 
     <string-array name="panel_gamma_entries">
@@ -48,22 +48,6 @@
         <item>50% (Standard)</item>
         <item>75%</item>
         <item>100%</item>
-    </string-array>
-
-    <string-array name="hspa_entries">
-        <item>Nur UMTS</item>
-        <item>Nur HSDPA</item>
-        <item>HSDPA + HSUPA</item>
-    </string-array>
-
-    <string-array name="touchkey_timeout_entries">
-            <item>Niemals</item>
-            <item>1 Sekunde</item>
-            <item>2 Sekunden</item>
-            <item>3 Sekunden (Standard)</item>
-            <item>4 Sekunden</item>
-            <item>5 Sekunden</item>
-            <item>6 Sekunden</item>
     </string-array>
 
 </resources>

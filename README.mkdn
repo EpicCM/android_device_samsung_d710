@@ -1,0 +1,22 @@
+HOW-TO for building CyanogenMod
+_______________________________
+
+- firstly, follow http://source.android.com/source to figure out how to get your build environment running, etc
+- make a directory for your build source, then sync CyanogenMod: repo init -u git://github.com/CyanogenMod/android.git -b ics
+- plug in your phone, and run the extract files script against a working cyanogenmod build
+- change directory to the top, and source the build environment setup: . build/envsetup.sh
+- brunch cm_epic4gtouch-userdebug, and wait as your meal cooks. 
+- it should output an update.zip in out/target/product/epic4gtouch... you've made CyanogenMod. congratulations. 
+  Now you can brag to your friends about how 1337 you are that you can build a ROM from source. :)
+
+
+List of Contributers to the device tree
+___________________________________________________________________________
+
+- darchstar
+- sbrissen
+- teamhacksung
+
+A full CHANGELOG for CyanogenMod can be found in its vendor:  https://github.com/CyanogenMod/android_vendor_cm/blob/ics/CHANGELOG.mkdn 
+
+Keep in mind guys, CyanogenMod is open source, and a community project. Get involved, and help us code for a better future :D

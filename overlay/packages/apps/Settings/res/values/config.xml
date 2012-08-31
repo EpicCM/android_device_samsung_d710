@@ -15,8 +15,6 @@
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-<!-- LED Flashlight -->
-<!-- <bool name="has_led_flash">true</bool> -->
     <string name="additional_system_update">com.samsung.sdm</string>
     <string name="additional_system_update_menu">com.samsung.sdm.ui.SprintUpdateSetting</string>
 

@@ -24,6 +24,7 @@ BOARD_USE_SKIA_LCDTEXT := true
 # Boot Animation
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
+#TARGET_BOOTANIMATION_USE_RGB565 := true
 
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
@@ -38,7 +39,6 @@ TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 EXYNOS4210_ENHANCEMENTS := true
 
 ifdef EXYNOS4210_ENHANCEMENTS
-COMMON_GLOBAL_CFLAGS += -DEXYNOS4_ENHANCEMENTS
 COMMON_GLOBAL_CFLAGS += -DEXYNOS4210_ENHANCEMENTS
 COMMON_GLOBAL_CFLAGS += -DSURFACEFLINGER_FORCE_SCREEN_RELEASE
 endif
@@ -61,8 +61,8 @@ BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_BASE := 0x40000000
 BOARD_KERNEL_CMDLINE := console=ttySAC2,115200 consoleblank=0
 
-# Kernel Config
-TARGET_KERNEL_SOURCE := kernel/samsung/smdk4210
+# Inline kernel building
+TARGET_KERNEL_SOURCE := kernel/samsung/d710
 TARGET_KERNEL_CONFIG := cyanogenmod_d710_defconfig
 
 # Filesystem
@@ -73,11 +73,11 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 2147483648
 BOARD_FLASH_BLOCK_SIZE := 4096
 
 # Releasetools
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/galaxys2-common/releasetools/galaxys2_ota_from_target_files
-TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/galaxys2-common/releasetools/galaxys2_img_from_target_files
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/d710/releasetools/d710_ota_from_target_files
+TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/d710/releasetools/d710_img_from_target_files
 
 # Graphics
-BOARD_EGL_CFG := device/samsung/galaxys2-common/configs/egl.cfg
+BOARD_EGL_CFG := device/samsung/d710/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 EGL_ALWAYS_ASYNC := true
 
@@ -87,9 +87,8 @@ ENABLE_WEBGL := true
 # Charging mode
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 BOARD_BATTERY_DEVICE_NAME := "battery"
-BOARD_CHARGER_RES := device/samsung/galaxys2-common/res/charger
+BOARD_CHARGER_RES := device/samsung/d710/res/charger
 
-BOARD_SUPPRESS_EMMC_WIPE := true
 
 # Notification LED
 BOARD_HAS_LED_NOTIF := true
@@ -100,9 +99,9 @@ BOARD_USE_SECTVOUT := true
 BOARD_USES_FIMGAPI := true
 BOARD_SAMSUNG_TVOUT := true
 BOARD_HDMI_DDC_CH := DDC_CH_I2C_7
-BOARD_USES_PROPRIETARY_LIBFIMC := true
-#BOARD_HAVE_HDMI_SUPPORT := SAMSUNG_HDMI_SUPPORT
-#BOARD_USES_SAMSUNG_HDMI := true
+
+BOARD_HAL_PATH := hardware/samsung/exynos4/hal
+BOARD_MM_PATH := hardware/samsung/exynos/multimedia
 
 # OMX
 BOARD_HAVE_CODEC_SUPPORT := SAMSUNG_CODEC_SUPPORT
@@ -116,11 +115,9 @@ BOARD_USES_MFC_FPS := true
 BOARD_USE_YAMAHAPLAYER := true
 BOARD_USE_SAMSUNG_SEPARATEDSTREAM := true
 BOARD_HAS_SAMSUNG_VOLUME_BUG := true
-COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB
 
 # Camera
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
-BOARD_USES_PROPRIETARY_LIBCAMERA := true
 
 # RIL
 BOARD_MOBILEDATA_INTERFACE_NAME := "ppp0"
@@ -141,7 +138,6 @@ WIFI_DRIVER_FW_PATH_P2P          := "/system/etc/wifi/bcm4330_p2p.bin"
 WIFI_DRIVER_MODULE_NAME          := "dhd"
 WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/etc/wifi/bcm4330_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
 WIFI_BAND                        := 802_11_ABG
-BOARD_LEGACY_NL80211_STA_EVENTS  := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -149,7 +145,7 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 12
-BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := false
 BOARD_VOLD_DISC_HAS_MULTIPLE_MAJORS := true
 
 # MTP
@@ -157,8 +153,7 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/s3c-usbgadget/gadget/l
 
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d710/recovery/recovery_keys.c
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/galaxys2-common/recovery/graphics.c
-BOARD_UMS_LUNFILE := "/sys/devices/platform/s3c-usbgadget/gadget/lun%d/file"
+BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/d710/recovery/graphics.c
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
@@ -168,7 +163,7 @@ BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk0p11
 BOARD_SUPPRESS_EMMC_WIPE := true
 
 # Device specific headers
-TARGET_SPECIFIC_HEADER_PATH := device/samsung/d710/include
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/d710/overlay/include
 
 # assert
 TARGET_OTA_ASSERT_DEVICE := d710,SPH-D710,epic4gtouch
