@@ -56,4 +56,4 @@ PRODUCT_COPY_FILES += \
 
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 $(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
-$(call inherit-product-if-exists, vendor/samsung/galaxys2-common/common-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/galaxys2-common/common-vendor-blobs.mk)
