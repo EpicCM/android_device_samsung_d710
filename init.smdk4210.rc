@@ -463,3 +463,6 @@ service wlandutservice /system/bin/wlandutservice
     group wifi net_raw net_admin system inet
     disabled
     oneshot
+
+on property:sys.boot_completed=1
+	chmod 660 /data/gps/secgpsd.socket

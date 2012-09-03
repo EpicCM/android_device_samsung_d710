@@ -60,7 +60,7 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330
 # Gps
 PRODUCT_COPY_FILES += \
 	device/samsung/d710/configs/gps.conf:system/etc/gps.conf \
-	device/samsung/d710/configs/sirfgps.conf:system/etc/sirfgps.conf
+	device/samsung/d710/configs/sirfgps.conf:system/etc/sirfgps.conf 
 
 # Packages
 PRODUCT_PACKAGES := \
