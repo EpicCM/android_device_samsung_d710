@@ -39,6 +39,8 @@ on fs
     chmod 0775 /efs/bluetooth
     chmod 0775 /efs/wifi
 
+import init.local.rc
+
     mkdir /data/misc/vpn/profiles 0770 system system
     mkdir /data/misc/radio 0775 radio system
     chmod 0770 /data/misc/wifi

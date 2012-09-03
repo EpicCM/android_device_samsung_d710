@@ -133,7 +133,7 @@
     <EncoderProfile quality="480p" fileFormat="mp4" duration="30">
       <Video codec="h264"
              bitRate="3078000"
-             width="720"
+             width="640"
              height="480"
              frameRate="30" />
 
@@ -223,7 +223,7 @@
     <EncoderProfile quality="timelapse480p" fileFormat="3gp" duration="30">
       <Video codec="h264"
              bitRate="3078000"
-             width="720"
+             width="640"
              height="480"
              frameRate="30" />
 
