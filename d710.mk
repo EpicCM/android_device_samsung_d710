@@ -153,7 +153,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	lights.exynos4 \
 	sensors.exynos4 \
-	gps.exynos4
+	gps.exynos4 \
 	libhwconverter \
 	libs5pjpeg \
 	libfimg
