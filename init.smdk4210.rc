@@ -249,10 +249,10 @@ on property:ril.cdma.data_state=0
     stop pppd_cdma
 
 # Vibetonz
-    chown root shell /dev/tspdrv
     chmod 0660 /dev/tspdrv
-    chown system system /sys/vibrator/pwm_val
+    chown root shell /dev/tspdrv
     chmod 0660 /sys/vibrator/pwm_val
+    chown system system /sys/vibrator/pwm_val
 
 # Permissions for LCD
     chown radio system /sys/class/lcd/panel/lcd_power
@@ -267,15 +267,16 @@ on property:ril.cdma.data_state=0
     chmod 0664 /sys/class/backlight/panel/auto_brightness
 
 # Permissions for mDNIe 
-    chown radio radio /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/mode
-    chmod 0660 /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/mode
-    chown radio radio /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/outdoor
-    chmod 0660 /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/outdoor
-    chown radio radio /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/scenario
-    chmod 0660 /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/scenario
-    chown radio radio /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/negative
-    chmod 0660 /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/negative
-    write /sys/devices/platform/samsung-pd.2/mdnie/mdnie/mdnie/scenario 4
+    chown system media_rw /sys/class/mdnie/mdnie/mode
+    chmod 0660 /sys/class/mdnie/mdnie/mode   
+    chown system media_rw /sys/class/mdnie/mdnie/outdoor
+    chmod 0660 /sys/class/mdnie/mdnie/outdoor
+    chown system media_rw /sys/class/mdnie/mdnie/scenario
+    chmod 0660 /sys/class/mdnie/mdnie/scenario
+    chown system media_rw /sys/class/mdnie/mdnie/negative
+    chmod 0660 /sys/class/mdnie/mdnie/negative
+    write /sys/class/mdnie/mdnie/scenario 4    
+
 
 
 # Permissions for uart_sel and usb_sel
