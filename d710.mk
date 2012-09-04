@@ -249,5 +249,4 @@ TARGET_OMX_PATH := hardware/samsung/exynos/multimedia/openmax
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 $(call inherit-product, hardware/samsung/exynos4210.mk)
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
-$(call inherit-product-if-exists, vendor/samsung/galaxys2-common/common-vendor-blobs.mk)
 $(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
