@@ -136,6 +136,9 @@ on post-fs-data
     chmod 0662 /dev/log/radio
     chmod 0662 /dev/log/main
     chmod 0662 /dev/log/event
+    write /data/system/volume.dat
+    chmod 664 /data/system/volume.dat
+    chown system media_rw /data/system/volume.dat
 
 #panorama directory creation
     mkdir /data/pxtmpdir 0775
