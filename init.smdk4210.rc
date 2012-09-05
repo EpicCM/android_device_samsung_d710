@@ -255,15 +255,15 @@ on property:ril.cdma.data_state=0
     chown system system /sys/vibrator/pwm_val
 
 # Permissions for LCD
-    chown radio system /sys/class/lcd/panel/lcd_power
+    chown system media_rw /sys/class/lcd/panel/lcd_power
     chmod 0664 /sys/class/lcd/panel/lcd_power
-    chown radio system /sys/class/lcd/panel/lcd_type
+    chown system media_rw /sys/class/lcd/panel/lcd_type
     chmod 0664 /sys/class/lcd/panel/lcd_type
-    chown radio radio /sys/class/lcd/panel/gamma_mode
+    chown system media_rw /sys/class/lcd/panel/gamma_mode
     chmod 0664 /sys/class/lcd/panel/gamma_mode
-    chown radio radio /sys/class/lcd/panel/power_reduce
+    chown system media_rw /sys/class/lcd/panel/power_reduce
     chmod 0664 /sys/class/lcd/panel/power_reduce
-    chown radio radio /sys/class/backlight/panel/auto_brightness
+    chown system media_rw /sys/class/backlight/panel/auto_brightness
     chmod 0664 /sys/class/backlight/panel/auto_brightness
 
 # Permissions for mDNIe 
