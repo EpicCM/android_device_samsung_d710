@@ -16,5 +16,5 @@
 
 <resources>
     <!-- Additional System Update menu(Update PRL, Update Profile) is displayed if it is true -->
-    <bool name="config_additional_system_update_setting_enable">true</bool>
+    <bool name="config_additional_system_update_setting_enable">false</bool>
 </resources>
