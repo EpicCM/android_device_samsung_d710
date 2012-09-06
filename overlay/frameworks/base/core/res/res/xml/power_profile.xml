@@ -18,50 +18,41 @@
 -->
 
 <device name="Android">
-  <!-- All values are in mAh except as noted -->
-  <item name="none">0</item>
-  <item name="screen.on">49</item>
-  <item name="bluetooth.active">142</item>
-  <item name="bluetooth.on">0.3</item>
-  <item name="bluetooth.at">35690</item>
-  <item name="screen.full">260</item>
-  <item name="wifi.on">4</item>
-  <item name="wifi.active">120</item>
-  <item name="wifi.scan">220</item>
-  <item name="dsp.audio">88</item>
-  <item name="dsp.video">88</item>
-  <item name="radio.active">185</item>
-  <!-- The current consumed by the radio when it is scanning for a signal -->
-  <item name="radio.scanning">88</item>
-  <item name="gps.on">50</item>
-  <!-- Current consumed by the radio at different signal strengths, when paging -->
-  <array name="radio.on"> <!-- Strength 0 to BINS-1 -->
-      <value>3.4</value>
-      <value>3.4</value>
-  </array>
-  <!-- Different CPU speeds as reported in
-       /sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state -->
-  <array name="cpu.speeds">
-      <value>200000</value>
-      <value>500000</value>
-      <value>800000</value>
-      <value>1000000</value>
-      <value>1200000</value>
-  </array>
-  <!-- Power consumption when CPU is idle -->
-  <item name="cpu.idle">1.4</item>
+    <item name="none">0</item>
+    <item name="screen.on">75</item>
+    <item name="bluetooth.active">32</item>
+    <item name="bluetooth.on">0.3</item>
+    <item name="screen.full">201</item>
+    <item name="wifi.on">0.3</item>
+    <item name="wifi.active">83</item>
+    <item name="wifi.scan">52</item>
+    <item name="dsp.audio">34</item>
+    <item name="dsp.video">265</item>
+    <item name="radio.active">242</item>
+    <item name="radio.scanning">82</item>
+    <item name="gps.on">1</item>
+    <array name="radio.on">
+        <value>2.7</value>
+        <value>3</value>
+    </array>
+    <array name="cpu.speeds">
+        <value>12000000</value>
+        <value>10000000</value>
+        <value>800000</value>
+        <value>500000</value>
+        <value>200000</value>
+    </array>
+  <!-- Power consumption in suspend -->
+    <item name="cpu.idle">2</item>
   <!-- Power consumption due to wake lock held -->
-  <item name="cpu.awake">44</item>
+  <!-- <item name="cpu.awake">44</item> -->
   <!-- Power consumption at different speeds -->
-  <array name="cpu.active">
-      <value>55.4</value>
-      <value>82.1</value>
-      <value>113.7</value>
-      <value>140.0</value>
-      <value>170.0</value>
-      <value>200.0</value>
-      <value>230.0</value>
-  </array>
-  <!-- This is the battery capacity in mAh -->
-  <item name="battery.capacity">1800</item>
+    <array name="cpu.active">
+        <value>577</value>
+        <value>408</value>
+        <value>249</value>
+        <value>148</value>
+        <value>55</value>
+    </array>
+	<item name="battery.capacity">1650</item>
 </device>

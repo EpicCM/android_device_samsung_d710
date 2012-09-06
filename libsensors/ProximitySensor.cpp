@@ -128,7 +128,7 @@ int ProximitySensor::readEvents(sensors_event_t* data, int count)
                 numEventReceived++;
             }
         } else {
-            LOGE("ProximitySensor: unknown event (type=%d, code=%d)",
+            ALOGE("ProximitySensor: unknown event (type=%d, code=%d)",
                     type, event->code);
         }
         mInputReader.next();
@@ -139,6 +139,6 @@ int ProximitySensor::readEvents(sensors_event_t* data, int count)
 
 float ProximitySensor::indexToValue(size_t index) const
 {
-    LOGV("ProximitySensor: Index = %zu", index);
+    ALOGV("ProximitySensor: Index = %zu", index);
     return index * PROXIMITY_THRESHOLD_CM;
 }
