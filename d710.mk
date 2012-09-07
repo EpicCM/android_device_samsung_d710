@@ -185,10 +185,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/samsung/d710/configs/init.local.rc:system/etc/init.local.rc
 
-# Media
-PRODUCT_COPY_FILES += \
-    device/samsung/d710/configs/media_profiles.xml:system/etc/media_profiles.xml
-
 # Wifi
 PRODUCT_COPY_FILES += \
     device/samsung/d710/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
