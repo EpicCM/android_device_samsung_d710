@@ -12,8 +12,9 @@
 ## <sysfs_path> - List of sysfs paths to source devices
 ## storage_struct - ex) series, "/mnt/sdcard/extStorages" / parallel
 ######################
-# internal sdcard
 
+# internal sdcard
 dev_mount internal /storage/sdcard0 11 /devices/platform/dw_mmc/mmc_host/mmc0/mmc0 encryptable_nonremovable
 
+# external sdcard
 dev_mount sdcard /storage/sdcard1 auto /devices/virtual/block/cyasblkdevblk0
