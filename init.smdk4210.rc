@@ -23,6 +23,8 @@ on early-init
     chmod 0777 /dev/graphics/fb10
     chmod 0777 /dev/graphics/fb11
 
+# Set init its forked children's oom_adj.
+    write /proc/1/oom_score_adj -16
 
 on fs
 # mount ext4 partitions
@@ -136,7 +138,7 @@ on post-fs-data
     chmod 0662 /dev/log/radio
     chmod 0662 /dev/log/main
     chmod 0662 /dev/log/event
-    write /data/system/volume.dat
+    write /data/system/volume.dat 1
     chmod 664 /data/system/volume.dat
     chown system media_rw /data/system/volume.dat
 
