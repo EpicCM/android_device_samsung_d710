@@ -24,7 +24,7 @@ on early-init
     chmod 0777 /dev/graphics/fb11
 
 # Set init its forked children's oom_adj.
-    write /proc/1/oom_score_adj -16
+    write /proc/1/oom_score_adj -900
 
 on fs
 # mount ext4 partitions
