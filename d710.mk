@@ -108,12 +108,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.wimax.interface=uwbr0 \
     ro.cdma.ppp.interface=ppp0 \
     net.tcp.buffersize.wimax=4096,524288,1048576,4096,16384,110208 \
-    mobiledata.interfaces=pdp0,wlan0,gprs,ppp0,uwbr0 \
+    mobiledata.interfaces=ppp0,wlan0,uwbr0,pdp0 \
     wifi.interface=wlan0 \
     ro.telephony.sends_barcount=1 \
     ro.ril.def.agps.mode=2 \
     ro.telephony.call_ring.multiple=false \
-    ro.telephony.call_ring.delay=50
+    ro.telephony.call_ring.delay=0
 
 # Gps
 PRODUCT_COPY_FILES += \
@@ -134,9 +134,7 @@ PRODUCT_PACKAGES := \
 
 # Media
 PRODUCT_COPY_FILES += \
-    device/samsung/d710/configs/media_profiles.xml:system/etc/media_profiles.xml \
-    device/samsung/d710/configs/secomxregistry:system/etc/secomxregistry
-
+    device/samsung/d710/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -146,6 +144,7 @@ PRODUCT_PACKAGES += \
 # HAL
 PRODUCT_PACKAGES += \
     lights.exynos4 \
+    sensors.exynos4 \
     libhwconverter \
     libs5pjpeg \
     libfimg
@@ -180,9 +179,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/samsung/d710/configs/ip-up:system/etc/ppp/ip-up \
     device/samsung/d710/configs/ip-up:system/etc/ppp/ip-down \
-    device/samsung/d710/configs/pppd_runner:system/bin/pppd_runner \
-    device/samsung/d710/configs/init.cdma-pppd:system/etc/init.cdma-pppd \
-    device/samsung/d710/configs/init.gprs-pppd:system/etc/init.gprs-pppd
+    device/samsung/d710/configs/pppd_runner:system/bin/pppd_runner
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
