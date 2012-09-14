@@ -20,7 +20,8 @@ PRODUCT_COPY_FILES := \
     device/samsung/d710/lpm.rc:root/lpm.rc \
     device/samsung/d710/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
     device/samsung/d710/init.smdk4210.rc:root/init.smdk4210.rc \
-    device/samsung/d710/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
+    device/samsung/d710/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc \
+    device/samsung/d710/init.rc:root/init.rc
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -146,7 +147,6 @@ PRODUCT_PACKAGES += \
 # HAL 
 PRODUCT_PACKAGES += \
     lights.exynos4 \
-    sensors.exynos4 \
     libhwconverter \
     libs5pjpeg \
     libfimg
@@ -173,11 +173,6 @@ PRODUCT_PACKAGES += \
     libhwconverter \
     libs5pjpeg \
     libfimg
-
-
-# Local Init
-PRODUCT_COPY_FILES += \
-    device/samsung/d710/configs/init.local.rc:system/etc/init.local.rc
 
 # Wifi
 PRODUCT_COPY_FILES += \
