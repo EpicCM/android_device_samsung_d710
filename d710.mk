@@ -110,7 +110,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     net.tcp.buffersize.wimax=4096,524288,1048576,4096,16384,110208 \
     mobiledata.interfaces=pdp0,wlan0,gprs,ppp0,uwbr0 \
     wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=180
     ro.telephony.sends_barcount=1 \
     ro.ril.def.agps.mode=2 \
     ro.telephony.call_ring.multiple=false \
