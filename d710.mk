@@ -92,7 +92,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072 \
     hwui.render_dirty_regions=false
-	
+
 # Ril properties
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=4 \
@@ -118,7 +118,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Gps
 PRODUCT_COPY_FILES += \
     device/samsung/d710/configs/gps.conf:system/etc/gps.conf \
-    device/samsung/d710/configs/sirfgps.conf:system/etc/sirfgps.conf 
+    device/samsung/d710/configs/sirfgps.conf:system/etc/sirfgps.conf
 
 # Packages
 PRODUCT_PACKAGES := \
@@ -136,14 +136,14 @@ PRODUCT_PACKAGES := \
 PRODUCT_COPY_FILES += \
     device/samsung/d710/configs/media_profiles.xml:system/etc/media_profiles.xml \
     device/samsung/d710/configs/secomxregistry:system/etc/secomxregistry
-    
+
 
 # Charger
 PRODUCT_PACKAGES += \
     charger \
     charger_res_images
 
-# HAL 
+# HAL
 PRODUCT_PACKAGES += \
     lights.exynos4 \
     libhwconverter \
