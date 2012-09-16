@@ -40,7 +40,7 @@ loglevel 3
 
     mkdir /system
     mkdir /data 0771 system system
-    mkdir /cache 0771 system cache
+    mkdir /cache 0770 system cache
     mkdir /config 0500 root root
 
     # Directory for putting things only root should see.
@@ -97,11 +97,12 @@ on fs
 # mount ext4 partitions
     mount ext4 /dev/block/mmcblk0p9 /system noatime wait ro
     mount ext4 /dev/block/mmcblk0p7 /cache nosuid nodev noatime wait
-    mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait 
-    mount ext4 /dev/block/mmcblk0p12 /preload nosuid nodev noatime wait
     mount ext4 /dev/block/mmcblk0p1 /efs nosuid nodev noatime wait
 
+    
 on post-fs
+    mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait 
+    
     # once everything is setup, no need to modify /
     mount rootfs rootfs / ro remount
 
@@ -125,6 +126,8 @@ on post-fs
 
     # create the lost+found directories, so as to enforce our permissions
     mkdir /cache/lost+found 0770 root root
+    chown root root /cache/lost+found
+    chmod 0770 /cache/lost+found
 
 on post-fs-data
     # We chown/chmod /data again so because mount is run as root + defaults
@@ -147,8 +150,20 @@ on post-fs-data
 
     write /proc/apanic_console 1
 
-    # create basic filesystem structure
-    mkdir /data/misc 01771 system misc
+    chown system cache /cache
+    chmod 0770 /cache
+
+    chown system inet /app-cache
+    chmod 0770 /app-cache
+
+    chown root system /dev/ttySAC1
+    chmod 0660 /dev/ttySAC1
+
+    mkdir /data/gps 771 gps system
+    chown gps system /data/gps
+
+# create basic filesystem structure
+    mkdir /data/misc 01775 system misc
     mkdir /data/misc/bluetoothd 0770 bluetooth bluetooth
     mkdir /data/misc/bluetooth 0770 system system
     mkdir /data/misc/keystore 0700 keystore keystore
@@ -157,14 +172,22 @@ on post-fs-data
     mkdir /data/misc/systemkeys 0700 system system
     # give system access to wpa_supplicant.conf for backup and restore
     mkdir /data/misc/wifi 0770 wifi wifi
+    chmod 0770 /data/misc/wifi
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
-    mkdir /data/local 0751 root root
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/dhcp 0775 dhcp dhcp
+    chmod 0775 /data/misc/dhcp
+    mkdir /data/local 0771 shell shell
     mkdir /data/local/tmp 0771 shell shell
     mkdir /data/data 0771 system system
     mkdir /data/app-private 0771 system system
     mkdir /data/app 0771 system system
     mkdir /data/property 0700 root root
     mkdir /data/radio 0770 radio radio
+
+    write /data/.psm.info 1
+    chown system system /data/.psm.info
+    chmod 0600 /data/.psm.info
 
     # create dalvik-cache and double-check the perms, so as to enforce our permissions
     mkdir /data/dalvik-cache 0771 system system
@@ -182,10 +205,14 @@ on post-fs-data
 
     # create the lost+found directories, so as to enforce our permissions
     mkdir /data/lost+found 0770 root root
+    chown root root /data/lost+found
+    chmod 0770 /data/lost+found
 
     # create directory for DRM plug-ins - give drm the read/write access to
     # the following directory.
     mkdir /data/drm 0770 drm drm
+    chown drm drm /data/drm
+    chmod 0770 /data/drm
 
     # If there is no fs-post-data action in the init.<device>.rc file, you
     # must uncomment this line, otherwise encrypted filesystems
@@ -197,6 +224,9 @@ on post-fs-data
     chmod 0660 /sys/class/android_usb/android0/f_mass_storage/lun/file
     chown system system /sys/class/android_usb/android0/f_rndis/ethaddr
     chmod 0660 /sys/class/android_usb/android0/f_rndis/ethaddr
+
+    chmod 0660 /dev/usb_mtp_gadget
+	chown system system /dev/usb_mtp_gadget
 
 # Include extra init file
     import /system/etc/init.local.rc
@@ -224,7 +254,7 @@ on boot
     write /proc/sys/vm/dirty_expire_centisecs 200
     write /proc/sys/vm/dirty_background_ratio  5
 
-    # Permissions for System Server and daemons.
+# Permissions for System Server and daemons.
     chown radio system /sys/android_power/state
     chown radio system /sys/android_power/request_state
     chown radio system /sys/android_power/acquire_full_wake_lock
@@ -236,9 +266,15 @@ on boot
     chmod 0660 /sys/power/state
     chmod 0660 /sys/power/wake_lock
     chmod 0660 /sys/power/wake_unlock
+    chown system system /sys/devices/virtual/sec/sec_touchkey/brightness
+    chown radio system /sys/devices/virtual/sec/sec_touchkey/touch_sensitivity
+    chown radio system /sys/class/lightsensor/switch_cmd/lightsensor_file_state
+    chown radio system /sys/devices/virtual/sec/sec_touchkey/touch_version
+    chown radio system /sys/devices/virtual/sec/sec_touchkey/autocal_enable
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/class/leds/keyboard-backlight/brightness
     chown system system /sys/class/leds/lcd-backlight/brightness
+    chown system system /sys/class/backlight/panel/brightness
     chown system system /sys/class/leds/button-backlight/brightness
     chown system system /sys/class/leds/jogball-backlight/brightness
     chown system system /sys/class/leds/red/brightness
@@ -261,6 +297,9 @@ on boot
     chown system system /sys/kernel/ipv4/tcp_rmem_min
     chown system system /sys/kernel/ipv4/tcp_rmem_def
     chown system system /sys/kernel/ipv4/tcp_rmem_max
+    chown system system /sys/class/power_supply/battery/temp
+    chown system system /sys/class/proximity/proximity/proximity_avg
+    chown radio system /sys/class/sec/gsensorcal/calibration
     chown root radio /proc/cmdline
 
     # allow system to modify cpufreq control files
@@ -316,49 +355,6 @@ on property:vold.decrypt=trigger_shutdown_framework
     class_reset late_start
     class_reset main
 
-# Used to disable USB when switching states
-on property:sys.usb.config=none
-    stop adbd
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/bDeviceClass 0
-    setprop sys.usb.state $sys.usb.config
-
-# adb only USB configuration
-# This should only be used during device bringup
-# and as a fallback if the USB manager fails to set a standard configuration
-on property:sys.usb.config=adb
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 18d1
-    write /sys/class/android_usb/android0/idProduct D002
-    write /sys/class/android_usb/android0/functions $sys.usb.config
-    write /sys/class/android_usb/android0/enable 1
-    start adbd
-    setprop sys.usb.state $sys.usb.config
-
-# USB accessory configuration
-on property:sys.usb.config=accessory
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 18d1
-    write /sys/class/android_usb/android0/idProduct 2d00
-    write /sys/class/android_usb/android0/functions $sys.usb.config
-    write /sys/class/android_usb/android0/enable 1
-    setprop sys.usb.state $sys.usb.config
-
-# USB accessory configuration, with adb
-on property:sys.usb.config=accessory,adb
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 18d1
-    write /sys/class/android_usb/android0/idProduct 2d01
-    write /sys/class/android_usb/android0/functions $sys.usb.config
-    write /sys/class/android_usb/android0/enable 1
-    start adbd
-    setprop sys.usb.state $sys.usb.config
-
-# Used to set USB configuration at boot and to switch the configuration
-# when changing the default configuration
-on property:persist.sys.usb.config=*
-    setprop sys.usb.config $persist.sys.usb.config
-
 ## Daemon processes to be run by init.
 ##
 service ueventd /sbin/ueventd
@@ -375,22 +371,83 @@ service console /system/bin/sh
 on property:ro.debuggable=1
     start console
 
-# adbd is controlled via property triggers in init.<platform>.usb.rc
+ # MTP permission, fixed by 2011/03/18 ******++
+    chmod 0660 /dev/usb_mtp_gadget
+    chown system system /dev/usb_mtp_gadget
+
+    # USB Device permission
+    #chown system system /sys/devices/platform/android_usb/UsbMenuSel
+    chown system system /sys/devices/platform/android_usb/tethering
+    chown radio system /sys/devices/platform/android_usb/UsbMenuSel
+
+    # USB HUB permission
+    chown radio radio /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port
+
+    # USB switch permission
+    chown radio radio /sys/class/sec/switch/set_usb_path
+
+
+# Samsung USB Mode : system properties are linked with sysfs
+# write /sys/class/sec/switch/UsbMenuSel 0
+on property:persist.service.usb.setting=0
+	write /sys/devices/platform/android_usb/UsbMenuSel 0
+on property:persist.service.usb.setting=1
+	write /sys/devices/platform/android_usb/UsbMenuSel 1
+on property:persist.service.usb.setting=2
+	write /sys/devices/platform/android_usb/UsbMenuSel 2
+on property:persist.service.usb.setting=3
+	write /sys/devices/platform/android_usb/UsbMenuSel 3
+on property:persist.service.usb.setting=4
+	write /sys/devices/platform/android_usb/UsbMenuSel 4
+
+# USB HUB : system properties are linked with sysfs
+#  bit :    3     2      1         0
+#          AP,   CP, WIMAX, RESERVED
+# Enable AP, CP, WIMAX
+
+on property:persist.service.usb.hubport=0
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
+	write /sys/class/sec/switch/set_usb_path ALL
+on property:persist.service.usb.hubport=2
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
+	write /sys/class/sec/switch/set_usb_path ALL
+on property:persist.service.usb.hubport=4
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
+	write /sys/class/sec/switch/set_usb_path AP
+on property:persist.service.usb.hubport=6
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
+	write /sys/class/sec/switch/set_usb_path AP
+on property:persist.service.usb.hubport=8
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
+	write /sys/class/sec/switch/set_usb_path CP
+on property:persist.service.usb.hubport=10
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enalbe_cp
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
+	write /sys/class/sec/switch/set_usb_path CP
+on property:persist.service.usb.hubport=12
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
+on property:persist.service.usb.hubport=14
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
+	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
+
 service adbd /sbin/adbd
     class core
     disabled
 
-# adbd on at boot in emulator
-on property:ro.kernel.qemu=1
-    start adbd
-
-# This property trigger has added to imitiate the previous behavior of "adb root".
-# The adb gadget driver used to reset the USB bus when the adbd daemon exited,
-# and the host side adb relied on this behavior to force it to reconnect with the
-# new adbd instance after init relaunches it. So now we force the USB bus to reset
-# here when adbd sets the service.adb.root property to 1.  We also restart adbd here
-# rather than waiting for init to notice its death and restarting it so the timing
-# of USB resetting and adb restarting more closely matches the previous behavior.
 on property:service.adb.root=1
     write /sys/class/android_usb/android0/enable 0
     restart adbd
