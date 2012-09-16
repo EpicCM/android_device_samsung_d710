@@ -501,12 +501,11 @@ service initd /system/xbin/busybox run-parts /system/etc/init.d
 	oneshot
 	disabled
 
-# bugreport is triggered by holding down volume down, volume up and power
-#service bugreport /system/bin/bugmailer.sh -v
-#    class main
-#    disabled
-#    oneshot
-#    keycodes 114 115 116
+service immvibed /system/bin/immvibed
+    class core
+    user shell
+    group shell
+    oneshot
 
 service wimax_route /system/bin/route add default dev uwbr0
     class main
@@ -517,6 +516,11 @@ service wlandutservice /system/bin/wlandutservice
     user system
     group wifi net_raw net_admin system inet
     disabled
+    oneshot
+
+service dvfs /system/bin/sh /system/bin/dvfs.sh
+    class main
+    user root
     oneshot
 
 on property:sys.boot_completed=1
