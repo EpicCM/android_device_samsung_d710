@@ -48,7 +48,7 @@ on property:ro.debuggable=1
 on property:adb.recovery=1
 	write /sys/class/android_usb/android0/enable 0
 	write /sys/class/android_usb/android0/idVendor 04e8
-	write /sys/class/android_usb/android0/idProduct 6860
+	write /sys/class/android_usb/android0/idProduct 685e
 	write /sys/class/android_usb/android0/functions adb,mass_storage
 	write /sys/class/android_usb/android0/enable 1
 	write /sys/class/android_usb/android0/iManufacturer $ro.product.manufacturer
