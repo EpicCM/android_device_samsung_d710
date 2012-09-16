@@ -23,5 +23,5 @@
     <bool name="config_showPhoneRSSIForData">true</bool>
 
     <!-- Show 1/2G networks as 3G on Sprint. -->
-    <bool name="config_showMin3G">true</bool>
+    <bool name="config_showMin3G">false</bool>
 </resources>

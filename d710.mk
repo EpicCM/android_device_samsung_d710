@@ -107,8 +107,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.carrier=Sprint \
     ro.wimax.interface=uwbr0 \
     ro.cdma.ppp.interface=ppp0 \
-    net.tcp.buffersize.wimax=4096,524288,1048576,4096,16384,110208 \
-    mobiledata.interfaces=ppp0,wlan0,uwbr0,pdp0 \
+    mobiledata.interfaces=ppp0,wlan0,uwbr0,p2p \
     wifi.interface=wlan0 \
     ro.telephony.sends_barcount=1 \
     ro.ril.def.agps.mode=2 \
@@ -174,7 +173,8 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_COPY_FILES += \
-    device/samsung/d710/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
+    device/samsung/d710/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
+    device/samsung/d710/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf 
 
 PRODUCT_COPY_FILES += \
     device/samsung/d710/configs/ip-up:system/etc/ppp/ip-up \
@@ -212,18 +212,13 @@ PRODUCT_LOCALES += hdpi
 PRODUCT_COPY_FILES += \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=240
-
 PRODUCT_TAGS += dalvik.gc.type-precise
-
-# Vold properties and default USB interface
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mass_storage,adb
 
 # enable repeatable keys in cwm
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cwm.enable_key_repeat=true
+    ro.cwm.enable_key_repeat=true \
+    ro.sf.lcd_density=240 \
+    persist.sys.usb.config=mass_storage,adb
 
 # Include exynos4 platform specific parts
 TARGET_HAL_PATH := hardware/samsung/exynos4/hal
