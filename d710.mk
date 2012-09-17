@@ -111,11 +111,11 @@ PRODUCT_PROPERTY_OVERRIDES := \
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=240 \
+    wifi.supplicant_scan_interval=15 \
     ro.telephony.sends_barcount=1 \
     ro.ril.def.agps.mode=2 \
     ro.telephony.call_ring.multiple=false \
-    ro.telephony.call_ring.delay=3000 \
+    ro.telephony.call_ring.delay=1000 \
     hwui.render_dirty_regions=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -126,7 +126,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	   
 # Telephony property for CDMA
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.vc_call_vol_steps=14 \
+    ro.config.vc_call_vol_steps=15 \
     ro.telephony.default_network=4 \
     ro.com.google.clientidbase=android-sprint-us \
     ro.cdma.home.operator.numeric=310120 \
