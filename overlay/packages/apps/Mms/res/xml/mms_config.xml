@@ -26,8 +26,8 @@
     <bool name="smsExpiryDate">false</bool>
     <bool name="sendAnimationJpn">false</bool>
     <bool name="wapPush">false</bool>
-	<bool name="enableSplitSMS">true</bool>
-	<bool name="enableMultipartSMS">false</bool>
+    <bool name="enableSplitSMS">true</bool>
+    <bool name="enableMultipartSMS">false</bool>
     <bool name="disable_sms_setting_networklock">false</bool>
     <bool name="supportEmoji">false</bool>
     <bool name="enable_prefix_fwd">false</bool>
