@@ -205,7 +205,7 @@
     <string-array translatable="false" name="radioAttributes">
         <item>"1,1"</item>
         <item>"0,1"</item>
-		<item>"6,1"</item>
+	<item>"6,1"</item>
         <item>"7,1"</item>
     </string-array>
 	
@@ -219,7 +219,7 @@
 	
 	    <!-- The default iface on which to monitor data use 
     <string name="config_datause_iface">rmnet0</string>-->
-	 <string name="config_datause_iface">ppp0</string>
+    <string name="config_datause_iface">ppp0</string>
 
     <!-- Array of ConnectivityManager.TYPE_xxxx values allowable for tethering -->
     <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN or
@@ -232,7 +232,7 @@
         <item>5</item>
     </integer-array>
 	
-	    <!-- Set and Unsets WiMAX -->
+    <!-- Set and Unsets WiMAX -->
     <bool name="config_wimaxEnabled">true</bool>
     <!-- Location of the wimax framwork jar location -->
     <string name="config_wimaxServiceJarLocation">/system/framework/wimax_service.jar</string>
