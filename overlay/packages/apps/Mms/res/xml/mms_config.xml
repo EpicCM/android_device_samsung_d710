@@ -29,7 +29,7 @@
     <bool name="enableSplitSMS">true</bool>
     <bool name="enableMultipartSMS">false</bool>
     <bool name="disable_sms_setting_networklock">false</bool>
-    <bool name="supportEmoji">false</bool>
+    <bool name="supportEmoji">true</bool>
     <bool name="enable_prefix_fwd">false</bool>
     <bool name="enable_auth_mdn">false</bool>
     <bool name="enable_save_empty_recipient">false</bool>
