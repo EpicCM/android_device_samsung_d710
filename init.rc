@@ -116,7 +116,7 @@ on post-fs
 
     # This may have been created by the recovery system with odd permissions
     chown system cache /cache/recovery
-    chmod 0770 /cache/recovery
+    chmod 0771 /cache/recovery
 
     #change permissions on vmallocinfo so we can grab it from bugreports
     chown root log /proc/vmallocinfo
@@ -129,9 +129,9 @@ on post-fs
     chmod 0220 /proc/sysrq-trigger
 
     # create the lost+found directories, so as to enforce our permissions
-    mkdir /cache/lost+found 0770 root root
+    mkdir /cache/lost+found 0771 root root
     chown root root /cache/lost+found
-    chmod 0770 /cache/lost+found
+    chmod 0771 /cache/lost+found
 
 on post-fs-data
     # We chown/chmod /data again so because mount is run as root + defaults
@@ -155,10 +155,10 @@ on post-fs-data
     write /proc/apanic_console 1
 
     chown system cache /cache
-    chmod 0770 /cache
+    chmod 0771 /cache
 
     chown system inet /app-cache
-    chmod 0770 /app-cache
+    chmod 0771 /app-cache
 
     chown root system /dev/ttySAC1
     chmod 0660 /dev/ttySAC1
@@ -208,9 +208,9 @@ on post-fs-data
     chmod 0771 /data/resource-cache
 
     # create the lost+found directories, so as to enforce our permissions
-    mkdir /data/lost+found 0770 root root
+    mkdir /data/lost+found 0771 root root
     chown root root /data/lost+found
-    chmod 0770 /data/lost+found
+    chmod 0771 /data/lost+found
 
     # create directory for DRM plug-ins - give drm the read/write access to
     # the following directory.
