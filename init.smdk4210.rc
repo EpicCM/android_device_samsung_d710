@@ -1,4 +1,5 @@
 import init.smdk4210.usb.rc
+import init.smdk4210.gps.rc
 
 on early-init
     export PHONE_STORAGE /mnt/sdcard
@@ -44,17 +45,8 @@ on post-fs-data
     insmod /system/lib/modules/j4fs.ko
     insmod /system/lib/modules/scsi_wait_scan.ko
     mount j4fs /dev/block/mmcblk0p4 /mnt/.lfs
-# GPS
-    chown root system /dev/ttySAC1
-    chmod 0660 /dev/ttySAC1
-    chown root root /sys/class/sec/gps/GPS_PWR_EN/value
-    chmod 0664 /sys/class/sec/gps/GPS_PWR_EN/value
-    chown root root /sys/class/sec/gps/GPS_nRST/value
-    chmod 0664 /sys/class/sec/gps/GPS_nRST/value
-    mkdir /data/gps 771 system system
-    chown system system /data/gps
-
-    # give system access to wpa_supplicant.conf for backup and restore
+    
+# give system access to wpa_supplicant.conf for backup and restore
     mkdir /data/misc/wifi 0770 wifi wifi
     chmod 0770 /data/misc/wifi
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
@@ -421,7 +413,14 @@ on boot
     setprop status.battery.level_scale 9
 
 service wpa_supplicant /system/bin/wpa_supplicant \
-    -Dnl80211 -e/data/misc/wifi/entropy.bin
+    -Dnl80211 -iwlan0 -e/data/misc/wifi/entropy.bin
+    class main
+    socket wpa_wlan0 dgram 0660 wifi wifi
+    disabled
+    oneshot
+
+service p2p_supplicant /system/bin/wpa_supplicant \
+    -Dnl80211 -ip2p0 -e/data/misc/wifi/entropy.bin -puse_p2p_group_interface=1
     class main
     socket wpa_wlan0 dgram 0660 wifi wifi
     disabled
@@ -432,7 +431,7 @@ service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
     disabled
     oneshot
 
-service dhcpcd_p2p /system/bin/dhcpcd -aABKL
+service dhcpcd_p2p0 /system/bin/dhcpcd -aABKL
     class main
     disabled
     oneshot
@@ -442,7 +441,7 @@ service iprenew_wlan0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service iprenew_p2p /system/bin/dhcpcd -n
+service iprenew_p2p0 /system/bin/dhcpcd -n
     class main
     disabled
     oneshot
@@ -484,12 +483,6 @@ service iprenew_uwbr0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
-# GPS
-service gpsd /system/bin/gpsd
-    class main   
-    user system
-    group system inet
-
 # TVout
 service TvoutService_C /system/bin/bintvoutservice
     class main
@@ -522,6 +515,3 @@ service dvfs /system/bin/sh /system/bin/dvfs.sh
     class main
     user root
     oneshot
-
-on property:sys.boot_completed=1
-	chmod 660 /data/gps/secgpsd.socket
