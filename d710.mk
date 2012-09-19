@@ -119,7 +119,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     hwui.render_dirty_regions=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.vold.switchexternal=1 \
     persist.service.usb.setting=0 \
     persist.service.adb.enable=1 \
     persist.sys.usb.config=mass_storage,adb
