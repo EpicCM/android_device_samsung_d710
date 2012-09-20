@@ -7,12 +7,12 @@ on init
     export ANDROID_DATA /data
     export ANDROID_CACHE /cache
     export SECONDARY_STORAGE /sdcard
-    export EXTERNAL_STORAGE /extSdCard
+    export EXTERNAL_STORAGE /external_sd
 
     #symlink /system/etc /etc
 
     mkdir /sdcard
-    mkdir /extSdCard
+    mkdir /external_sd
     mkdir /usbdisk
     mkdir /system
     mkdir /data
