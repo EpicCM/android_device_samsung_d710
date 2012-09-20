@@ -2,8 +2,8 @@ import init.smdk4210.usb.rc
 import init.gps.rc
 
 on early-init
-    export PHONE_STORAGE /storage/sdcard0
-    export EXTERNAL_STORAGE /storage/sdcard1
+    export EXTERNAL_STORAGE /storage/sdcard0
+    export SECONDARY_STORAGE /storage/sdcard1
     mkdir /storage 0775 system system
     mkdir /storage/sdcard0 0000 system system
     mkdir /storage/sdcard1 0000 system system
@@ -17,16 +17,16 @@ on early-init
 on persist.sys.vold.switchexternal=0
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
-    symlink /storage/sdcard1 /external_sd
-    symlink /storage/sdcard1 /mnt/external_sd
+    symlink /storage/sdcard1 /extSdCard
+    symlink /storage/sdcard1 /mnt/extSdCard
     symlink /storage/usbdisk0 /usbdisk0
     symlink /storage/usbdisk0 /mnt/usbdisk0
 
 on persist.sys.vold.switchexternal=1
     symlink /storage/sdcard1 /sdcard
     symlink /storage/sdcard1 /mnt/sdcard
-    symlink /storage/sdcard0 /external_sd
-    symlink /storage/sdcard0 /mnt/external_sd
+    symlink /storage/sdcard0 /extSdCard
+    symlink /storage/sdcard0 /mnt/extSdCard
     symlink /storage/usbdisk0 /usbdisk0
     symlink /storage/usbdisk0 /mnt/usbdisk0
 

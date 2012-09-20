@@ -7,5 +7,5 @@ rild.libargs=-d /dev/ttyS0
 ro.sf.lcd_density=240
 
 # notify vold we have internal and external sd
-ro.vold.switchablepair=/mnt/sdcard,/mnt/external_sd
+ro.vold.switchablepair=/mnt/sdcard,/mnt/extSdCard
 persist.sys.vold.switchexternal=0
