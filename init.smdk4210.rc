@@ -1,9 +1,8 @@
 import init.smdk4210.usb.rc
 import init.smdk4210.gps.rc
+import init.smdk4210.vold.rc
 
 on early-init
-    export PHONE_STORAGE /mnt/sdcard
-    export EXTERNAL_STORAGE /mnt/external_sd
     mkdir /mnt 0775 system system
     mkdir /mnt/sdcard 0000 system system
     mkdir /mnt/external_sd 0000 system system
@@ -12,7 +11,8 @@ on early-init
     mkdir /efs
     mkdir /mnt/.lfs 0755 root root
     symlink /mnt/sdcard /sdcard
-    symlink /mnt/external_sd /external_sd	    
+    symlink /mnt/external_sd /external_sd  
+
     symlink /system/vendor /vendor
     write /sys/block/mmcblk0/queue/iosched/slice_idle 0
 
