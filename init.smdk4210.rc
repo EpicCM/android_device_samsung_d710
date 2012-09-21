@@ -14,7 +14,7 @@ on early-init
     mkdir /mnt/.lfs 0755 root root
 
     # for backwards compatibility
-on persist.sys.vold.switchexternal=0
+#on persist.sys.vold.switchexternal=0
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
     symlink /storage/sdcard1 /external_sd
@@ -22,13 +22,13 @@ on persist.sys.vold.switchexternal=0
     symlink /storage/usbdisk0 /usbdisk0
     symlink /storage/usbdisk0 /mnt/usbdisk0
 
-on persist.sys.vold.switchexternal=1
-    symlink /storage/sdcard1 /sdcard
-    symlink /storage/sdcard1 /mnt/sdcard
-    symlink /storage/sdcard0 /external_sd
-    symlink /storage/sdcard0 /mnt/external_sd
-    symlink /storage/usbdisk0 /usbdisk0
-    symlink /storage/usbdisk0 /mnt/usbdisk0
+#on persist.sys.vold.switchexternal=1
+#    symlink /storage/sdcard1 /sdcard
+#    symlink /storage/sdcard1 /mnt/sdcard
+#    symlink /storage/sdcard0 /external_sd
+#    symlink /storage/sdcard0 /mnt/external_sd
+#    symlink /storage/usbdisk0 /usbdisk0
+#    symlink /storage/usbdisk0 /mnt/usbdisk0
 
 # Disable CFQ slice idle delay
     write /sys/block/mmcblk0/queue/iosched/slice_idle 0
