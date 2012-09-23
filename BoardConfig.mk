@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2012 The Android Open-Source Project
+# Copyright (C) 2011 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,16 +14,13 @@
 # limitations under the License.
 #
 
+
 # This variable is set first, so it can be overridden
 # by BoardConfigVendor.mk
 USE_CAMERA_STUB := true
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_LIBSECRIL_STUB := true
 BOARD_USE_SKIA_LCDTEXT := true
-
-# Boot Animation
-TARGET_BOOTANIMATION_PRELOAD := true
-TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
@@ -38,6 +35,7 @@ TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 EXYNOS4210_ENHANCEMENTS := true
 
 ifdef EXYNOS4210_ENHANCEMENTS
+COMMON_GLOBAL_CFLAGS += -DEXYNOS4_ENHANCEMENTS
 COMMON_GLOBAL_CFLAGS += -DEXYNOS4210_ENHANCEMENTS
 COMMON_GLOBAL_CFLAGS += -DSURFACEFLINGER_FORCE_SCREEN_RELEASE
 endif
@@ -61,7 +59,7 @@ BOARD_KERNEL_BASE := 0x40000000
 BOARD_KERNEL_CMDLINE := console=ttySAC2,115200 consoleblank=0
 
 # Kernel Config
-TARGET_KERNEL_SOURCE := kernel/samsung/d710
+TARGET_KERNEL_SOURCE := kernel/samsung/smdk4210
 TARGET_KERNEL_CONFIG := cyanogenmod_d710_defconfig
 
 # Filesystem
@@ -72,11 +70,11 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 2147483648
 BOARD_FLASH_BLOCK_SIZE := 4096
 
 # Releasetools
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/d710/releasetools/d710_ota_from_target_files
-TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/d710/releasetools/d710_img_from_target_files
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/galaxys2-common/releasetools/galaxys2_ota_from_target_files
+TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/galaxys2-common/releasetools/galaxys2_img_from_target_files
 
 # Graphics
-BOARD_EGL_CFG := device/samsung/d710/configs/egl.cfg
+BOARD_EGL_CFG := device/samsung/galaxys2-common/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 EGL_ALWAYS_ASYNC := true
 
@@ -86,8 +84,9 @@ ENABLE_WEBGL := true
 # Charging mode
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 BOARD_BATTERY_DEVICE_NAME := "battery"
-BOARD_CHARGER_RES := device/samsung/d710/res/charger
+BOARD_CHARGER_RES := device/samsung/galaxys2-common/res/charger
 
+BOARD_SUPPRESS_EMMC_WIPE := true
 
 # Notification LED
 BOARD_HAS_LED_NOTIF := true
@@ -98,10 +97,9 @@ BOARD_USE_SECTVOUT := true
 BOARD_USES_FIMGAPI := true
 BOARD_SAMSUNG_TVOUT := true
 BOARD_HDMI_DDC_CH := DDC_CH_I2C_7
-
-BOARD_HAL_PATH := hardware/samsung/exynos4/hal
-BOARD_MM_PATH := hardware/samsung/exynos/multimedia
 BOARD_USES_PROPRIETARY_LIBFIMC := true
+#BOARD_HAVE_HDMI_SUPPORT := SAMSUNG_HDMI_SUPPORT
+#BOARD_USES_SAMSUNG_HDMI := true
 
 # OMX
 BOARD_HAVE_CODEC_SUPPORT := SAMSUNG_CODEC_SUPPORT
@@ -120,6 +118,8 @@ COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB
 # Camera
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
 BOARD_USES_PROPRIETARY_LIBCAMERA := true
+COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
+DISABLE_HW_ID_MATCH_CHECK := true
 
 # RIL
 BOARD_MOBILEDATA_INTERFACE_NAME := "ppp0"
@@ -132,7 +132,7 @@ BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
-WIFI_DRIVER_MODULE_PATH          := "/lib/modules/dhd.ko"
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/dhd.ko"
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/dhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA          := "/system/etc/wifi/bcm4330_sta.bin"
 WIFI_DRIVER_FW_PATH_AP           := "/system/etc/wifi/bcm4330_apsta.bin"
@@ -150,27 +150,28 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_VOLD_MAX_PARTITIONS := 12
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_VOLD_DISC_HAS_MULTIPLE_MAJORS := true
-
-# MTP
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/s3c-usbgadget/gadget/lun%d/file"
 
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d710/recovery/recovery_keys.c
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/d710/recovery/graphics.c
+BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/galaxys2-common/recovery/graphics.c
 BOARD_UMS_LUNFILE := "/sys/devices/platform/s3c-usbgadget/gadget/lun%d/file"
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/cyasblkdevblk0p1
-BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk0p11
+
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/d710/include
+
+# Nearly all shipped I9100 devices have defective eMMC chips (VYL00M fwrev 0x19)
+# Prevent usage of ERASE commands in recovery on these boards.
+# This is redundant for our recovery since the kernel has MMC_CAP_ERASE
+# disabled for mshci.c, and so do nearly all I9100 kernels,
+# but better safe than sorry.
 BOARD_SUPPRESS_EMMC_WIPE := true
 
-# Device specific headers
-TARGET_SPECIFIC_HEADER_PATH := device/samsung/d710/overlay/include
-
 # assert
-TARGET_OTA_ASSERT_DEVICE := d710,SPH-D710,epic4gtouch
+TARGET_OTA_ASSERT_DEVICE := epic4gtouch,SPH-D710,d710
 
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/d710/BoardConfigVendor.mk

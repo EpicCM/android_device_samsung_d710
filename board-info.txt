@@ -1,3 +1,2 @@
 require board=smdk4210
-require version-bootloader=SPH-D710
-
+require version-bootloader=D710XXX

@@ -28,7 +28,7 @@
 #include <cutils/log.h>
 #include "AkmSensor.h"
 
-//#define LOG_NDEBUG 0
+//#define ALOG_NDEBUG 0
 
 /*****************************************************************************/
 
@@ -164,7 +164,7 @@ int AkmSensor::enable(int32_t handle, int en)
         else
             err = akm_disable_sensor(sensor_type);
 
-        LOGE_IF(err, "Could not change sensor state (%s)", strerror(-err));
+        ALOGE_IF(err, "Could not change sensor state (%s)", strerror(-err));
         if (!err) {
             mEnabled &= ~(1<<what);
             mEnabled |= (uint32_t(flags)<<what);
@@ -222,7 +222,7 @@ int AkmSensor::loadAKMLibrary()
         akm_enable_sensor = stub_enable_disable_sensor;
         akm_disable_sensor = stub_enable_disable_sensor;
         akm_set_delay = stub_set_delay;
-        LOGE("AkmSensor: unable to load AKM Library, %s", dlerror());
+        ALOGE("AkmSensor: unable to load AKM Library, %s", dlerror());
         return -ENOENT;
     }
 
@@ -268,7 +268,7 @@ int AkmSensor::readEvents(sensors_event_t* data, int count)
                 mInputReader.next();
             }
         } else {
-            LOGE("AkmSensor: unknown event (type=%d, code=%d)",
+            ALOGE("AkmSensor: unknown event (type=%d, code=%d)",
                     type, event->code);
             mInputReader.next();
         }
@@ -293,17 +293,17 @@ void AkmSensor::processEvent(int code, int value)
             break;
 
         case EVENT_TYPE_MAGV_X:
-            LOGV("AkmSensor: EVENT_TYPE_MAGV_X value =%d", value);
+            ALOGV("AkmSensor: EVENT_TYPE_MAGV_X value =%d", value);
             mPendingMask |= 1<<MagneticField;
             mPendingEvents[MagneticField].magnetic.x = value * CONVERT_M_X;
             break;
         case EVENT_TYPE_MAGV_Y:
-            LOGV("AkmSensor: EVENT_TYPE_MAGV_Y value =%d", value);
+            ALOGV("AkmSensor: EVENT_TYPE_MAGV_Y value =%d", value);
             mPendingMask |= 1<<MagneticField;
             mPendingEvents[MagneticField].magnetic.y = value * CONVERT_M_Y;
             break;
         case EVENT_TYPE_MAGV_Z:
-            LOGV("AkmSensor: EVENT_TYPE_MAGV_Z value =%d", value);
+            ALOGV("AkmSensor: EVENT_TYPE_MAGV_Z value =%d", value);
             mPendingMask |= 1<<MagneticField;
             mPendingEvents[MagneticField].magnetic.z = value * CONVERT_M_Z;
             break;
