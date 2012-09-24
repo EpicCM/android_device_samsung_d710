@@ -1,5 +1,5 @@
 on fs
-   echo 0 > /proc/sys/kernel/randomize_va_space
+   write /proc/sys/kernel/randomize_va_space 0
    chown root system /dev/ttySAC1
    chmod 0660 /dev/ttySAC1
 

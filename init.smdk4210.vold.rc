@@ -1,8 +1,0 @@
-on post-fs-data
-on property:persist.cm.switchablemounts=0
-    export PHONE_STORAGE /mnt/sdcard
-    export EXTERNAL_STORAGE /mnt/external_sd
-on property:persist.cm.switchablemounts=1
-    export PHONE_STORAGE /mnt/external_sd
-    export EXTERNAL_STORAGE /mnt/sdcard
-
