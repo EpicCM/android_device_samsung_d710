@@ -12,6 +12,10 @@ on early-init
     symlink /mnt/sdcard /sdcard
     symlink /mnt/external_sd /external_sd  
 
+# SD-Card Exports
+    export PHONE_STORAGE /mnt/sdcard
+    export EXTERNAL_STORAGE /mnt/external_sd
+
     symlink /system/vendor /vendor
     write /sys/block/mmcblk0/queue/iosched/slice_idle 0
 
@@ -53,9 +57,7 @@ on post-fs-data
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
 
-# SD-Card Exports
-    export PHONE_STORAGE $persist.cm.mount0
-    export EXTERNAL_STORAGE $persist.cm.mount1
+export_rc /data/system/storage.rc
 
 # LED Light Triggers
     chown system system /sys/class/leds/red/trigger
