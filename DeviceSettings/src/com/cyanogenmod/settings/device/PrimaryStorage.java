@@ -44,15 +44,22 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
      */
     public static void restore(Context context) {
         if (!isSupported()) {
-            return;
+        Utils.NewFile(FILE, "export PHONE_STORAGE /mnt/sdcard");
+        Utils.AppendFile(FILE,"export EXTERNAL_STORAGE /mnt/external_sd");
+        }
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        Utils.NewFile(FILE, "export PHONE_STORAGE /mnt/sdcard");
+        Utils.AppendFile(FILE,"export EXTERNAL_STORAGE " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "/mnt/external_sd"));
         }
 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        Utils.writeValue(FILE, sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "/mnt/external_sd"));
-    }
-
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Utils.writeValue(FILE, (String) newValue);
+        if ((String) newValue == "/mnt/sdcard") {
+        Utils.NewFile(FILE, "export PHONE_STORAGE /mnt/external_sd");
+        Utils.AppendFile(FILE,"export EXTERNAL_STORAGE /mnt/sdcard"); 
+        } else {
+        Utils.NewFile(FILE, "export PHONE_STORAGE /mnt/sdcard");
+        Utils.AppendFile(FILE,"export EXTERNAL_STORAGE /mnt/external_sd");
+        }
         return true;
     }
 
