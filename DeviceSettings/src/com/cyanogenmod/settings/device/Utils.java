@@ -20,8 +20,11 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.Writer;
-import java.io.OutputStreamWriter
-import java.io.FileWriter
+import java.io.OutputStreamWriter;
+import java.io.FileWriter;
+import java.io.Reader;
+import java.io.InputStreamReader;
+import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,14 +39,60 @@ public class Utils {
     private static final String TAG_READ = "GalaxyS2Settings_Utils_Read";
     private static final String TAG_WRITE = "GalaxyS2Settings_Utils_Write";
 
-    /**
+     /**
      * Write a string value to the specified NEW file.
      * 
      * @param filename The filename
      * @param value The value 
      */
 
-    public static void NewFile(String filename, String value) {
+    public static void readVar(String filename, String variable) {
+        FileReader fdr = null;
+        try {
+            fdr = new FileReader(filename);
+            BufferedReader buffer = null;
+            buffer = new BufferedReader(fdr);
+            String s;
+            String result;
+            while((s = buffer.readLine()) != null) { 
+            if s.contains(variable) {
+                result = s.substring(s.indexOf(variable) + variable.length() + 1);
+                return result;
+            } else {
+                return null;
+            }
+            }      
+            buffer.close();
+        } catch (FileNotFoundException ex) {
+            Log.w(TAG, "file " + filename + " not found: " + ex);
+        } catch (IOException ex) {
+            Log.w(TAG, "IOException trying to sync " + filename + ": " + ex);
+        } catch (RuntimeException ex) {
+            Log.w(TAG, "exception while syncing file: ", ex);
+        } finally {
+            if (fdr != null) {
+                try {
+                    Log.w(TAG_WRITE, "file " + filename + ": " + value);
+                    fdr.close();
+                } catch (IOException ex) {
+                    Log.w(TAG, "IOException while closing synced file: ", ex);
+                } catch (RuntimeException ex) {
+                    Log.w(TAG, "exception while closing file: ", ex);
+                }
+            }
+        }
+
+    }
+
+
+     /**
+     * Write a string value to the specified NEW file.
+     * 
+     * @param filename The filename
+     * @param value The value 
+     */
+
+    public static void newFile(String filename, String value) {
         FileWriter fwr = null;
         try {
             fwr = new FileWriter(filename);
@@ -79,7 +128,7 @@ public class Utils {
      * @param value The value 
      */
 
-    public static void AppendFile(String filename, String value) {
+    public static void appendFile(String filename, String value) {
         FileWriter fwr = null;
         try {
             fwr = new FileWriter(filename, true);
