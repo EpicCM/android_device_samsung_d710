@@ -19,6 +19,9 @@ package com.cyanogenmod.settings.device;
 import android.util.Log;
 
 import java.io.File;
+import java.io.Writer;
+import java.io.OutputStreamWriter
+import java.io.FileWriter
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -34,12 +37,84 @@ public class Utils {
     private static final String TAG_WRITE = "GalaxyS2Settings_Utils_Write";
 
     /**
+     * Write a string value to the specified NEW file.
+     * 
+     * @param filename The filename
+     * @param value The value 
+     */
+
+    public static void NewFile(String filename, String value) {
+        FileWriter fwr = null;
+        try {
+            fwr = new FileWriter(filename);
+            fwr.write(value);
+            fwr.flush();
+        } catch (FileNotFoundException ex) {
+            Log.w(TAG, "file " + filename + " not found: " + ex);
+        } catch (SyncFailedException ex) {
+            Log.w(TAG, "file " + filename + " sync failed: " + ex);
+        } catch (IOException ex) {
+            Log.w(TAG, "IOException trying to sync " + filename + ": " + ex);
+        } catch (RuntimeException ex) {
+            Log.w(TAG, "exception while syncing file: ", ex);
+        } finally {
+            if (fwr != null) {
+                try {
+                    Log.w(TAG_WRITE, "file " + filename + ": " + value);
+                    fwr.close();
+                } catch (IOException ex) {
+                    Log.w(TAG, "IOException while closing synced file: ", ex);
+                } catch (RuntimeException ex) {
+                    Log.w(TAG, "exception while closing file: ", ex);
+                }
+            }
+        }
+
+    }
+
+    /**
+     * Append a string value to the specified file.
+     * 
+     * @param filename The filename
+     * @param value The value 
+     */
+
+    public static void AppendFile(String filename, String value) {
+        FileWriter fwr = null;
+        try {
+            fwr = new FileWriter(filename, true);
+            fwr.write(value);
+            fwr.flush();
+        } catch (FileNotFoundException ex) {
+            Log.w(TAG, "file " + filename + " not found: " + ex);
+        } catch (SyncFailedException ex) {
+            Log.w(TAG, "file " + filename + " sync failed: " + ex);
+        } catch (IOException ex) {
+            Log.w(TAG, "IOException trying to sync " + filename + ": " + ex);
+        } catch (RuntimeException ex) {
+            Log.w(TAG, "exception while syncing file: ", ex);
+        } finally {
+            if (fwr != null) {
+                try {
+                    Log.w(TAG_WRITE, "file " + filename + ": " + value);
+                    fwr.close();
+                } catch (IOException ex) {
+                    Log.w(TAG, "IOException while closing synced file: ", ex);
+                } catch (RuntimeException ex) {
+                    Log.w(TAG, "exception while closing file: ", ex);
+                }
+            }
+        }
+
+    }
+
+    /**
      * Write a string value to the specified file.
      * 
      * @param filename The filename
-     * @param value The value
+     * @param value The value 
      */
-    public static void writeValue(String filename, String value) {
+ public static void writeValue(String filename, String value) {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(new File(filename), false);
