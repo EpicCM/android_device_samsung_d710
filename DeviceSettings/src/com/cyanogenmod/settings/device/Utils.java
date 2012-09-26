@@ -66,20 +66,27 @@ public class Utils {
             buffer.close();
         } catch (FileNotFoundException ex) {
             Log.w(TAG, "file " + filename + " not found: " + ex);
+            return null;
         } catch (IOException ex) {
             Log.w(TAG, "IOException trying to sync " + filename + ": " + ex);
+            return null;
         } catch (RuntimeException ex) {
             Log.w(TAG, "exception while syncing file: ", ex);
+            return null;
         } finally {
             if (fdr != null) {
                 try {
                     Log.w(TAG_WRITE, "file " + filename + ": " + variable);
                     fdr.close();
+                    return null;
                 } catch (IOException ex) {
                     Log.w(TAG, "IOException while closing synced file: ", ex);
+                    return null;
                 } catch (RuntimeException ex) {
                     Log.w(TAG, "exception while closing file: ", ex);
+                    return null;
                 }
+            return null;
             }
         }
 
