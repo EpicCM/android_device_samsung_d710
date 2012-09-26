@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+                android:title="@string/storage_subcat_title">
+    <com.cyanogenmod.settings.device.PrimaryStorage
+                android:key="primary_storage"
+                android:title="@string/primary_storage_title_head"
+                android:summary="@string/primary_storage_summary_head"
+                android:entries="@array/primary_storage_entries"
+                android:entryValues="@array/primary_storage_entries_values"
+                android:defaultValue="/mnt/external_sd" />
+    </PreferenceCategory>
+</PreferenceScreen>

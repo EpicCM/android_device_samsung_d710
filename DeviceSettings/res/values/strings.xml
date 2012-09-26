@@ -39,6 +39,11 @@
     <string name="vibrator_intensity_title_head">Vibrator Intensity</string>
     <string name="vibrator_intensity_summary_head">Set vibrator intensity</string>
 
+    <string name="category_storage_title">Storage</string>
+    <string name="storage_subcat_title">SD Storage</string>
+    <string name="primary_storage_title_head">Primary Storage</string>
+    <string name="primary_storage_summary_head">Set Primary SD Storage</string>
+
     <string name="category_dock_title">Dock</string>
     <string name="dockaudio_subcat_title">Audio</string>
     <string name="use_dock_audio_title_head">Use Dock USB Audio</string>
