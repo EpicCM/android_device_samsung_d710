@@ -55,7 +55,7 @@ public class Utils {
             String s;
             String result;
             while((s = buffer.readLine()) != null) { 
-            if s.contains(variable) {
+            if (s.contains(variable)) {
                 result = s.substring(s.indexOf(variable) + variable.length() + 1);
                 return result;
             } else {
