@@ -46,7 +46,7 @@ public class Utils {
      * @param value The value 
      */
 
-    public static void readVar(String filename, String variable) {
+    public static String readVar(String filename, String variable) {
         FileReader fdr = null;
         try {
             fdr = new FileReader(filename);
