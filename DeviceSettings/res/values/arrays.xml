@@ -133,13 +133,13 @@
     </string-array>
     
     <string-array name="primary_storage_entries">
-        <item>external_sd</item>
         <item>sdcard</item>
+        <item>external_sd</item>
     </string-array>
 
     <string-array name="primary_storage_entries_values" translatable="false"> 
-        <item>/mnt/external_sd</item>
         <item>/mnt/sdcard</item>
+        <item>/mnt/external_sd</item>
     </string-array>
     
 
