@@ -86,7 +86,6 @@ public class Utils {
                     Log.w(TAG, "exception while closing file: ", ex);
                     return null;
                 }
-            return null;
             }
         }
 
