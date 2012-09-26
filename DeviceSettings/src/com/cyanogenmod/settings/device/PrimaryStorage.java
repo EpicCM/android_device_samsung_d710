@@ -44,21 +44,21 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
      */
     public static void restore(Context context) {
         if (!isSupported()) {
-        Utils.newFile(FILE, "export PHONE_STORAGE /mnt/sdcard");
-        Utils.appendFile(FILE,"export EXTERNAL_STORAGE /mnt/external_sd");
+        Utils.newFile(FILE, "export PHONE_STORAGE /mnt/sdcard" + System.getProperty( "line.separator" ));
+        Utils.appendFile(FILE,"export EXTERNAL_STORAGE /mnt/external_sd" + System.getProperty( "line.separator" ));
         }
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        Utils.newFile(FILE, "export PHONE_STORAGE /mnt/sdcard");
-        Utils.appendFile(FILE,"export EXTERNAL_STORAGE " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "/mnt/external_sd"));
+        Utils.newFile(FILE, "export PHONE_STORAGE /mnt/sdcard" + System.getProperty( "line.separator" ));
+        Utils.appendFile(FILE,"export EXTERNAL_STORAGE " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "/mnt/external_sd") + System.getProperty( "line.separator" ));
         }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if ((String) newValue == "/mnt/sdcard") {
-        Utils.newFile(FILE, "export PHONE_STORAGE /mnt/external_sd");
-        Utils.appendFile(FILE,"export EXTERNAL_STORAGE /mnt/sdcard"); 
+        Utils.newFile(FILE, "export PHONE_STORAGE /mnt/external_sd" + System.getProperty( "line.separator" ));
+        Utils.appendFile(FILE,"export EXTERNAL_STORAGE /mnt/sdcard" + System.getProperty( "line.separator" )); 
         } else {
-        Utils.newFile(FILE, "export PHONE_STORAGE /mnt/sdcard");
-        Utils.appendFile(FILE,"export EXTERNAL_STORAGE /mnt/external_sd");
+        Utils.newFile(FILE, "export PHONE_STORAGE /mnt/sdcard" + System.getProperty( "line.separator" ));
+        Utils.appendFile(FILE,"export EXTERNAL_STORAGE /mnt/external_sd" + System.getProperty( "line.separator" ));
         }
         return true;
     }
