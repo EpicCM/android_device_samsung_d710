@@ -27,7 +27,7 @@ import android.preference.PreferenceManager;
 
 public class PrimaryStorage extends ListPreference implements OnPreferenceChangeListener {
 
-    public VibratorIntensity(Context context, AttributeSet attrs) {
+    public PrimaryStorage(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.setOnPreferenceChangeListener(this);
     }
