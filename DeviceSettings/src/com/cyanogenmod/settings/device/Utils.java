@@ -73,7 +73,7 @@ public class Utils {
         } finally {
             if (fdr != null) {
                 try {
-                    Log.w(TAG_WRITE, "file " + filename + ": " + value);
+                    Log.w(TAG_WRITE, "file " + filename + ": " + variable);
                     fdr.close();
                 } catch (IOException ex) {
                     Log.w(TAG, "IOException while closing synced file: ", ex);
