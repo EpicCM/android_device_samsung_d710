@@ -53,13 +53,13 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
         }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (newValue.toString == "/mnt/sdcard") {
+        if (newValue.toString() == "/mnt/sdcard") {
         Utils.newFile(FILE, "export PHONE_STORAGE /mnt/external_sd" + System.getProperty( "line.separator" ));
         Utils.appendFile(FILE,"export EXTERNAL_STORAGE /mnt/sdcard" + System.getProperty( "line.separator" )); 
         } else {
         Utils.newFile(FILE, "export PHONE_STORAGE /mnt/sdcard" + System.getProperty( "line.separator" ));
         Utils.appendFile(FILE,"export EXTERNAL_STORAGE /mnt/external_sd" + System.getProperty( "line.separator" ));
-        //Utils.appendFile(FILE, newValue.toString + System.getProperty( "line.separator" ));
+        //Utils.appendFile(FILE, newValue.toString() + System.getProperty( "line.separator" ));
         }
         return true;
     }
