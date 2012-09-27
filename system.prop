@@ -12,14 +12,6 @@ ro.telephony.call_ring.multiple=0
 # Set ring delay to 0ms
 ro.telephony.call_ring.delay=0
 
-# notify vold we have internal and external sd
-#ro.additionalmounts=/mnt/external_sd
-#ro.vold.switchablepair=/mnt/sdcard,/mnt/external_sd
-#persist.sys.vold.switchexternal=0
-persist.cm.switchablemounts=0
-persist.cm.mount0=/mnt/sdcard
-persist.cm.mount1=/mnt/external_sd
-
 #wifi
 wifi.supplicant_scan_interval=90
 
