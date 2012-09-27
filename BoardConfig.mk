@@ -148,7 +148,7 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 12
-BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := false
 BOARD_VOLD_DISC_HAS_MULTIPLE_MAJORS := true
 
 # MTP
@@ -170,7 +170,7 @@ BOARD_SUPPRESS_EMMC_WIPE := true
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/d710/overlay/include
 
 # assert
-TARGET_OTA_ASSERT_DEVICE := d710,SPH-D710,epic4gtouch
+TARGET_OTA_ASSERT_DEVICE := SPH-D710,epic4gtouch,d710
 
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/d710/BoardConfigVendor.mk
