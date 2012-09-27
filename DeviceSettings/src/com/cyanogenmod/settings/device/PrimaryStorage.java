@@ -52,6 +52,7 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
         Utils.newFile(FILE, "export PHONE_STORAGE /mnt/sdcard" + System.getProperty( "line.separator" ));
         Utils.appendFile(FILE,"export EXTERNAL_STORAGE " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "/mnt/external_sd") + System.getProperty( "line.separator" ));
         }
+        }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Log.v(TAG, "newValue is " + newValue.toString());
