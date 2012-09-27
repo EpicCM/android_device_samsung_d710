@@ -16,6 +16,8 @@
 
 package com.cyanogenmod.settings.device;
 
+import android.util.Log;
+
 import java.io.IOException;
 import android.content.Context;
 import android.util.AttributeSet;
