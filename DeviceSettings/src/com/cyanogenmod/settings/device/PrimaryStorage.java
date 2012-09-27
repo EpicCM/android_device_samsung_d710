@@ -33,7 +33,8 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
     }
 
     private static final String FILE = "/data/system/storage.rc";
-
+    private static final String TAG = "GalaxyS2Settings_Utils_Store";
+    
     public static boolean isSupported() {
         return Utils.fileExists(FILE);
     }
@@ -46,20 +47,20 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
         if (!isSupported()) {
         Utils.newFile(FILE, "export PHONE_STORAGE /mnt/sdcard" + System.getProperty( "line.separator" ));
         Utils.appendFile(FILE,"export EXTERNAL_STORAGE /mnt/external_sd" + System.getProperty( "line.separator" ));
-        }
+        } else { 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         Utils.newFile(FILE, "export PHONE_STORAGE /mnt/sdcard" + System.getProperty( "line.separator" ));
         Utils.appendFile(FILE,"export EXTERNAL_STORAGE " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "/mnt/external_sd") + System.getProperty( "line.separator" ));
         }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        Log.v(TAG, "newValue is " + newValue.toString());
         if (newValue.toString() == "/mnt/sdcard") {
         Utils.newFile(FILE, "export PHONE_STORAGE /mnt/external_sd" + System.getProperty( "line.separator" ));
         Utils.appendFile(FILE,"export EXTERNAL_STORAGE /mnt/sdcard" + System.getProperty( "line.separator" )); 
         } else {
         Utils.newFile(FILE, "export PHONE_STORAGE /mnt/sdcard" + System.getProperty( "line.separator" ));
         Utils.appendFile(FILE,"export EXTERNAL_STORAGE /mnt/external_sd" + System.getProperty( "line.separator" ));
-        //Utils.appendFile(FILE, newValue.toString() + System.getProperty( "line.separator" ));
         }
         return true;
     }
