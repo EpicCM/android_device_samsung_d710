@@ -27,7 +27,7 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product, device/samsung/d710/full_d710.mk)
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := d710
+PRODUCT_DEVICE := SPH-D710
 PRODUCT_NAME := cm_d710
 PRODUCT_BRAND := Samsung
 PRODUCT_MODEL := SPH-D710 
