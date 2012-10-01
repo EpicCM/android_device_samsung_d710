@@ -13,7 +13,6 @@ on early-init
     symlink /mnt/external_sd /external_sd  
 
 # SD-Card Exports
-    export SECONDARY_STORAGE /mnt/sdcard
     export EXTERNAL_STORAGE /mnt/external_sd
 
     symlink /system/vendor /vendor
