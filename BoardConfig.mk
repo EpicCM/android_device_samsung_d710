@@ -17,6 +17,8 @@
 
 # This variable is set first, so it can be overridden
 # by BoardConfigVendor.mk
+-include device/samsung/galaxys2-common/BoardCommonConfig.mk
+
 BOARD_USE_SKIA_LCDTEXT := true
 
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
@@ -48,7 +50,7 @@ BOARD_UMS_LUNFILE := "/sys/devices/platform/s3c-usbgadget/gadget/lun%d/file"
 TARGET_USERIMAGES_USE_EXT4 := true
 
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/d710/include
-
+EXYNOS4210_ENHANCEMENTS := true
 # assert
 TARGET_OTA_ASSERT_DEVICE := epic4gtouch,SPH-D710,d710
 
