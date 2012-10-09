@@ -17,5 +17,5 @@
  */
 -->
 <resources>
-	<string name="def_airplane_mode_radios" translatable="false">cell,bluetooth,wifi</string>
+    <string name="def_airplane_mode_radios" translatable="false">cell,bluetooth,wifi</string>
 </resources>
