@@ -18,7 +18,11 @@
 $(call inherit-product, vendor/cm/config/cdma.mk)
 
 # Release name
-PRODUCT_RELEASE_NAME := d710
+PRODUCT_RELEASE_NAME := SPH-D710
+
+# Bootanimation
+TARGET_SCREEN_HEIGHT := 800
+TARGET_SCREEN_WIDTH := 480
 
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
@@ -33,4 +37,4 @@ PRODUCT_BRAND := Samsung
 PRODUCT_MODEL := SPH-D710 
 
 #Set build fingerprint
-PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=SPH-D710 BUILD_FINGERPRINT=samsung/SPH-D710/SPH-D710:4.0.4/IMM76I/FH23:user/release-keys PRIVATE_BUILD_DESC="SPH-D710-user 4.0.4 IMM76I FH23 release-keys"
+PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=SPH-D710 TARGET_DEVICE=SPH-D710 BUILD_FINGERPRINT=samsung/SPH-D710/SPH-D710:4.0.4/IMM76I/FH23:user/release-keys PRIVATE_BUILD_DESC="SPH-D710-user 4.0.4 IMM76I FH23 release-keys"
