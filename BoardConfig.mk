@@ -19,6 +19,9 @@
 # by BoardConfigVendor.mk
 -include device/samsung/galaxys2-common/BoardCommonConfig.mk
 
+# Boot Animation
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 BOARD_USE_SKIA_LCDTEXT := true
 
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp

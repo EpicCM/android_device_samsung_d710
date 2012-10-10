@@ -1,0 +1,6 @@
+#!/system/bin/sh
+
+/system/bin/setprop "net.$IFNAME.local-ip" "$IPLOCAL"
+/system/bin/setprop "net.$IFNAME.remote-ip" "$IPREMOTE"
+/system/bin/setprop "net.$IFNAME.dns1" "8.8.8.8"
+/system/bin/setprop "net.$IFNAME.dns2" "8.8.4.4"

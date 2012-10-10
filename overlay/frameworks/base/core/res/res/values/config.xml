@@ -195,7 +195,7 @@
         <item>"mobile_dun,4,0,3,60000,true"</item>
         <item>"mobile_hipri,5,0,3,60000,true"</item>
         <item>"mobile_bluetooth,7,7,1,-1,true"</item>
-        <item>"wimax,6,6,1,-1,true"</item>
+        <item>"wimax,6,6,1,60000,true"</item>
         <item>"wifi_p2p,13,1,0,-1,true"</item>
     </string-array>
 
@@ -220,6 +220,10 @@
         <!-- The default iface on which to monitor data use 
     <string name="config_datause_iface">rmnet0</string>-->
     <string name="config_datause_iface">ppp0</string>
+
+    <string-array translatable="false" name="config_tether_wifi_regexs">
+        <item>"wlan\\d"</item>
+    </string-array>
 
     <!-- Array of ConnectivityManager.TYPE_xxxx values allowable for tethering -->
     <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN or

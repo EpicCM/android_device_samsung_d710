@@ -17,8 +17,10 @@ LOCAL_PATH := device/samsung/d710
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 		
 # Init files
-PRODUCT_COPY_FILES += \
+PRODUCT_COPY_FILES := \
     $(LOCAL_PATH)/init.smdk4210.rc:root/init.smdk4210.rc \
+    $(LOCAL_PATH)/init.smdk4210.gps.rc:root/init.smdk4210.gps.rc \
+    $(LOCAL_PATH)/init.rc:root/init.rc \
     $(LOCAL_PATH)/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
 
 # These are the hardware-specific features
@@ -106,7 +108,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.sends_barcount=1 \
     ro.ril.def.agps.mode=2 \
     ro.telephony.call_ring.multiple=false \
-    ro.telephony.call_ring.delay=3000 \
+    ro.telephony.call_ring.delay=0 \
     hwui.render_dirty_regions=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -125,8 +127,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     net.cdma.datalinkinterface=/dev/ttyCDMA0 \
     net.interfaces.defaultroute=cdma \
     net.cdma.ppp.interface=ppp0 \
+    ro.cdma.ppp.interface=ppp0 \
+    ro.wimax.interface=uwbr0 \
     net.connectivity.type=CDMA1 \
-    mobiledata.interfaces=ppp0 \
+    mobiledata.interfaces=ppp0,wlan0,uwbr0,p2p0 \
     ro.telephony.ril_class=SamsungCDMAv6RIL \
     ro.ril.samsung_cdma=true \
     ro.carrier=Sprint	

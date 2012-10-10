@@ -131,5 +131,16 @@
             <item>5</item>
             <item>6</item>
     </string-array>
+    
+    <string-array name="primary_storage_entries">
+        <item>sdcard</item>
+        <item>external_sd</item>
+    </string-array>
+
+    <string-array name="primary_storage_entries_values" translatable="false"> 
+        <item>/storage/sdcard0</item>
+        <item>/storage/sdcard1</item>
+    </string-array>
+    
 
 </resources>
