@@ -12,9 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Include common makefile
-$(call inherit-product, device/samsung/galaxys2-common/common.mk)
-
 LOCAL_PATH := device/samsung/d710
 
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
@@ -239,6 +236,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 PRODUCT_LOCALES += hdpi
+
+
+# Include common makefile
+$(call inherit-product, device/samsung/galaxys2-common/common.mk)
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
