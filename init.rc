@@ -1,3 +1,13 @@
+# Copyright (C) 2012 The Android Open Source Project
+#
+# IMPORTANT: Do not create world writable files or directories.
+# This is a common source of Android security bugs.
+#
+
+import /init.${ro.hardware}.rc
+import /init.usb.rc
+import /init.trace.rc
+
 on early-init
 # Set init its forked children's oom_adj.
     write /proc/1/oom_score_adj -941
@@ -23,7 +33,9 @@ loglevel 3
     export ANDROID_DATA /data
     export ASEC_MOUNTPOINT /mnt/asec
     export LOOP_MOUNTPOINT /mnt/obb
-    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar:/system/framework/filterfw.jar
+    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/framework2.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar
+    export TERMINFO /system/etc/terminfo
+    export TERM linux
 
 # Backward compatibility
     symlink /system/etc /etc
@@ -69,25 +81,36 @@ loglevel 3
     write /proc/sys/kernel/sched_compat_yield 1
     write /proc/sys/kernel/sched_child_runs_first 0
     write /proc/sys/kernel/randomize_va_space 2
+    write /proc/sys/kernel/kptr_restrict 2
+    write /proc/sys/kernel/dmesg_restrict 1
+    write /proc/sys/vm/mmap_min_addr 32768
+    write /proc/sys/kernel/sched_rt_runtime_us 950000
+    write /proc/sys/kernel/sched_rt_period_us 1000000
 
 # Create cgroup mount points for process groups
     mkdir /dev/cpuctl
     mount cgroup none /dev/cpuctl cpu
     chown system system /dev/cpuctl
     chown system system /dev/cpuctl/tasks
-    chmod 0777 /dev/cpuctl/tasks
+    chmod 0660 /dev/cpuctl/tasks
     write /dev/cpuctl/cpu.shares 1024
+    write /dev/cpuctl/cpu.rt_runtime_us 950000
+    write /dev/cpuctl/cpu.rt_period_us 1000000
 
-    mkdir /dev/cpuctl/fg_boost
-    chown system system /dev/cpuctl/fg_boost/tasks
-    chmod 0777 /dev/cpuctl/fg_boost/tasks
-    write /dev/cpuctl/fg_boost/cpu.shares 1024
+    mkdir /dev/cpuctl/apps
+    chown system system /dev/cpuctl/apps/tasks
+    chmod 0666 /dev/cpuctl/apps/tasks
+    write /dev/cpuctl/apps/cpu.shares 1024
+    write /dev/cpuctl/apps/cpu.rt_runtime_us 800000
+    write /dev/cpuctl/apps/cpu.rt_period_us 1000000
 
-    mkdir /dev/cpuctl/bg_non_interactive
-    chown system system /dev/cpuctl/bg_non_interactive/tasks
-    chmod 0777 /dev/cpuctl/bg_non_interactive/tasks
+    mkdir /dev/cpuctl/apps/bg_non_interactive
+    chown system system /dev/cpuctl/apps/bg_non_interactive/tasks
+    chmod 0666 /dev/cpuctl/apps/bg_non_interactive/tasks
     # 5.0 %
-    write /dev/cpuctl/bg_non_interactive/cpu.shares 52
+    write /dev/cpuctl/apps/bg_non_interactive/cpu.shares 52
+    write /dev/cpuctl/apps/bg_non_interactive/cpu.rt_runtime_us 700000
+    write /dev/cpuctl/apps/bg_non_interactive/cpu.rt_period_us 1000000
 
 # Allow everybody to read the xt_qtaguid resource tracking misc dev.
 # This is needed by any process that uses socket tagging.
@@ -106,7 +129,6 @@ on fs
     mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait 
     
 on post-fs
-
     # once everything is setup, no need to modify /
     mount rootfs rootfs / ro remount
 
@@ -116,7 +138,7 @@ on post-fs
 
     # This may have been created by the recovery system with odd permissions
     chown system cache /cache/recovery
-    chmod 0771 /cache/recovery
+    chmod 0770 /cache/recovery
 
     #change permissions on vmallocinfo so we can grab it from bugreports
     chown root log /proc/vmallocinfo
@@ -129,9 +151,7 @@ on post-fs
     chmod 0220 /proc/sysrq-trigger
 
     # create the lost+found directories, so as to enforce our permissions
-    mkdir /cache/lost+found 0771 root root
-    chown root root /cache/lost+found
-    chmod 0771 /cache/lost+found
+    mkdir /cache/lost+found 0770 root root
 
 on post-fs-data
     # We chown/chmod /data again so because mount is run as root + defaults
@@ -154,20 +174,8 @@ on post-fs-data
 
     write /proc/apanic_console 1
 
-    chown system cache /cache
-    chmod 0771 /cache
-
-    chown system inet /app-cache
-    chmod 0771 /app-cache
-
-    chown root system /dev/ttySAC1
-    chmod 0660 /dev/ttySAC1
-
-    mkdir /data/gps 771 gps system
-    chown gps system /data/gps
-
-# create basic filesystem structure
-    mkdir /data/misc 01775 system misc
+    # create basic filesystem structure
+    mkdir /data/misc 01771 system misc
     mkdir /data/misc/bluetoothd 0770 bluetooth bluetooth
     mkdir /data/misc/bluetooth 0770 system system
     mkdir /data/misc/keystore 0700 keystore keystore
@@ -176,22 +184,20 @@ on post-fs-data
     mkdir /data/misc/systemkeys 0700 system system
     # give system access to wpa_supplicant.conf for backup and restore
     mkdir /data/misc/wifi 0770 wifi wifi
-    chmod 0770 /data/misc/wifi
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    mkdir /data/misc/dhcp 0775 dhcp dhcp
-    chmod 0775 /data/misc/dhcp
     mkdir /data/local 0751 root root
+
+    # For security reasons, /data/local/tmp should always be empty.
+    # Do not place files or directories in /data/local/tmp
     mkdir /data/local/tmp 0771 shell shell
     mkdir /data/data 0771 system system
     mkdir /data/app-private 0771 system system
+    mkdir /data/app-asec 0700 root root
     mkdir /data/app 0771 system system
     mkdir /data/property 0700 root root
+    mkdir /data/ssh 0750 root shell
+    mkdir /data/ssh/empty 0700 root root
     mkdir /data/radio 0770 radio radio
-
-    write /data/.psm.info 1
-    chown system system /data/.psm.info
-    chmod 0600 /data/.psm.info
 
     # create dalvik-cache and double-check the perms, so as to enforce our permissions
     mkdir /data/dalvik-cache 0771 system system
@@ -208,31 +214,17 @@ on post-fs-data
     chmod 0771 /data/resource-cache
 
     # create the lost+found directories, so as to enforce our permissions
-    mkdir /data/lost+found 0771 root root
-    chown root root /data/lost+found
-    chmod 0771 /data/lost+found
+    mkdir /data/lost+found 0770 root root
 
     # create directory for DRM plug-ins - give drm the read/write access to
     # the following directory.
     mkdir /data/drm 0770 drm drm
-    chown drm drm /data/drm
-    chmod 0770 /data/drm
 
     # If there is no fs-post-data action in the init.<device>.rc file, you
     # must uncomment this line, otherwise encrypted filesystems
     # won't work.
     # Set indication (checked by vold) that we have finished this action
     #setprop vold.post_fs_data_done 1
-
-    chown system system /sys/class/android_usb/android0/f_mass_storage/lun/file
-    chmod 0660 /sys/class/android_usb/android0/f_mass_storage/lun/file
-    chown system system /sys/class/android_usb/android0/f_rndis/ethaddr
-    chmod 0660 /sys/class/android_usb/android0/f_rndis/ethaddr
-
-    chmod 0660 /dev/usb_mtp_gadget
-    chown system system /dev/usb_mtp_gadget
-
-    chmod 755 /system/init.local.rc
 
 # Include extra init file
     import /system/etc/init.local.rc
@@ -248,7 +240,7 @@ on boot
 
 # Memory management.  Basic kernel parameters, and allow the high
 # level system server to be able to adjust the kernel OOM driver
-# paramters to match how it is managing things.
+# parameters to match how it is managing things.
     write /proc/sys/vm/overcommit_memory 1
     write /proc/sys/vm/min_free_order_shift 4
     chown root system /sys/module/lowmemorykiller/parameters/adj
@@ -260,27 +252,50 @@ on boot
     write /proc/sys/vm/dirty_expire_centisecs 200
     write /proc/sys/vm/dirty_background_ratio  5
 
-# Permissions for System Server and daemons.
+    # Permissions for System Server and daemons.
     chown radio system /sys/android_power/state
     chown radio system /sys/android_power/request_state
     chown radio system /sys/android_power/acquire_full_wake_lock
     chown radio system /sys/android_power/acquire_partial_wake_lock
     chown radio system /sys/android_power/release_wake_lock
-    chown radio system /sys/power/state
+    chown system system /sys/power/state
+    chown system system /sys/power/wakeup_count
     chown radio system /sys/power/wake_lock
     chown radio system /sys/power/wake_unlock
     chmod 0660 /sys/power/state
     chmod 0660 /sys/power/wake_lock
     chmod 0660 /sys/power/wake_unlock
-    chown system system /sys/devices/virtual/sec/sec_touchkey/brightness
-    chown radio system /sys/devices/virtual/sec/sec_touchkey/touch_sensitivity
-    chown radio system /sys/class/lightsensor/switch_cmd/lightsensor_file_state
-    chown radio system /sys/devices/virtual/sec/sec_touchkey/touch_version
-    chown radio system /sys/devices/virtual/sec/sec_touchkey/autocal_enable
+
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boost
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boost
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/input_boost
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/input_boost
+
+    # Assume SMP uses shared cpufreq policy for all CPUs
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+
+    chown system system /sys/block/mmcblk0/queue/scheduler
+    chmod 0664 /sys/block/mmcblk0/queue/scheduler
+
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/class/leds/keyboard-backlight/brightness
     chown system system /sys/class/leds/lcd-backlight/brightness
-    chown system system /sys/class/backlight/panel/brightness
     chown system system /sys/class/leds/button-backlight/brightness
     chown system system /sys/class/leds/jogball-backlight/brightness
     chown system system /sys/class/leds/red/brightness
@@ -377,87 +392,14 @@ service console /system/bin/sh
 on property:ro.debuggable=1
     start console
 
- # MTP permission, fixed by 2011/03/18 ******++
-    chmod 0660 /dev/usb_mtp_gadget
-    chown system system /dev/usb_mtp_gadget
-
-    # USB Device permission
-    #chown system system /sys/devices/platform/android_usb/UsbMenuSel
-    chown system system /sys/devices/platform/android_usb/tethering
-    chown radio system /sys/devices/platform/android_usb/UsbMenuSel
-
-    # USB HUB permission
-    chown radio radio /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port
-
-    # USB switch permission
-    chown radio radio /sys/class/sec/switch/set_usb_path
-
-
-# Samsung USB Mode : system properties are linked with sysfs
-# write /sys/class/sec/switch/UsbMenuSel 0
-on property:persist.service.usb.setting=0
-	write /sys/devices/platform/android_usb/UsbMenuSel 0
-on property:persist.service.usb.setting=1
-	write /sys/devices/platform/android_usb/UsbMenuSel 1
-on property:persist.service.usb.setting=2
-	write /sys/devices/platform/android_usb/UsbMenuSel 2
-on property:persist.service.usb.setting=3
-	write /sys/devices/platform/android_usb/UsbMenuSel 3
-on property:persist.service.usb.setting=4
-	write /sys/devices/platform/android_usb/UsbMenuSel 4
-
-# USB HUB : system properties are linked with sysfs
-#  bit :    3     2      1         0
-#          AP,   CP, WIMAX, RESERVED
-# Enable AP, CP, WIMAX
-
-on property:persist.service.usb.hubport=0
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
-	write /sys/class/sec/switch/set_usb_path ALL
-on property:persist.service.usb.hubport=2
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
-	write /sys/class/sec/switch/set_usb_path ALL
-on property:persist.service.usb.hubport=4
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
-	write /sys/class/sec/switch/set_usb_path AP
-on property:persist.service.usb.hubport=6
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
-	write /sys/class/sec/switch/set_usb_path AP
-on property:persist.service.usb.hubport=8
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
-	write /sys/class/sec/switch/set_usb_path CP
-on property:persist.service.usb.hubport=10
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enalbe_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
-	write /sys/class/sec/switch/set_usb_path CP
-on property:persist.service.usb.hubport=12
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
-on property:persist.service.usb.hubport=14
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
-
+# adbd is controlled via property triggers in init.<platform>.usb.rc
 service adbd /sbin/adbd
     class core
     disabled
 
-on property:service.adb.root=1
-    write /sys/class/android_usb/android0/enable 0
-    restart adbd
-    write /sys/class/android_usb/android0/enable 1
+# adbd on at boot in emulator
+on property:ro.kernel.qemu=1
+    start adbd
 
 service servicemanager /system/bin/servicemanager
     class core
@@ -478,6 +420,7 @@ service netd /system/bin/netd
     class main
     socket netd stream 0660 root system
     socket dnsproxyd stream 0660 root inet
+    socket mdns stream 0660 root system
 
 service debuggerd /system/bin/debuggerd
     class main
@@ -487,7 +430,7 @@ service ril-daemon /system/bin/rild
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_rw qcom_oncrpc diag
+    group radio cache inet misc audio sdcard_r sdcard_rw qcom_oncrpc qcom_diag log
 
 service surfaceflinger /system/bin/surfaceflinger
     class main
@@ -506,7 +449,7 @@ service zygote /system/bin/app_process -Xzygote /system/bin --zygote --start-sys
 service drm /system/bin/drmserver
     class main
     user drm
-    group system inet drmrpc
+    group drm system inet drmrpc sdcard_r
 
 service media /system/bin/mediaserver
     class main
@@ -559,12 +502,24 @@ service mtpd /system/bin/mtpd
 service keystore /system/bin/keystore /data/misc/keystore
     class main
     user keystore
-    group keystore
+    group keystore drmrpc
     socket keystore stream 666
 
 service dumpstate /system/bin/dumpstate -s
     class main
     socket dumpstate stream 0660 shell log
+    disabled
+    oneshot
+
+service sshd /system/bin/start-ssh
+    class main
+    disabled
+
+service mdnsd /system/bin/mdnsd
+    class main
+    user mdnsr
+    group inet net_raw
+    socket mdnsd stream 0660 mdnsr inet
     disabled
     oneshot
 
