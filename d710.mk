@@ -92,7 +92,11 @@ PRODUCT_COPY_FILES += \
 	
 # Vold
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/vold.fstab:system/etc/vold.fstab 
+    $(LOCAL_PATH)/configs/vold.fstab:system/etc/vold.fstab
+
+# Vold
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf 
 
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
