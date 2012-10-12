@@ -139,7 +139,10 @@ PRODUCT_PACKAGES += \
     WiMAXSettings \
     SprintMenu \
     WiMAXHiddenMenu \
-    SystemUpdateUI
+    SystemUpdateUI \
+    SDM \
+    SyncMLSvc \
+    SecPhone
 	
 # MFC API
 PRODUCT_PACKAGES += \
