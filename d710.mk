@@ -98,47 +98,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf 
 
-# The OpenGL ES API level that is natively supported by this device.
-# This is a 16.16 fixed point number
-PRODUCT_PROPERTY_OVERRIDES := \
-    ro.opengles.version=131072
-
-# These are the hardware-specific settings that are stored in system properties.
-# Note that the only such settings should be the ones that are too low-level to
-# be reachable from resources or other mechanisms.
-PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=180 \
-    ro.telephony.sends_barcount=1 \
-    ro.ril.def.agps.mode=2 \
-    ro.telephony.call_ring.multiple=false \
-    ro.telephony.call_ring.delay=0 \
-    hwui.render_dirty_regions=false
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.service.usb.setting=0 \
-    persist.service.adb.enable=1 \
-    persist.sys.usb.config=mass_storage,adb
-	   
-# Telephony property for CDMA
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.default_network=4 \
-    ro.com.google.clientidbase=android-sprint-us \
-    ro.cdma.home.operator.numeric=310120 \
-    ro.cdma.home.operator.alpha=Sprint \
-    net.cdma.pppd.authtype=require-pap \
-    net.cdma.pppd.user=user[SPACE]SprintNextel \
-    net.cdma.datalinkinterface=/dev/ttyCDMA0 \
-    net.interfaces.defaultroute=cdma \
-    net.cdma.ppp.interface=ppp0 \
-    ro.cdma.ppp.interface=ppp0 \
-    ro.wimax.interface=uwbr0 \
-    net.connectivity.type=CDMA1 \
-    mobiledata.interfaces=ppp0,wlan0,uwbr0,p2p0 \
-    ro.telephony.ril_class=SamsungCDMAv6RIL \
-    ro.ril.samsung_cdma=true \
-    ro.carrier=Sprint	
-	
 # Gps
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
@@ -181,10 +140,6 @@ PRODUCT_PACKAGES += \
     SprintMenu \
     WiMAXHiddenMenu \
     SystemUpdateUI
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.wimax.interface=uwbr0 \
-    persist.service.usb.hubport=4
 	
 # MFC API
 PRODUCT_PACKAGES += \
@@ -215,6 +170,59 @@ PRODUCT_PACKAGES += \
     libs5pjpeg \
     libfimg
 
+# Screen density is actually considered a locale (since it is taken into account
+# the the build-time selection of resources). The product definitions including
+# this file must pay attention to the fact that the first entry in the final
+# PRODUCT_LOCALES expansion must not be a density.
+# This device is hdpi.
+PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
+PRODUCT_LOCALES += hdpi
+
+# Include common makefile
+$(call inherit-product, device/samsung/galaxys2-common/common.mk)
+
+# The OpenGL ES API level that is natively supported by this device.
+# This is a 16.16 fixed point number
+PRODUCT_PROPERTY_OVERRIDES := \
+    ro.opengles.version=131072
+
+# These are the hardware-specific settings that are stored in system properties.
+# Note that the only such settings should be the ones that are too low-level to
+# be reachable from resources or other mechanisms.
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0 \
+    wifi.supplicant_scan_interval=180 \
+    ro.telephony.sends_barcount=1 \
+    ro.ril.def.agps.mode=2 \
+    ro.telephony.call_ring.multiple=false \
+    ro.telephony.call_ring.delay=0 \
+    hwui.render_dirty_regions=false
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.service.usb.setting=0 \
+    persist.service.adb.enable=1 \
+    persist.sys.usb.config=mass_storage,adb
+	   
+# Telephony property for CDMA
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.default_network=4 \
+    ro.com.google.clientidbase=android-sprint-us \
+    ro.cdma.home.operator.numeric=310120 \
+    ro.cdma.home.operator.alpha=Sprint \
+    net.cdma.pppd.authtype=require-pap \
+    net.cdma.pppd.user=user[SPACE]SprintNextel \
+    net.cdma.datalinkinterface=/dev/ttyCDMA0 \
+    net.interfaces.defaultroute=cdma \
+    net.cdma.ppp.interface=ppp0 \
+    ro.cdma.ppp.interface=ppp0 \
+    ro.wimax.interface=uwbr0 \
+    net.connectivity.type=CDMA1 \
+    mobiledata.interfaces=ppp0,wlan0,uwbr0,p2p0 \
+    ro.telephony.ril_class=SamsungCDMAv6RIL \
+    ro.ril.samsung_cdma=true \
+    ro.carrier=Sprint
+
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -236,18 +244,9 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cwm.enable_key_repeat=true
 
-# Screen density is actually considered a locale (since it is taken into account
-# the the build-time selection of resources). The product definitions including
-# this file must pay attention to the fact that the first entry in the final
-# PRODUCT_LOCALES expansion must not be a density.
-# This device is hdpi.
-PRODUCT_AAPT_CONFIG := normal hdpi
-PRODUCT_AAPT_PREF_CONFIG := hdpi
-PRODUCT_LOCALES += hdpi
-
-
-# Include common makefile
-$(call inherit-product, device/samsung/galaxys2-common/common.mk)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.wimax.interface=uwbr0 \
+    persist.service.usb.hubport=4
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
