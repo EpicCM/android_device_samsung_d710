@@ -140,9 +140,12 @@ PRODUCT_PACKAGES += \
     SprintMenu \
     WiMAXHiddenMenu \
     SystemUpdateUI \
-    SDM \
-    SyncMLSvc \
-    SecPhone
+    HiddenMenu \
+    PhoneInfo \
+    Phone_Util \
+    serviceModeApp \
+    SprintAndroidExtension \
+    syncmldstmo
 	
 # MFC API
 PRODUCT_PACKAGES += \
