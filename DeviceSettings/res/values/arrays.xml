@@ -133,13 +133,13 @@
     </string-array>
     
     <string-array name="primary_storage_entries">
-        <item>sdcard</item>
-        <item>external_sd</item>
+        <item>Internal SD</item>
+        <item>External SD</item>
     </string-array>
 
     <string-array name="primary_storage_entries_values" translatable="false"> 
-        <item>/storage/sdcard0</item>
-        <item>/storage/sdcard1</item>
+        <item>sdcard0</item>
+        <item>sdcard1</item>
     </string-array>
     
 
