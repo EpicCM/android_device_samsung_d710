@@ -8,6 +8,6 @@
                 android:summary="@string/primary_storage_summary_head"
                 android:entries="@array/primary_storage_entries"
                 android:entryValues="@array/primary_storage_entries_values"
-                android:defaultValue="/mnt/external_sd" />
+                android:defaultValue="/storage/sdcard0" />
     </PreferenceCategory>
 </PreferenceScreen>
