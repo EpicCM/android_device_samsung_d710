@@ -50,6 +50,16 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
         Log.v(TAG, "No storage.rc file found, creating.");
         Utils.newFile(FILE,"export EXTERNAL_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ));
         Utils.appendFile(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ));
+        } else { 
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        Log.v(TAG, "Loading preference file, Primary storage is" + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "/storage/sdcard0"));
+        Utils.newFile(FILE,"export EXTERNAL_STORAGE " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "/storage/sdcard0") + System.getProperty( "line.separator" ));	
+        if ( sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "/storage/sdcard0") == "/storage/sdcard1") {
+        Utils.appendFile(FILE,"export SECONDARY_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ));
+        }
+        else if ( sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "/storage/sdcard0") == "/storage/sdcard0") {
+        Utils.appendFile(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ));       
+        }
         }
         }
 
