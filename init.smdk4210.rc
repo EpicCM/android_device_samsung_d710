@@ -19,9 +19,6 @@ on early-init
     symlink /storage/usbdisk0 /usbdisk0
     symlink /storage/usbdisk0 /mnt/usbdisk0
 
-# SD-Card Exports
-    export EXTERNAL_STORAGE /mnt/external_sd
-
     symlink /system/vendor /vendor
     write /sys/block/mmcblk0/queue/iosched/slice_idle 0
 
