@@ -222,7 +222,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.wimax.interface=uwbr0 \
     persist.service.usb.hubport=4
 
-
-
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 $(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
