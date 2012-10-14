@@ -13,8 +13,6 @@
 # limitations under the License.
 
 LOCAL_PATH := device/samsung/d710
-
-DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 		
 # Init files
 PRODUCT_COPY_FILES := \
@@ -153,9 +151,6 @@ PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 PRODUCT_LOCALES += hdpi
 
-# Include common makefile
-$(call inherit-product, device/samsung/galaxys2-common/common.mk)
-
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
 PRODUCT_PROPERTY_OVERRIDES := \
@@ -221,5 +216,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.wimax.interface=uwbr0 \
     persist.service.usb.hubport=4
+
+# Include common makefile
+$(call inherit-product, device/samsung/galaxys2-common/common.mk)
+
+DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 
 $(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
