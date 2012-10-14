@@ -222,8 +222,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.wimax.interface=uwbr0 \
     persist.service.usb.hubport=4
 
-$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
+
 
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
-$(call inherit-product-if-exists, vendor/samsung/galaxys2-common/common-vendor.mk)
 $(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
