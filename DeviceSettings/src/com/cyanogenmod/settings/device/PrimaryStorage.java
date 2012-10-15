@@ -26,6 +26,8 @@ import android.preference.Preference;
 import android.preference.ListPreference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 
 public class PrimaryStorage extends ListPreference implements OnPreferenceChangeListener {
 
@@ -71,7 +73,7 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
             Utils.writeValue(FILE,"export EXTERNAL_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), false);
             Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);       
         }
-            Utils.showDialog(this, "Reboot Required!", "Reboot required before changes will take effect!");
+            Utils.showDialog((Context)getActivity(), "Reboot Required!", "Reboot required before changes will take effect!");
             return true;
         }
 
