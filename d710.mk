@@ -81,34 +81,11 @@ PRODUCT_COPY_FILES += \
 
 # Packages
 PRODUCT_PACKAGES := \
-    TvOut \
-    audio.a2dp.default \
-    com.android.future.usb.accessory \
-    smdk4210_hdcp_keys \
-    GalaxyS2Settings \
-    SamsungServiceMode \
-    libsurfaceflinger_client \
-    Torch
-	
-# Camera
-PRODUCT_PACKAGES += \
-    camera.exynos4
-	
-# Charger
-PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images
+    smdk4210_hdcp_keys
 
 # Sensors
 PRODUCT_PACKAGES += \
-    lights.exynos4 \
     sensors.exynos4
-
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-    static_busybox \
-    make_ext4fs \
-    setup_fs
 	
 # WIMAX
 PRODUCT_PACKAGES += \
@@ -116,28 +93,8 @@ PRODUCT_PACKAGES += \
     SprintMenu \
     WiMAXHiddenMenu \
     SystemUpdateUI
-	
-# MFC API
-PRODUCT_PACKAGES += \
-    libsecmfcapi
 
 PRODUCT_PACKAGES += \
-    libstagefrighthw \
-    libseccscapi \
-    libsecbasecomponent \
-    libsecosal \
-    libSEC_OMX_Resourcemanager \
-    libSEC_OMX_Core \
-    libSEC_OMX_Vdec \
-    libOMX.SEC.AVC.Decoder \
-    libOMX.SEC.M4V.Decoder \
-    libOMX.SEC.WMV.Decoder \
-    libOMX.SEC.VP8.Decoder \
-    libSEC_OMX_Venc \
-    libOMX.SEC.AVC.Encoder \
-    libOMX.SEC.M4V.Encoder \
-    libSEC_OMX_Adec \
-    libOMX.SEC.MP3.Decoder \
     libhwconverter \
     libs5pjpeg \
     libfimg
