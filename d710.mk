@@ -19,7 +19,7 @@ DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 # Init files
 PRODUCT_COPY_FILES := \
     $(LOCAL_PATH)/init.smdk4210.rc:root/init.smdk4210.rc \
-    $(LOCAL_PATH)/init.smdk4210.gps.rc:root/init.smdk4210.usb.rc \
+    $(LOCAL_PATH)/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
     $(LOCAL_PATH)/init.rc:root/init.rc \
     $(LOCAL_PATH)/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
 
