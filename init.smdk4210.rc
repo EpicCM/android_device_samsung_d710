@@ -540,12 +540,6 @@ service wimax_route /system/bin/route add default dev uwbr0
     disabled
     oneshot
 
-service gpsd /system/bin/gpsd
-    class late_start
-    socket gps seqpacket 0664 system system
-    user system
-    group system inet
-
 service wlandutservice /system/bin/wlandutservice
     user system
     group wifi net_raw net_admin system inet
