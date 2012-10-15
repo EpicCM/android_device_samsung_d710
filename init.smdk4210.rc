@@ -1,5 +1,5 @@
-import init.smdk4210.usb.rc
-import init.smdk4210.gps.rc
+import /init.smdk4210.usb.rc
+import /init.smdk4210.gps.rc
 
 on early-init
     export EXTERNAL_STORAGE /storage/sdcard0
@@ -55,9 +55,6 @@ on post-fs-data
     insmod /system/lib/modules/j4fs.ko
     insmod /system/lib/modules/scsi_wait_scan.ko
     mount j4fs /dev/block/mmcblk0p4 /mnt/.lfs
-
-# MDNS
-    socket mdns stream 0660 root system
     
 # give system access to wpa_supplicant.conf for backup and restore
     mkdir /data/misc/wifi 0770 wifi wifi

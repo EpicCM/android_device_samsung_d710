@@ -13,11 +13,14 @@
 # limitations under the License.
 
 LOCAL_PATH := device/samsung/d710
+
+DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 		
 # Init files
 PRODUCT_COPY_FILES := \
     $(LOCAL_PATH)/init.smdk4210.rc:root/init.smdk4210.rc \
     $(LOCAL_PATH)/init.smdk4210.gps.rc:root/init.smdk4210.gps.rc \
+    $(LOCAL_PATH)/init.smdk4210.gps.rc:root/init.smdk4210.usb.rc \
     $(LOCAL_PATH)/init.rc:root/init.rc \
     $(LOCAL_PATH)/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
 
@@ -61,10 +64,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/usr/idc/qwerty.idc:system/usr/idc/qwerty.idc \
     $(LOCAL_PATH)/usr/idc/qwerty2.idc:system/usr/idc/qwerty2.idc \
     $(LOCAL_PATH)/usr/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc 
-    	
-# Misc	
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/apns-conf.xml:system/etc/apns-conf.xml
 	
 # Vold
 PRODUCT_COPY_FILES += \
@@ -219,7 +218,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Include common makefile
 $(call inherit-product, device/samsung/galaxys2-common/common.mk)
-
-DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
-
 $(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
