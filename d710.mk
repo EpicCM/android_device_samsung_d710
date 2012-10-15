@@ -69,9 +69,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/vold.fstab:system/etc/vold.fstab
 
-# Vold
+# Net
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf 
+    $(LOCAL_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    $(LOCAL_PATH)/configs/ip-up:system/etc/ppp/ip-up \
+    $(LOCAL_PATH)/configs/ip-down:system/etc/ppp/ip-down
 
 # Gps
 PRODUCT_COPY_FILES += \
