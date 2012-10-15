@@ -361,21 +361,12 @@ on boot
     chown system system /sys/power/cpufreq_min_limit
     chmod 0660 /sys/power/cpufreq_max_limit
     chmod 0660 /sys/power/cpufreq_min_limit
-    
-on property:ril.cdma.data_state=1
-    restart pppd_cdma
-
-on property:ril.cdma.data_state=0
-    stop pppd_cdma
-    
+        
     chown radio system /sys/power/gpu_lock
     chmod 0660 /sys/power/gpu_lock
 
     mount debugfs /sys/kernel/debug /sys/kernel/debug
-
-    setprop ro.build.product SPH-D710
-    setprop ro.product.device SPH-D710
-    setprop ro.radio.noril yes    
+   
 
 # Permisions for sensors
     chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_selftest
