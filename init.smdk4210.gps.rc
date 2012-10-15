@@ -1,7 +1,7 @@
 on fs
    write /proc/sys/kernel/randomize_va_space 0
-   chown root system /dev/ttySAC1
-   chmod 0660 /dev/ttySAC1
+   chown system system /dev/ttySAC1
+   chmod 0664 /dev/ttySAC1
 
 on post-fs-data
     # create data/gps for GPS demon
@@ -18,10 +18,10 @@ on post-fs-data
 on boot
 service gpsd /system/bin/gpsd
     class late_start
-    socket gps seqpacket 0660 system system
+    socket gps seqpacket 0664 system system
     user system
     group system inet
 
 on property:sys.boot_completed=1
-  chown gps system /data/gps/secgpsd.socket
+  chown system system /data/gps/secgpsd.socket
   chmod 664 /data/gps/secgpsd.socket
