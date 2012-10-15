@@ -76,7 +76,7 @@ public class Utils {
 
     }
 
-public static void writeValue2(String filename, String value, Boolean append) {
+public static void writeValue(String filename, String value, Boolean append) {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(new File(filename), append);
