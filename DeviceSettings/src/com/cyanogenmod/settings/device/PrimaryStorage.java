@@ -54,9 +54,9 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             Log.v(TAG, "Loading preference file, Primary storage is " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0"));
             Utils.writeValue(FILE,"export EXTERNAL_STORAGE " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0") + System.getProperty( "line.separator" ), false);
-            if (sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0") == "sdcard1") {
+            if (sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0").equals("sdcard1")) {
                 Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), true);
-            } else if ( sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0") == "sdcard0") {
+            } else if (sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0").equals("sdcard0")) {
                 Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);       
             }
         }
@@ -64,10 +64,10 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Log.v(TAG, "Setting Primary Storage to " + (String) newValue );
-        if (newValue.toString() == "sdcard1") {
+        if (newValue.toString.equals("sdcard1")) {
             Utils.writeValue(FILE,"export EXTERNAL_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), false);
             Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), true);
-        } else if (newValue.toString() == "sdcard0") {
+        } else if (newValue.toString.equals("sdcard0")) {
             Utils.writeValue(FILE,"export EXTERNAL_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), false);
             Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);       
         }
