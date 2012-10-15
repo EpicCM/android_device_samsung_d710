@@ -48,16 +48,16 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
     public static void restore(Context context) {
         if (!isSupported()) {
             Log.v(TAG, "No storage.rc file found, creating.");
-            Utils.writeValue2(FILE,"export EXTERNAL_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), false);
-            Utils.writeValue2(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);
+            Utils.writeValue(FILE,"export EXTERNAL_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), false);
+            Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);
         } else { 
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-            Log.v(TAG, "Loading preference file, Primary storage is" + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0"));
-            Utils.writeValue2(FILE,"export EXTERNAL_STORAGE " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0") + System.getProperty( "line.separator" ), false);
+            Log.v(TAG, "Loading preference file, Primary storage is " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0"));
+            Utils.writeValue(FILE,"export EXTERNAL_STORAGE " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0") + System.getProperty( "line.separator" ), false);
             if (sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0") == "sdcard1") {
-                Utils.writeValue2(FILE,"export SECONDARY_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), true);
+                Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), true);
             } else if ( sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0") == "sdcard0") {
-                Utils.writeValue2(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);       
+                Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);       
             }
         }
         }
@@ -65,11 +65,11 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Log.v(TAG, "Setting Primary Storage to" + (String) newValue );
         if ( (String) newValue == "sdcard1") {
-            Utils.writeValue2(FILE,"export EXTERNAL_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), false);
-            Utils.writeValue2(FILE,"export SECONDARY_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), true);
+            Utils.writeValue(FILE,"export EXTERNAL_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), false);
+            Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), true);
         } else if ( (String) newValue == "sdcard0") {
-            Utils.writeValue2(FILE,"export EXTERNAL_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), false);
-            Utils.writeValue2(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);       
+            Utils.writeValue(FILE,"export EXTERNAL_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), false);
+            Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);       
         }
             return true;
         }
