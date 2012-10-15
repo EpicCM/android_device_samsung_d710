@@ -108,13 +108,15 @@ PRODUCT_PACKAGES += \
     static_busybox \
     make_ext4fs \
     setup_fs
-	
+
+ifeq ($(TARGET_DEVICE),d710)	
 # WIMAX
 PRODUCT_PACKAGES += \
     WiMAXSettings \
     SprintMenu \
     WiMAXHiddenMenu \
     SystemUpdateUI 
+endif
 	
 # MFC API
 PRODUCT_PACKAGES += \
