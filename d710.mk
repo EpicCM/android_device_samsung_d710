@@ -172,8 +172,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.service.usb.setting=0 \
     persist.service.adb.enable=1 \
-    persist.sys.usb.config=mass_storage,adb
-	   
+    persist.sys.usb.config=mass_storage,adb \
+    persist.service.usb.hubport=4	   
+
 # Telephony property for CDMA
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=4 \
@@ -212,11 +213,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # enable repeatable keys in cwm
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cwm.enable_key_repeat=true
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.wimax.interface=uwbr0 \
-    persist.service.usb.hubport=4
+    ro.cwm.enable_key_repeat=true    
 
 # Include common makefile
 $(call inherit-product, device/samsung/galaxys2-common/common.mk)
