@@ -64,10 +64,10 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Log.v(TAG, "Setting Primary Storage to " + (String) newValue );
-        if (newValue.toString.equals("sdcard1")) {
+        if ((String) newValue.equals("sdcard1")) {
             Utils.writeValue(FILE,"export EXTERNAL_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), false);
             Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), true);
-        } else if (newValue.toString.equals("sdcard0")) {
+        } else if ((String) newValue.equals("sdcard0")) {
             Utils.writeValue(FILE,"export EXTERNAL_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), false);
             Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);       
         }
