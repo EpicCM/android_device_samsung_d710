@@ -73,7 +73,7 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
             Utils.writeValue(FILE,"export EXTERNAL_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), false);
             Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);       
         }
-            Utils.showDialog((Context)this, "Reboot Required!", "Reboot required before changes will take effect!");
+          /**  Utils.showDialog((Context)this, "Reboot Required!", "Reboot required before changes will take effect!"); **/
             return true;
         }
 
