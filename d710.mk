@@ -22,8 +22,6 @@ PRODUCT_COPY_FILES := \
     $(LOCAL_PATH)/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
     $(LOCAL_PATH)/init.rc:root/init.rc \
     $(LOCAL_PATH)/init.bt.rc:root/init.bt.rc \
-    $(LOCAL_PATH)/init.trace.rc:root/init.trace.rc \
-    $(LOCAL_PATH)/init.usb.rc:root/init.usb.rc \
     $(LOCAL_PATH)/fstab.smdk4210:root/fstab.smdk4210 \
     $(LOCAL_PATH)/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
 
@@ -151,7 +149,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     net.cdma.ppp.interface=ppp0 \
     ro.wimax.interface=uwbr0 \
     net.connectivity.type=CDMA1 \
-    mobiledata.interfaces=ppp0,wlan0,uwbr0,p2p0 \
+    mobiledata.interfaces=ppp0,wlan0,uwbr0 \
     ro.telephony.ril_class=SamsungCDMAv6RIL \
     ro.ril.samsung_cdma=true \
     ro.carrier=Sprint
@@ -180,3 +178,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Include common makefile
 $(call inherit-product, device/samsung/galaxys2-common/common.mk)
 $(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/galaxys2-common/common-vendor.mk)

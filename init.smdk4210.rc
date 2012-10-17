@@ -1,5 +1,4 @@
 import /init.smdk4210.usb.rc
-import /init.bt.rc
 
 on early-init
     export EXTERNAL_STORAGE /storage/sdcard0
@@ -8,6 +7,11 @@ on early-init
     mkdir /storage/sdcard0 0000 system system
     mkdir /storage/sdcard1 0000 system system
     mkdir /storage/usbdisk0 0000 system system
+    mkdir /storage/usbdisk1 0000 system system
+    mkdir /storage/usbdisk2 0000 system system
+    mkdir /storage/usbdisk3 0000 system system
+    mkdir /storage/usbdisk4 0000 system system
+    mkdir /storage/usbdisk5 0000 system system
     mkdir /efs 0771 radio system
     mkdir /mnt 0775 root system
     mkdir /mnt/.lfs 0755 root root
@@ -18,6 +22,16 @@ on early-init
     symlink /storage/sdcard1 /mnt/external_sd
     symlink /storage/usbdisk0 /usbdisk0
     symlink /storage/usbdisk0 /mnt/usbdisk0
+    symlink /storage/usbdisk1 /usbdisk1
+    symlink /storage/usbdisk1 /mnt/usbdisk1
+    symlink /storage/usbdisk2 /usbdisk2
+    symlink /storage/usbdisk2 /mnt/usbdisk2
+    symlink /storage/usbdisk3 /usbdisk3
+    symlink /storage/usbdisk3 /mnt/usbdisk3
+    symlink /storage/usbdisk4 /usbdisk4
+    symlink /storage/usbdisk4 /mnt/usbdisk4
+    symlink /storage/usbdisk5 /usbdisk5
+    symlink /storage/usbdisk5 /mnt/usbdisk5
 
     symlink /system/vendor /vendor
     write /sys/block/mmcblk0/queue/iosched/slice_idle 0
@@ -64,6 +78,7 @@ on post-fs-data
     mkdir /efs/bluetooth 0775 radio system
     mkdir /efs/imei 0775 radio system
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
+    chmod 0660 /data/misc/wifi/p2p_supplicant.conf
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0775 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
@@ -101,7 +116,7 @@ on post-fs-data
 #panorama directory creation
     mkdir /data/pxtmpdir 0775
     chown system system /data/pxtmpdir
-    chmod 0775 /data/pxtmpdir   
+    chmod 0775 /data/pxtmpdir
 
     chmod 0644 /data/system/storage.rc
 export_rc /data/system/storage.rc
@@ -142,7 +157,7 @@ on boot
 
 # Permissions for mDNIe
     chown system media_rw /sys/class/mdnie/mdnie/mode
-    chmod 0664 /sys/class/mdnie/mdnie/mode   
+    chmod 0664 /sys/class/mdnie/mdnie/mode
     chown system media_rw /sys/class/mdnie/mdnie/outdoor
     chmod 0664 /sys/class/mdnie/mdnie/outdoor
     chown system media_rw /sys/class/mdnie/mdnie/scenario
@@ -197,16 +212,6 @@ on boot
     chown gps system /data/gps
     write /proc/sys/kernel/randomize_va_space 0
 
-# IPC sysfs
-    chown radio radio /sys/devices/virtual/misc/multipdp/waketime
-    symlink /dev/block/mmcblk0p8 /dev/mbin0
-
-# GPS for Qualcomm-SamsungIPC
-service secgpsd /system/bin/secgpsd
-    class main
-    user system
-    group system inet
-
 # Permissions for bluetooth
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
     chown bluetooth bluetooth /efs/bluetooth/bt_addr
@@ -257,6 +262,7 @@ on property:ril.cdma.data_state=1
 on property:ril.cdma.data_state=0
     stop pppd_cdma
 
+    write /data/system/volume.dat 1
 # Great Wall of Permissions
     chmod 0444 /sys/class/android_usb/android0/terminal_version
     chmod 0444 /sys/class/power_supply/battery/temp
@@ -396,12 +402,11 @@ on property:ril.cdma.data_state=0
 
     write /sys/devices/system/cpu/cpufreq/ondemand/down_differential 5
     write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 85
-    write /data/system/volume.dat 1
     write /sys/class/sec/sec_key/wakeup_keys  102,116
 
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     setprop wifi.interface wlan0
-# Device Encryption by B2B Security Lab. 
+# Device Encryption by B2B Security Lab.
     setprop ro.crypto.keyfile.userdata /efs/metadata
 
 # fake some battery state
@@ -410,17 +415,34 @@ on property:ril.cdma.data_state=0
     setprop status.battery.level_raw  50
     setprop status.battery.level_scale 9
 
+# for bluetooth
+service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm --no2bytes --tosleep 50000 \
+    --baudrate 3000000 --use_baudrate_for_download --patchram /system/bin/bcm4330B1.hcd \
+    --scopcm=0,0,0,0,0,0,0,3,3,0  /dev/ttySAC0
+    class main
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+# bluetooth mac address
+service bdaddr /system/bin/bdaddr_read
+    class main
+    user root
+    disabled
+    oneshot
+
 # Wimax changes
 service dhcpcd_uwbr0 /system/bin/dhcpcd -ABKL
     class main
     disabled
     oneshot
-    
+
 service iprenew_uwbr0 /system/bin/dhcpcd -n
     class main
     disabled
-    oneshot     
-    
+    oneshot
+
 # Bluetooth PAN
 service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
     class main
@@ -452,7 +474,7 @@ service iprenew_p2p /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service p2p_supplicant /system/bin/p2p_supplicant \
+service p2p_supplicant /system/bin/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -e/data/misc/wifi/entropy.bin -puse_p2p_group_interface=1
     class main
     disabled
@@ -506,12 +528,22 @@ on property:init.svc.macloader=stopped
     chown system root /data/.rev
     chmod 0660 /data/.rev
 
-#service pppd_cdma /system/bin/pppd_runner
-#    class main
-#    user root
-#    group radio cache inet misc system
-#    disabled
-#    oneshot
+service gpsd /system/bin/gpsd
+    class main
+    user system
+    group system inet
+
+service wimax_route /system/bin/route add default dev uwbr0
+    class main
+    disabled
+    oneshot
+
+service pppd_cdma /system/bin/pppd_runner
+    class main
+    user root
+    group radio cache inet misc system
+    disabled
+    oneshot
 
 on property:sys.boot_completed=1
     chown system system /data/gps/secgpsd.socket

@@ -5,8 +5,6 @@
 #
 
 import /init.${ro.hardware}.rc
-import /init.usb.rc
-import /init.trace.rc
 
 on early-init
 
@@ -103,13 +101,13 @@ on fs
 # mount ext4 partitions
 #    mount ext4 /dev/block/mmcblk0p9 /system noatime wait ro
 #    exec sfsck /dev/block/mmcblk0p7 ext4
-#    mount ext4 /dev/block/mmcblk0p7 /cache nosuid nodev noatime wait    
+#    mount ext4 /dev/block/mmcblk0p7 /cache nosuid nodev noatime wait
 #    exec sfsck /dev/block/mmcblk0p1 ext4
 #    mount ext4 /dev/block/mmcblk0p1 /efs nosuid nodev noatime wait
 #    exec sformat /dev/block/mmcblk0p11 vfat
 #    exec sfsck /dev/block/mmcblk0p10 ext4
-#    mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait 
-    
+#    mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait
+
 on post-fs
     # once everything is setup, no need to modify /
     mount rootfs rootfs / ro remount
@@ -153,7 +151,7 @@ on post-fs-data
 
     mkdir /data/misc/wifi 0770 wifi wifi
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
- 
+
     mkdir /data/local 0751 root root
     mkdir /data/local/tmp 0771 shell shell
     mkdir /data/data 0771 system system
@@ -181,6 +179,8 @@ on post-fs-data
 
     mkdir /data/drm 0770 drm drm
 
+    chown system system /system/etc/init.local.rc
+    chmod 0644 /system/etc/init.local.rc
     import /system/etc/init.local.rc
 
 on boot

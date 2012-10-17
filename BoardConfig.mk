@@ -47,6 +47,10 @@ BOARD_HDMI_DDC_CH := DDC_CH_I2C_7
 # RIL
 BOARD_MOBILEDATA_INTERFACE_NAME := "ppp0"
 
+# Wifi
+WIFI_DRIVER_FW_PATH_MFG          := "/system/etc/wifi/bcm4330_mfg.bin"
+WIFI_FIRMWARE_LOADER             := "wlandutservice"
+
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d710/recovery/recovery_keys.c
 BOARD_UMS_LUNFILE := "/sys/devices/platform/s3c-usbgadget/gadget/lun%d/file"
@@ -55,7 +59,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/d710/include
 EXYNOS4210_ENHANCEMENTS := true
 # assert
-TARGET_OTA_ASSERT_DEVICE := epic4gtouch,SPH-D710,d710
+TARGET_OTA_ASSERT_DEVICE := epic4gtouch,SPH-D710,d710,smdk4210
 
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/d710/BoardConfigVendor.mk
