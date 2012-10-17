@@ -14,3 +14,11 @@ net.dns2=8.8.4.4
 
 #scrolling
 windowsmgr.max_events_per_sec=180
+ro.tvout.enable=true
+persist.service.usb.hubport=4
+net.streaming.rtsp.uaprof=http://wap.samsungmobile.com/uaprof/
+ro.ril.hsxpa=1
+ro.ril.gprsclass=10
+dalvik.vm.heapstartsize=5m
+dalvik.vm.heapgrowthlimit=48m
+dalvik.vm.heapsize=128m

@@ -1,13 +1,13 @@
 on init
-    write /sys/class/android_usb/android0/iSerial ${ro.product.serialno}
+    write /sys/class/android_usb/android0/iSerial ${ro.serialno}
     write /sys/class/android_usb/android0/f_rndis/manufacturer Samsung
     write /sys/class/android_usb/android0/f_rndis/vendorID 04e8
     write /sys/class/android_usb/android0/f_rndis/wceis 1
-    
+
 on boot
     write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
     write /sys/class/android_usb/android0/iProduct ${ro.product.model}
-    write /sys/class/android_usb/android0/iSerial ${ro.product.serialno}
+    write /sys/class/android_usb/android0/iSerial ${ro.serialno}
     write /sys/class/android_usb/f_mass_storage/inquiry_string "Samsung"
 
 on property:sys.usb.config=mtp
@@ -17,6 +17,7 @@ on property:sys.usb.config=mtp
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state ${sys.usb.config}
+
 
 on property:sys.usb.config=mtp,adb
     write /sys/class/android_usb/android0/enable 0
@@ -37,7 +38,7 @@ on property:sys.usb.config=rndis
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=rndis,adb
-    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/enable  0
     write /sys/class/android_usb/android0/idVendor 04e8
     write /sys/class/android_usb/android0/idProduct 6864
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
@@ -45,7 +46,6 @@ on property:sys.usb.config=rndis,adb
     write /sys/class/android_usb/android0/enable 1
     start adbd
     setprop sys.usb.state ${sys.usb.config}
-
 on property:sys.usb.config=ptp
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 04e8
@@ -71,6 +71,14 @@ on property:sys.usb.config=rndis,dm
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state ${sys.usb.config}
 
+on property:sys.usb.config=rndis,acm,dm
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 04e8
+    write /sys/class/android_usb/android0/idProduct 6862
+    write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    write /sys/class/android_usb/android0/enable 1
+    setprop sys.usb.state ${sys.usb.config}
+
 on property:sys.usb.config=mass_storage
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 04e8
@@ -87,6 +95,88 @@ on property:sys.usb.config=mass_storage,adb
     write /sys/class/android_usb/android0/enable 1
     start adbd
     setprop sys.usb.state ${sys.usb.config}
+
+# Askon Mode : VZW required
+
+on property:sys.usb.config=askon
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    setprop sys.usb.state ${sys.usb.config}
+
+on property:sys.usb.config=askon,adb
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    setprop sys.usb.state ${sys.usb.config}
+
+# rndis,acm,diag and diag,acm,adb used for Hidden Menu
+
+on property:sys.usb.config=rndis,diag
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 04e8
+    write /sys/class/android_usb/android0/idProduct 6862
+    write /sys/class/android_usb/android0/f_diag/clients diag_mdm
+    write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    write /sys/class/android_usb/android0/enable 1
+    setprop sys.usb.state ${sys.usb.config}
+
+on property:sys.usb.config=diag,acm,adb
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 04E8
+    write /sys/class/android_usb/android0/idProduct 6860
+    write /sys/class/android_usb/android0/f_diag/clients diag_mdm
+    write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    write /sys/class/android_usb/android0/enable 1
+    start adbd
+    setprop sys.usb.state ${sys.usb.config}
+
+on property:sys.usb.config=rndis,acm,diag
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 04E8
+    write /sys/class/android_usb/android0/idProduct 6864
+    write /sys/class/android_usb/android0/f_diag/clients diag_mdm
+    write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    write /sys/class/android_usb/android0/enable 1
+    setprop sys.usb.state ${sys.usb.config}
+
+#s.amarnath, sandip change for usb hubport 
+on property:persist.service.usb.hubport=0
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
+    write /sys/class/sec/switch/set_usb_path ALL
+on property:persist.service.usb.hubport=2
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
+    write /sys/class/sec/switch/set_usb_path ALL
+on property:persist.service.usb.hubport=4
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
+    write /sys/class/sec/switch/set_usb_path AP
+on property:persist.service.usb.hubport=6
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
+    write /sys/class/sec/switch/set_usb_path AP
+on property:persist.service.usb.hubport=8
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
+    write /sys/class/sec/switch/set_usb_path CP
+on property:persist.service.usb.hubport=10
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
+    write /sys/class/sec/switch/set_usb_path CP
+on property:persist.service.usb.hubport=12
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
+on property:persist.service.usb.hubport=14
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
     
 on property:cm.usb.autoprime=AP
     write /sys/class/android_usb/android0/enable 0

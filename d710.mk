@@ -15,12 +15,16 @@
 LOCAL_PATH := device/samsung/d710
 
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
-		
+
 # Init files
 PRODUCT_COPY_FILES := \
     $(LOCAL_PATH)/init.smdk4210.rc:root/init.smdk4210.rc \
     $(LOCAL_PATH)/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
     $(LOCAL_PATH)/init.rc:root/init.rc \
+    $(LOCAL_PATH)/init.bt.rc:root/init.bt.rc \
+    $(LOCAL_PATH)/init.trace.rc:root/init.trace.rc \
+    $(LOCAL_PATH)/init.usb.rc:root/init.usb.rc \
+    $(LOCAL_PATH)/fstab.smdk4210:root/fstab.smdk4210 \
     $(LOCAL_PATH)/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
 
 # These are the hardware-specific features
@@ -48,7 +52,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/usr/keylayout/Vendor_046d_Product_c299.kl:system/usr/keylayout/Vendor_046d_Product_c299.kl \
     $(LOCAL_PATH)/usr/keylayout/Vendor_046d_Product_c532.kl:system/usr/keylayout/Vendor_046d_Product_c532.kl \
     $(LOCAL_PATH)/usr/keylayout/Vendor_054c_Product_0268.kl:system/usr/keylayout/Vendor_054c_Product_0268.kl
-	
+
 # Keychars
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/usr/keychars/Generic.kcm:system/usr/keychars/Generic.kcm \
@@ -62,8 +66,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/usr/idc/mxt224_ts_input.idc:system/usr/idc/mxt224_ts_input.idc \
     $(LOCAL_PATH)/usr/idc/qwerty.idc:system/usr/idc/qwerty.idc \
     $(LOCAL_PATH)/usr/idc/qwerty2.idc:system/usr/idc/qwerty2.idc \
-    $(LOCAL_PATH)/usr/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc 
-	
+    $(LOCAL_PATH)/usr/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc
+
 # Vold
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/vold.fstab:system/etc/vold.fstab
@@ -74,8 +78,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/ip-up:system/etc/ppp/ip-up \
     $(LOCAL_PATH)/configs/ip-down:system/etc/ppp/ip-down
 
-# Gps
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+    $(LOCAL_PATH)/configs/media_codecs:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/configs/Volume.db:system/etc/Volume.db \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/configs/sirfgps.conf:system/etc/sirfgps.conf
 
@@ -87,7 +93,7 @@ PRODUCT_PACKAGES := \
 # Sensors
 PRODUCT_PACKAGES += \
     sensors.exynos4
-	
+
 # WIMAX
 PRODUCT_PACKAGES += \
     WiMAXSettings \
@@ -130,7 +136,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.service.usb.setting=0 \
     persist.service.adb.enable=1 \
     persist.sys.usb.config=mass_storage,adb \
-    persist.service.usb.hubport=4	   
+    persist.service.usb.hubport=4
 
 # Telephony property for CDMA
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -157,7 +163,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.networklocation=1
 
 # Extended JNI checks
-# The extended JNI checks will cause the system to run more slowly, but they can spot a variety of nasty bugs 
+# The extended JNI checks will cause the system to run more slowly, but they can spot a variety of nasty bugs
 # before they have a chance to cause problems.
 # Default=true for development builds, set by android buildsystem.
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -169,8 +175,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # enable repeatable keys in cwm
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cwm.enable_key_repeat=true    
+    ro.cwm.enable_key_repeat=true
 
 # Include common makefile
-$(call inherit-product, device/samsung/galaxys2-common/common.mk)
 $(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)

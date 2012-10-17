@@ -13,10 +13,52 @@
 ## storage_struct - ex) series, "/mnt/sdcard/extStorages" / parallel
 ######################
 # internal sdcard
-dev_mount sdcard0 /storage/sdcard0 11 /devices/platform/dw_mmc/mmc_host/mmc0/mmc0 nonremovable,encryptable
+{ 
+	ums_sys_path = /sys/class/android_usb/f_mass_storage/lun0/file
+	discard = enable
+}
+dev_mount sdcard /storage/sdcard0 11 /devices/platform/dw_mmc/mmc_host/mmc0/mmc0 encryptable_nonremovable
 
-# external sd
+# external sdcard
+{
+	ums_sys_path = /sys/class/android_usb/f_mass_storage/lun1/file
+	android_secure_containers = enable
+}
 dev_mount sdcard1 /storage/sdcard1 auto /devices/virtual/block/cyasblkdevblk0
 
 #usb host device 
-dev_mount usbdisk /storage/usbdisk0 auto /devices/platform/s5p-ehci
+{ 
+	media_type = usb
+}
+dev_mount usbdisk0 /storage/usbdisk0 auto /devices/platform/s5p-ehci
+
+#usb host device 
+{
+	media_type = usb
+}
+dev_mount usbdisk1 /storage/usbdisk1 auto /devices/platform/s5p-ehci
+
+#usb host device 
+{
+	media_type = usb
+}
+dev_mount usbdisk2 /storage/usbdisk2 auto /devices/platform/s5p-ehci
+
+#usb host device 
+{
+	media_type = usb
+}
+dev_mount usbdisk3 /storage/usbdisk3 auto /devices/platform/s5p-ehci
+
+#usb host device 
+{
+	media_type = usb
+}
+dev_mount usbdisk4 /storage/usbdisk4 auto /devices/platform/s5p-ehci
+
+#usb host device 
+{
+	media_type = usb
+}
+dev_mount usbdisk5 /storage/usbdisk5 auto /devices/platform/s5p-ehci
+#EOF 

@@ -5,6 +5,8 @@
 #
 
 import /init.${ro.hardware}.rc
+import /init.usb.rc
+import /init.trace.rc
 
 on early-init
 
@@ -23,7 +25,6 @@ loglevel 3
     export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
     export LD_LIBRARY_PATH /vendor/lib:/system/lib
     export ANDROID_BOOTLOGO 1
-    export ANDROID_CACHE /cache
     export ANDROID_ROOT /system
     export ANDROID_ASSETS /system/app
     export ANDROID_DATA /data
@@ -96,20 +97,18 @@ loglevel 3
     write /dev/cpuctl/apps/bg_non_interactive/cpu.rt_runtime_us 700000
     write /dev/cpuctl/apps/bg_non_interactive/cpu.rt_period_us 1000000
 
-
     chmod 0644 /dev/xt_qtaguid
 
 on fs
 # mount ext4 partitions
-    mount ext4 /dev/block/mmcblk0p9 /system noatime wait ro
-    exec sfsck /dev/block/mmcblk0p7 ext4
-    mount ext4 /dev/block/mmcblk0p7 /cache nosuid nodev noatime wait
-    
-    exec sfsck /dev/block/mmcblk0p1 ext4
-    mount ext4 /dev/block/mmcblk0p1 /efs nosuid nodev noatime wait
-    exec sformat /dev/block/mmcblk0p11 vfat
-    exec sfsck /dev/block/mmcblk0p10 ext4
-    mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait 
+#    mount ext4 /dev/block/mmcblk0p9 /system noatime wait ro
+#    exec sfsck /dev/block/mmcblk0p7 ext4
+#    mount ext4 /dev/block/mmcblk0p7 /cache nosuid nodev noatime wait    
+#    exec sfsck /dev/block/mmcblk0p1 ext4
+#    mount ext4 /dev/block/mmcblk0p1 /efs nosuid nodev noatime wait
+#    exec sformat /dev/block/mmcblk0p11 vfat
+#    exec sfsck /dev/block/mmcblk0p10 ext4
+#    mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait 
     
 on post-fs
     # once everything is setup, no need to modify /
@@ -117,13 +116,11 @@ on post-fs
 
     chown system cache /cache
     chmod 0771 /cache
-
     chown system cache /cache/recovery
     chmod 0770 /cache/recovery
 
     chown root log /proc/vmallocinfo
     chmod 0440 /proc/vmallocinfo
-
     chown root system /proc/kmsg
     chmod 0440 /proc/kmsg
     chown root system /proc/sysrq-trigger
@@ -135,8 +132,6 @@ on post-fs-data
 
     chown system system /data
     chmod 0771 /data
-
-
 
     copy /proc/apanic_console /data/dontpanic/apanic_console
     chown root log /data/dontpanic/apanic_console
@@ -158,8 +153,8 @@ on post-fs-data
 
     mkdir /data/misc/wifi 0770 wifi wifi
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
+ 
     mkdir /data/local 0751 root root
-
     mkdir /data/local/tmp 0771 shell shell
     mkdir /data/data 0771 system system
     mkdir /data/app-private 0771 system system
@@ -249,6 +244,16 @@ on boot
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
+# allow system to modify ksm control files
+    chown root system /sys/kernel/mm/ksm/pages_to_scan
+    chmod 0664 /sys/kernel/mm/ksm/pages_to_scan
+    chown root system /sys/kernel/mm/ksm/sleep_millisecs
+    chmod 0664 /sys/kernel/mm/ksm/sleep_millisecs
+    chown root system /sys/kernel/mm/ksm/run
+    chmod 0664 /sys/kernel/mm/ksm/run
+    write /sys/kernel/mm/ksm/sleep_millisecs 1500
+    write /sys/kernel/mm/ksm/pages_to_scan 256
+
     chown system system /sys/block/mmcblk0/queue/scheduler
     chmod 0664 /sys/block/mmcblk0/queue/scheduler
 
@@ -277,28 +282,7 @@ on boot
     chown system system /sys/kernel/ipv4/tcp_rmem_min
     chown system system /sys/kernel/ipv4/tcp_rmem_def
     chown system system /sys/kernel/ipv4/tcp_rmem_max
-    chown system system /sys/class/power_supply/battery/temp
-    chown system system /sys/class/proximity/proximity/proximity_avg
-    chown radio system /sys/class/sec/gsensorcal/calibration
     chown root radio /proc/cmdline
-
-    # allow system to modify cpufreq control files
-    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-
-# allow system to modify ksm control files
-    chown root system /sys/kernel/mm/ksm/pages_to_scan
-    chmod 0664 /sys/kernel/mm/ksm/pages_to_scan
-    chown root system /sys/kernel/mm/ksm/sleep_millisecs
-    chmod 0664 /sys/kernel/mm/ksm/sleep_millisecs
-    chown root system /sys/kernel/mm/ksm/run
-    chmod 0664 /sys/kernel/mm/ksm/run
-    write /sys/kernel/mm/ksm/sleep_millisecs 1500
-    write /sys/kernel/mm/ksm/pages_to_scan 256
 
 # Set this property so surfaceflinger is not started by system_init
     setprop system_init.startsurfaceflinger 0
@@ -345,11 +329,20 @@ service console /system/bin/sh
     class core
     console
     disabled
-    user shell
     group log
+
+service console_user /system/bin/sh
+    class core
+    console
+    disabled
+    user shell
+    group shell log
 
 on property:ro.debuggable=1
     start console
+
+on property:ro.debuggable=0
+    start console_user
 
 # adbd is controlled via property triggers in init.<platform>.usb.rc
 service adbd /sbin/adbd
@@ -374,6 +367,7 @@ service vold /system/bin/vold
     class core
     socket vold stream 0660 root mount
     ioprio be 2
+    socket dir_enc_report stream 0660 root mount
 
 service netd /system/bin/netd
     class main
@@ -408,12 +402,12 @@ service zygote /system/bin/app_process -Xzygote /system/bin --zygote --start-sys
 service drm /system/bin/drmserver
     class main
     user drm
-    group drm system inet drmrpc sdcard_r
+    group system drm inet drmrpc sdcard_r radio sdcard_rw media_rw
 
 service media /system/bin/mediaserver
     class main
     user media
-    group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc
+    group system audio camera inet net_bt net_bt_admin net_bw_acct drmrpc sdcard_rw sdcard_r media_rw
     ioprio rt 4
 
 service bootanim /system/bin/bootanimation
@@ -481,11 +475,6 @@ service mdnsd /system/bin/mdnsd
     socket mdnsd stream 0660 mdnsr inet
     disabled
     oneshot
-
-service gpsd /system/bin/gpsd
-    class main   
-    user system
-    group system inet
 
 # adb over network
 on property:service.adb.tcp.port=5555
