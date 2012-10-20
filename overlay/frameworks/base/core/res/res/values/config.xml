@@ -17,6 +17,62 @@
 */
 -->
 <resources>
+    <bool name="config_animateScreenLights">false</bool>
+    <integer name="config_deskDockKeepsScreenOn">0</integer>
+    <integer name="config_carDockKeepsScreenOn">1</integer>
+    <bool name="config_unplugTurnsOnScreen">true</bool>
+    <string name="config_networkLocationProviderPackageName" translatable="false">com.google.android.location</string>
+    <string name="config_geocodeProviderPackageName" translatable="false">com.google.android.location</string>
+    <bool name="config_showNavigationBar">false</bool>
+    <string-array translatable="false" name="config_tether_usb_regexs">
+        <item>"rndis0"</item>
+    </string-array>
+    <string-array translatable="false" name="config_tether_bluetooth_regexs">
+        <item>"bnep\\d"</item>
+    </string-array>
+    <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
+    <bool translatable="false" name="config_wifi_p2p_support">true</bool>
+    <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
+    <bool name="config_ui_enableFadingMarquee">false</bool>
+    <integer-array name="config_longPressVibePattern">
+        <item>0</item>
+        <item>1</item>
+        <item>20</item>
+        <item>21</item>
+    </integer-array>
+    <integer-array name="config_virtualKeyVibePattern">
+        <item>0</item>
+        <item>1</item>
+        <item>20</item>
+        <item>21</item>
+    </integer-array>
+    <integer-array name="config_keyboardTapVibePattern">
+        <item>20</item>
+    </integer-array>
+    <integer-array name="config_safeModeDisabledVibePattern">
+        <item>0</item>
+        <item>1</item>
+        <item>20</item>
+        <item>21</item>
+    </integer-array>
+    <integer-array name="config_safeModeEnabledVibePattern">
+        <item>0</item>
+        <item>1</item>
+        <item>20</item>
+        <item>21</item>
+        <item>500</item>
+        <item>600</item>
+    </integer-array>
+    <integer-array name="config_scrollBarrierVibePattern">
+        <item>0</item>
+        <item>15</item>
+        <item>10</item>
+        <item>10</item>
+    </integer-array>
+    <bool name="config_disableMenuKeyInLockScreen">true</bool>
+    <bool name="config_forceDisableHardwareKeyboard">true</bool>
+    <bool name="config_noDelayInATwoDP">true</bool>
+    <bool name="config_samsung_stk">true</bool>
     <color name="config_defaultNotificationColor">#ffff0000</color>
     <integer name="config_defaultNotificationLedOn">1000</integer>
     <integer name="config_defaultNotificationLedOff">14000</integer>

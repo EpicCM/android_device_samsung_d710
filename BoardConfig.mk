@@ -49,7 +49,6 @@ BOARD_MOBILEDATA_INTERFACE_NAME := "ppp0"
 
 # Wifi
 WIFI_DRIVER_FW_PATH_MFG          := "/system/etc/wifi/bcm4330_mfg.bin"
-WIFI_FIRMWARE_LOADER             := "wlandutservice"
 
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d710/recovery/recovery_keys.c
