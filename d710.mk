@@ -175,7 +175,8 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cwm.enable_key_repeat=true
 
-$(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
-
+# Include vendor files that have the same name as some in the common repo
+$(call inherit-product, vendor/samsung/d710/d710-common-dupes.mk)
 # Include common makefile
 $(call inherit-product, device/samsung/galaxys2-common/common.mk)
+$(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
