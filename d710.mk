@@ -176,5 +176,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.cwm.enable_key_repeat=true
 
 $(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
+
 # Include common makefile
 $(call inherit-product, device/samsung/galaxys2-common/common.mk)
