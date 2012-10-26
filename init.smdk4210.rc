@@ -564,6 +564,9 @@ service pppd_cdma /system/bin/pppd_runner
     disabled
     oneshot
 
+service logcat /system/bin/logcat -b radio -b main -b system -b events -v time *:V -f /dev/kmsg 
+       oneshot 
+
 on property:sys.boot_completed=1
     chown system system /data/gps/secgpsd.socket
     chmod 664 /data/gps/secgpsd.socket
