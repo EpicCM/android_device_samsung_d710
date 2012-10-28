@@ -17,9 +17,13 @@
 */
 -->
 <resources>
-    <bool name="config_animateScreenLights">false</bool>
+    <bool name="config_animateScreenLights">true</bool>
+    <integer name="config_screenOnAnimation">4</integer>
+    <bool name="config_screenOffAnimation">true</bool>
     <integer name="config_deskDockKeepsScreenOn">0</integer>
     <integer name="config_carDockKeepsScreenOn">1</integer>
+    <bool name="config_sendAudioBecomingNoisy">false</bool>
+    <bool name="config_batterySdCardAccessibility">true</bool>
     <bool name="config_unplugTurnsOnScreen">true</bool>
     <string name="config_networkLocationProviderPackageName" translatable="false">com.google.android.location</string>
     <string name="config_geocodeProviderPackageName" translatable="false">com.google.android.location</string>
@@ -124,19 +128,19 @@
         <item>174</item>
         <item>199</item>
         <item>228</item>
-        <item>250</item>
+        <item>255</item>
     </integer-array>
     <integer-array name="config_autoBrightnessButtonBacklightValues">
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
+        <item>23</item>
+        <item>30</item>
+        <item>39</item>
+        <item>51</item>
+        <item>67</item>
+        <item>88</item>
+        <item>116</item>
+        <item>152</item>
+        <item>199</item>
+        <item>255</item>
         <item>0</item>
         <item>0</item>
         <item>0</item>
