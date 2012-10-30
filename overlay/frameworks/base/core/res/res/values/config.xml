@@ -125,7 +125,7 @@
         <item>174</item>
         <item>199</item>
         <item>228</item>
-        <item>255</item>
+        <item>250</item>
     </integer-array>
     <integer-array name="config_autoBrightnessButtonBacklightValues">
         <item>23</item>
@@ -137,7 +137,7 @@
         <item>116</item>
         <item>152</item>
         <item>199</item>
-        <item>255</item>
+        <item>250</item>
         <item>0</item>
         <item>0</item>
         <item>0</item>
