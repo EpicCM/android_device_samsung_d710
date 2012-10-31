@@ -34,6 +34,20 @@
     <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
     <bool translatable="false" name="config_wifi_p2p_support">true</bool>
     <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
+    <!-- Flag indicating that the media framework should allow changing
+         master volume stream and nothing else . -->
+    <bool name="config_useMasterVolume">true</bool>
+
+    <!-- Array of integer pairs controlling the rate at which the master volume changes
+         in response to volume up and down key events.
+         The first integer of each pair is compared against the current master volume
+         (in range 0 to 100).
+         The last pair with first integer <= the current volume is chosen,
+         and the second integer of the pair indicates the amount to increase the master volume
+         when volume up is pressed. -->
+    <integer-array name="config_masterVolumeRamp">
+        <item>0</item>  <item>6</item>  <!-- default: always increase volume by 5% -->
+    </integer-array>
     <bool name="config_ui_enableFadingMarquee">false</bool>
     <integer-array name="config_longPressVibePattern">
         <item>0</item>
