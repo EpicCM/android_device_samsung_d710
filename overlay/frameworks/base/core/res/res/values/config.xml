@@ -46,7 +46,7 @@
          and the second integer of the pair indicates the amount to increase the master volume
          when volume up is pressed. -->
     <integer-array name="config_masterVolumeRamp">
-        <item>0</item>  <item>6</item>  <!-- default: always increase volume by 5% -->
+        <item>0</item>  <item>5</item>  <!-- default: always increase volume by 5% -->
     </integer-array>
     <bool name="config_ui_enableFadingMarquee">false</bool>
     <integer-array name="config_longPressVibePattern">
