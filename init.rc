@@ -5,7 +5,7 @@
 #
 
 import /init.${ro.hardware}.rc
-import /init.cm.rc
+import /init.usb.rc
 import /init.trace.rc
 
 on early-init
@@ -164,6 +164,9 @@ on post-fs-data
     mkdir /data/lost+found 0770 root root
 
     mkdir /data/drm 0770 drm drm
+
+# Include extra init file
+    import /init.cm.rc
 
 on boot
 # basic network init
