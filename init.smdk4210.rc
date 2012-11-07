@@ -347,12 +347,13 @@ on boot
     chmod 0660 /sys/class/host_notify/usb_otg/booster
 
 # Permisions for sensors
-    chown system radio /dev/accelerometer
     chown radio system /sys/devices/virtual/accelerometer/accelerometer/acc_file
     chown radio system /sys/devices/virtual/sec/gsensorcal/calibration
     chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_selftest
     chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_get_temp
     chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_power_on
+    chown system radio /dev/accelerometer
+    chown system radio /dev/k3g
     chown system radio /dev/akm8975
     chown system radio /sys/class/sensors/magnetic_sensor/raw_data
     chown system radio /sys/class/sensors/magnetic_sensor/vendor
