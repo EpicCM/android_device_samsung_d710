@@ -20,6 +20,7 @@
 -include device/samsung/galaxys2-common/BoardCommonConfig.mk
 
 # Boot Animation
+TARGET_ARCH := arm
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 BOARD_USE_SKIA_LCDTEXT := true
