@@ -22,11 +22,6 @@
     <integer name="config_carDockKeepsScreenOn">1</integer>
     <bool name="config_batterySdCardAccessibility">true</bool>
     <bool name="config_unplugTurnsOnScreen">false</bool>
-    <string-array name="config_locationProviderPackageNames" translatable="false">
-        <!-- The standard AOSP fused location provider -->
-        <item>com.android.location.fused</item>
-        <item>com.google.android.location</item>
-    </string-array>
     <bool name="config_showNavigationBar">false</bool>
     <string-array translatable="false" name="config_tether_usb_regexs">
         <item>"rndis0"</item>
@@ -78,6 +73,7 @@
 <!-- Not yet merged
     <bool name="config_noDelayInATwoDP">true</bool>
     <bool name="config_samsung_stk">true</bool>
+    <bool name="config_smsSamsungCdmaAlternateMessageIDEncoding">true</bool>
 -->
     <color name="config_defaultNotificationColor">#ffff0000</color>
     <integer name="config_defaultNotificationLedOn">1000</integer>
@@ -226,5 +222,4 @@
     <bool name="config_mms_content_disposition_support">false</bool>
     <bool name="config_telephony_use_own_number_for_voicemail">true</bool>
     <bool name="config_cellBroadcastAppLinks">true</bool>
-    <bool name="config_smsSamsungCdmaAlternateMessageIDEncoding">true</bool>
 </resources>
