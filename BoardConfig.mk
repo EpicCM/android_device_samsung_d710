@@ -25,7 +25,7 @@ TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 BOARD_USE_SKIA_LCDTEXT := true
 
-TARGET_HAL_PATH := hardware/samsung/exynos4/hal
+TARGET_HAL_PATH := hardware/samsung/exynos4
 
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
