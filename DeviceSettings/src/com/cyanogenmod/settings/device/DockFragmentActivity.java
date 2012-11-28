@@ -28,6 +28,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.os.UserHandle;
 
 import com.cyanogenmod.settings.device.R;
 
