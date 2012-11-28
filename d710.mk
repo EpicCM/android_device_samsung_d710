@@ -165,6 +165,8 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cwm.enable_key_repeat=true
 
+TARGET_HAL_PATH := hardware/samsung/exynos4
+
 # Include vendor files that have the same name as some in the common repo
 $(call inherit-product, vendor/samsung/d710/d710-common-dupes.mk)
 # Include common makefile
