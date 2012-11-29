@@ -131,6 +131,8 @@ PRODUCT_COPY_FILES += \
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
+	CMFileManager \
+	CMFileManagerThemes \
 	static_busybox \
 	make_ext4fs \
 	setup_fs
