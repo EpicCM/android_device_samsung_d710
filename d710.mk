@@ -118,6 +118,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.def.agps.mode=2 \
     ro.telephony.call_ring.multiple=false \
     ro.telephony.call_ring.delay=0 \
+    ro.config.vc_call_vol_steps=7 \
     hwui.render_dirty_regions=false
 
 PRODUCT_PROPERTY_OVERRIDES += \

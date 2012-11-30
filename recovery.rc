@@ -1,24 +1,88 @@
+import usb.rc
+
 on early-init
     start ueventd
+	    
+sysclktz 0
+
+loglevel 9
 
 on init
     export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
+    export LD_LIBRARY_PATH /vendor/lib:/system/lib
     export ANDROID_ROOT /system
     export ANDROID_DATA /data
     export ANDROID_CACHE /cache
-    export SECONDARY_STORAGE /sdcard
-    export EXTERNAL_STORAGE /external_sd
+    export SECONDARY_STORAGE /storage/sdcard0
+    export EXTERNAL_STORAGE /storage/sdcard1
 
-    #symlink /system/etc /etc
+    symlink /misc /etc
+    symlink /sys/kernel/debug /d
 
-    mkdir /sdcard
-    mkdir /external_sd
-    mkdir /usbdisk
+
+    mkdir /storage
+    mkdir /storage/sdcard0 0000 system system
+    mkdir /storage/sdcard1 0000 system system
+    mkdir /usbdisk0 0000 system system
     mkdir /system
-    mkdir /data
-    mkdir /cache
+    mkdir /data 0771 system system
+    mkdir /cache 0771 system system
     mkdir /preload
+    mkdir /config 0500 root root
+    mkdir /efs
+    # Directory for putting things only root should see.
+    mkdir /mnt/secure 0700 root root
+
+    # Directory for staging bindmounts
+    mkdir /mnt/secure/staging 0700 root root
+
+    # Directory-target for where the secure container
+    # imagefile directory will be bind-mounted
+    mkdir /mnt/secure/asec  0700 root root
+
+    # Secure container public mount points.
+    mkdir /mnt/asec  0700 root system
+    mount tmpfs tmpfs /mnt/asec mode=0755,gid=1000
+
+    # Filesystem image public mount points.
+    mkdir /mnt/obb 0700 root system
+    mount tmpfs tmpfs /mnt/obb mode=0755,gid=1000
+
+    write /proc/sys/kernel/panic_on_oops 1
+    write /proc/sys/kernel/hung_task_timeout_secs 0
+    write /proc/cpu/alignment 4
+    write /proc/sys/kernel/sched_latency_ns 10000000
+    write /proc/sys/kernel/sched_wakeup_granularity_ns 2000000
+    write /proc/sys/kernel/sched_compat_yield 1
+    write /proc/sys/kernel/sched_child_runs_first 0
+    
+# Create cgroup mount points for process groups
+    mkdir /dev/cpuctl
+    mount cgroup none /dev/cpuctl cpu
+    chown system system /dev/cpuctl
+    chown system system /dev/cpuctl/tasks
+    chmod 0777 /dev/cpuctl/tasks
+    write /dev/cpuctl/cpu.shares 1024
+
+    mkdir /dev/cpuctl/fg_boost
+    chown system system /dev/cpuctl/fg_boost/tasks
+    chmod 0777 /dev/cpuctl/fg_boost/tasks
+    write /dev/cpuctl/fg_boost/cpu.shares 1024
+
+    mkdir /dev/cpuctl/bg_non_interactive
+    chown system system /dev/cpuctl/bg_non_interactive/tasks
+    chmod 0777 /dev/cpuctl/bg_non_interactive/tasks
+    # 5.0 %
+    write /dev/cpuctl/bg_non_interactive/cpu.shares 52
+
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard1 /external_sd
+
+on fs
     mount /tmp /tmp tmpfs
+
+
+
 
 on boot
 # Permissions for mDNIe
@@ -72,3 +136,5 @@ on property:service.adb.root=1
     write /sys/class/android_usb/android0/enable 0
     restart adbd
     write /sys/class/android_usb/android0/enable 1
+
+    write /dev/graphics/fb3 1

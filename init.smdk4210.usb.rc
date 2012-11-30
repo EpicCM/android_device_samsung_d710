@@ -1,13 +1,13 @@
 on init
-    write /sys/class/android_usb/android0/iSerial ${ro.serialno}
+    write /sys/class/android_usb/android0/iSerial $ro.serialno
     write /sys/class/android_usb/android0/f_rndis/manufacturer Samsung
     write /sys/class/android_usb/android0/f_rndis/vendorID 04e8
     write /sys/class/android_usb/android0/f_rndis/wceis 1
 
 on boot
-    write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
-    write /sys/class/android_usb/android0/iProduct ${ro.product.model}
-    write /sys/class/android_usb/android0/iSerial ${ro.serialno}
+    write /sys/class/android_usb/android0/iManufacturer $ro.product.manufacturer
+    write /sys/class/android_usb/android0/iProduct $ro.product.model
+    write /sys/class/android_usb/android0/iSerial $ro.serialno
     write /sys/class/android_usb/f_mass_storage/inquiry_string "Samsung"
 
 on property:sys.usb.config=mtp
@@ -96,6 +96,18 @@ on property:sys.usb.config=mass_storage,adb
     start adbd
     setprop sys.usb.state ${sys.usb.config}
 
+# Askon Mode : VZW required
+
+on property:sys.usb.config=askon
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    setprop sys.usb.state ${sys.usb.config}
+
+on property:sys.usb.config=askon,adb
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    setprop sys.usb.state ${sys.usb.config}
+
 # rndis,acm,diag and diag,acm,adb used for Hidden Menu
 
 on property:sys.usb.config=rndis,diag
@@ -154,7 +166,7 @@ on property:persist.service.usb.hubport=8
     write /sys/class/sec/switch/set_usb_path CP
 on property:persist.service.usb.hubport=10
     write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
-    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enalbe_cp
     write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
     write /sys/class/sec/switch/set_usb_path CP
 on property:persist.service.usb.hubport=12
@@ -165,7 +177,7 @@ on property:persist.service.usb.hubport=14
     write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
     write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
     write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
-    
+
 on property:cm.usb.autoprime=AP
     write /sys/class/android_usb/android0/enable 0
     write /sys/devices/virtual/sec/switch/set_usb_path AP
