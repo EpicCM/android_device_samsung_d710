@@ -241,12 +241,6 @@ on post-fs-data
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chmod 0444 /sys/class/rfkill/rfkill0/type
 
-on property:ril.cdma.data_state=1
-    restart pppd_cdma
-
-on property:ril.cdma.data_state=0
-    stop pppd_cdma
-
 # Vibetonz
     chown root shell /dev/tspdrv
     chmod 0660 /dev/tspdrv
@@ -313,6 +307,12 @@ on property:ril.cdma.data_state=0
 # DVFS - cpufreq ondemand
     write /sys/devices/system/cpu/cpufreq/ondemand/down_differential 5
     write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 85
+
+on property:ril.cdma.data_state=1
+    restart pppd_cdma
+
+on property:ril.cdma.data_state=0
+    stop pppd_cdma
 
 on boot
     chown radio radio /sys/class/backlight/pwm-backlight/brightness
